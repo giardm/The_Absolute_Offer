@@ -12,8 +12,8 @@
 <body>
   <header>
     <div class="logo">
-      <a href=""><img id="mobileLogo" src="./images/logo-03-b.png" alt=""></a>
-      <a href=""><img id="desktopLogo" src="./images/logo-04-b.png" alt=""></a>
+      <a href="?action=home"><img id="mobileLogo" src="./images/logo-03-b.png" alt=""></a>
+      <a href="?action=home"><img id="desktopLogo" src="./images/logo-04-b.png" alt=""></a>
     </div>
     <div class="searchContainer">
       <div class="searchInput">
@@ -25,7 +25,8 @@
       </button>
     </div>
     <div class="profil">
-      <i class="fa-regular fa-user"></i>
-      <i class="fa-light fa-user"></i>
+      <a href="?action=profil">
+        <i class="fa-regular fa-user"></i>
+      </a>
     </div>
   </header>

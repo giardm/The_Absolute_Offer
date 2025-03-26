@@ -1,39 +1,18 @@
 <?php
+require_once RACINE . ("/config/config.php");
 
-class Router
-{
-  private $routes = [];
+$action = isset($_GET['action']) ? $_GET['action'] : 'intro';
 
-  // Ajouter une route
-  public function addRoute($url, $controller, $action)
-  {
-    $this->routes[$url] = ['controller' => $controller, 'action' => $action];
-  }
+switch ($action) {
+  case 'home':
+    require_once RACINE . ("/app/controllers/home_ctlr.php");
+    break;
 
-  // Analyser l'URL de la requête et appeler le contrôleur/action appropriés
-  public function dispatch()
-  {
-    $url = isset($_GET['url']) ? $_GET['url'] : 'home'; // Par défaut, on va vers 'home'
+  case 'profil':
+    require_once RACINE . ("/app/controllers/profil_ctlr.php");
+    break;
 
-    if (isset($this->routes[$url])) {
-      $controllerName = $this->routes[$url]['controller'];
-      var_dump($controllerName);
-      $action = $this->routes[$url]['action'];
-
-      // Inclure le contrôleur
-      require_once RACINE . "/app/controllers/$controllerName.php";
-
-      // Créer une instance du contrôleur
-      $controller = new $controllerName();
-
-      // Appeler l'action
-      $controller->$action();
-    } else {
-      // Gérer une route non trouvée
-      echo "404 - Page non trouvée";
-    }
-  }
+  default:
+    require_once RACINE . ("/app/controllers/home_ctlr.php");
+    break;
 }
-
-
-//$router->addRoute('about', 'about_ctlr', 'index');
