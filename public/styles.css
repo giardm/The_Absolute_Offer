@@ -112,7 +112,6 @@ header {
   height: 40px;
   width: auto;
   padding: 0 16px;
-  gap: 8px;
   border: 1px solid #F5F7FA;
   border-radius: 10px;
 }
@@ -129,7 +128,9 @@ header {
 @media (min-width: 768px) {
   .searchContainer .searchInput {
     display: block;
+    display: flex;
     color: white;
+    gap: 16px;
     width: 480px;
     background-color: #357DF2;
     font-family: "Lexend", sans-serif;
@@ -138,7 +139,7 @@ header {
   .searchContainer .searchInput input {
     background-color: #357DF2;
     border: none;
-    width: 90%;
+    width: 75%;
   }
   .searchContainer .searchInput input::placeholder {
     color: #AAB4BF;

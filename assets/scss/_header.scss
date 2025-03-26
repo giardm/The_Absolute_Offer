@@ -21,7 +21,6 @@ header {
   height: 40px;
   width: auto;
   padding: 0 16px;
-  gap: 8px;
   border: 1px solid $neutral_lowest;
   border-radius: 10px;
 
@@ -41,7 +40,9 @@ header {
 
     .searchInput {
       display: block;
+      display: flex;
       color: white;
+      gap: 16px;
       width: 480px;
       background-color: $brand_medium;
       font-family: 'Lexend', sans-serif;
@@ -51,7 +52,7 @@ header {
     .searchInput input {
       background-color: $brand_medium;
       border: none;
-      width: 90%;
+      width: 75%;
 
       &::placeholder {
         color: $neutral_low;
