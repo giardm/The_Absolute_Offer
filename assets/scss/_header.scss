@@ -1,0 +1,87 @@
+header {
+  background-color: $brand_medium;
+  height: 8vh;
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#mobileLogo {
+  display: block;
+}
+
+#desktopLogo {
+  display: none;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: auto;
+  padding: 0 16px;
+  gap: 8px;
+  border: 1px solid $neutral_lowest;
+  border-radius: 10px;
+
+  .searchInput {
+    display: none;
+  }
+
+  .searchButton {
+    display: block;
+    color: $neutral_low;
+    font-size: 16px;
+    background: none;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+
+    .searchInput {
+      display: block;
+      color: white;
+      width: 480px;
+      background-color: $brand_medium;
+      font-family: 'Lexend', sans-serif;
+      font-size: 14px;
+    }
+
+    .searchInput input {
+      background-color: $brand_medium;
+      border: none;
+      width: 90%;
+
+      &::placeholder {
+        color: $neutral_low;
+      }
+
+      &:focus {
+        color: #fff;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .searchButton {
+      display: none;
+    }
+  }
+}
+
+.profil i {
+  font-size: 36px;
+  color: #fff;
+}
+
+
+@media (min-width: 768px) {
+  #mobileLogo {
+    display: none;
+  }
+
+  #desktopLogo {
+    display: block;
+  }
+}

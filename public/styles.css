@@ -1,16 +1,260 @@
+/* -------- Reset -------- */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
 body {
-  background-color: black;
+  line-height: 1;
 }
 
-video {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+ol,
+ul {
+  list-style: none;
 }
 
-img {
-  height: 100px;
+body {
+  color: #000;
+  background-color: #dcdcdc;
+}
+
+a {
+  text-decoration: none;
+  color: #1883ba;
+}
+
+header {
+  background-color: #357DF2;
+  height: 8vh;
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#mobileLogo {
+  display: block;
+}
+
+#desktopLogo {
+  display: none;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  height: 40px;
   width: auto;
+  padding: 0 16px;
+  gap: 8px;
+  border: 1px solid #F5F7FA;
+  border-radius: 10px;
+}
+.searchContainer .searchInput {
+  display: none;
+}
+.searchContainer .searchButton {
+  display: block;
+  color: #AAB4BF;
+  font-size: 16px;
+  background: none;
+  border: none;
+}
+@media (min-width: 768px) {
+  .searchContainer .searchInput {
+    display: block;
+    color: white;
+    width: 480px;
+    background-color: #357DF2;
+    font-family: "Lexend", sans-serif;
+    font-size: 14px;
+  }
+  .searchContainer .searchInput input {
+    background-color: #357DF2;
+    border: none;
+    width: 90%;
+  }
+  .searchContainer .searchInput input::placeholder {
+    color: #AAB4BF;
+  }
+  .searchContainer .searchInput input:focus {
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+  .searchContainer .searchButton {
+    display: none;
+  }
+}
+
+.profil i {
+  font-size: 36px;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  #mobileLogo {
+    display: none;
+  }
+  #desktopLogo {
+    display: block;
+  }
+}
+/* lexend-100 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-200 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/lexend/lexend-v24-latin-200.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-300 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/lexend/lexend-v24-latin-300.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-regular - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/lexend/lexend-v24-latin-regular.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-500 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/lexend/lexend-v24-latin-500.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-600 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/lexend/lexend-v24-latin-600.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-700 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/lexend/lexend-v24-latin-700.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-800 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/lexend/lexend-v24-latin-800.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-900 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/lexend/lexend-v24-latin-900.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /*# sourceMappingURL=styles.css.map */
