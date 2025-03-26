@@ -3,3 +3,18 @@
 @import 'global';
 @import 'header';
 @import 'footer';
+
+body {
+  background-color: black;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+img {
+  height: 100px;
+  width: auto;
+}
