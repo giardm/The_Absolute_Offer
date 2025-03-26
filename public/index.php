@@ -1,9 +1,14 @@
 <?php
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
 require dirname(__DIR__) . "/config/config.php";
-require RACINE . "/app/controllers/router.php";
+// Chargement des fichiers nécessaires
+require_once RACINE . '/app/controllers/router.php';
 
+// Initialiser le routeur
 $router = new Router();
-$router->dispatch($_SERVER['REQUEST_URI']);
+
+// Définir les routes
+$router->addRoute('home', 'home_ctlr', 'index'); // Correspond à /home
+
+// Lancer le traitement de la requête
+$router->dispatch();

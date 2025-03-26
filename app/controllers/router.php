@@ -2,24 +2,38 @@
 
 class Router
 {
-  public function dispatch($uri)
+  private $routes = [];
+
+  // Ajouter une route
+  public function addRoute($url, $controller, $action)
   {
-    $scriptName = dirname($_SERVER['SCRIPT_NAME']);
-    $uri = str_replace($scriptName, '', $uri);
+    $this->routes[$url] = ['controller' => $controller, 'action' => $action];
+  }
 
-    $uri = '/' . trim($uri, '/');
+  // Analyser l'URL de la requête et appeler le contrôleur/action appropriés
+  public function dispatch()
+  {
+    $url = isset($_GET['url']) ? $_GET['url'] : 'home'; // Par défaut, on va vers 'home'
 
-    var_dump($uri);
+    if (isset($this->routes[$url])) {
+      $controllerName = $this->routes[$url]['controller'];
+      var_dump($controllerName);
+      $action = $this->routes[$url]['action'];
 
-    // Vérification des routes
-    if ($uri == '/' || $uri == '/home') {
-      require_once '../app/controllers/homeController.php';
-      $controller = new HomeController();
-      $controller->index();
+      // Inclure le contrôleur
+      require_once RACINE . "/app/controllers/$controllerName.php";
+
+      // Créer une instance du contrôleur
+      $controller = new $controllerName();
+
+      // Appeler l'action
+      $controller->$action();
     } else {
-      require_once '../app/controllers/errorController.php';
-      $controller = new ErrorController();
-      $controller->index();
+      // Gérer une route non trouvée
+      echo "404 - Page non trouvée";
     }
   }
 }
+
+
+//$router->addRoute('about', 'about_ctlr', 'index');
