@@ -1,3 +1,10 @@
-<div class="container">
-  <h2>Bienvenu sur ton profil canaille</h2>
-</div>
+<?php
+
+require RACINE . "/app/views/partials/header.php";
+?>
+
+
+<?
+
+
+require RACINE . "/app/views/partials/footer.php";

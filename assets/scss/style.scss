@@ -4,3 +4,41 @@
 @import 'header';
 @import 'footer';
 @import 'fonts';
+
+.container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+video {
+  padding: 40px;
+  width: 360px;
+  height: auto;
+  object-fit: cover;
+}
+
+#homeHero {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background:
+    url("./images/ellipse1.png") no-repeat center bottom,
+    url("./images/ellipse2.png") no-repeat center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+#homeHero h1 {
+  padding: 32px;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+#homeHero p {
+  padding: 24px;
+  font-weight: 400;
+  font-size: 32px;
+}

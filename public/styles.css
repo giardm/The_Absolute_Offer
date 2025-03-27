@@ -80,8 +80,9 @@ ul {
 }
 
 body {
-  color: #000;
-  background-color: #dcdcdc;
+  color: #fff;
+  font-family: "Lexend", sans-serif;
+  background-color: #161B29;
 }
 
 a {
@@ -155,6 +156,7 @@ header {
 }
 
 .profil i {
+  padding: 8px;
   font-size: 36px;
   color: #fff;
 }
@@ -256,6 +258,41 @@ header {
   font-weight: 900;
   src: url("../fonts/lexend/lexend-v24-latin-900.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+.container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+video {
+  padding: 40px;
+  width: 360px;
+  height: auto;
+  object-fit: cover;
+}
+
+#homeHero {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: url("./images/ellipse1.png") no-repeat center bottom, url("./images/ellipse2.png") no-repeat center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+#homeHero h1 {
+  padding: 32px;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+#homeHero p {
+  padding: 24px;
+  font-weight: 400;
+  font-size: 32px;
 }
 
 /*# sourceMappingURL=styles.css.map */
