@@ -7,4 +7,6 @@ if (isset($_GET["action"])) {
 } else {
   $action = "home";
 }
+
+
 require CONTROLLERS_PATH. "/router.php";

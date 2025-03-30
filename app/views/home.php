@@ -8,11 +8,11 @@
 </div>
 
 <div class="container" id="homeFeaturedOffers">
-  <h2>Offres du moment</h2>
+  <h2 class="sectionTitle">Jeux du moment</h2>
 
-  <section class="featuredOffers">
 
-  </section>
+  <div id="featuredGamesContainer"></div>
+
 
 </div>
 
