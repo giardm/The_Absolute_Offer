@@ -7,4 +7,4 @@ if (isset($_GET["action"])) {
 } else {
   $action = "home";
 }
-require RACINE . "/app/controllers/router.php";
+require APP_PATH . "/controllers/router.php";
