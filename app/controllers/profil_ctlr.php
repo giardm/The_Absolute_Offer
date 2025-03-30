@@ -1,3 +1,3 @@
 <?php
 
-require_once APP_PATH . '/views/profil.php';
+require_once VIEWS_PATH . '/profil.php';

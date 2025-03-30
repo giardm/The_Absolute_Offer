@@ -5,14 +5,14 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
 switch ($action) {
   case 'home':
-    require_once APP_PATH . ("/controllers/home_ctlr.php");
+    require_once CONTROLLERS_PATH. ("/home_ctlr.php");
     break;
 
   case 'profil':
-    require_once APP_PATH . ("/controllers/profil_ctlr.php");
+    require_once CONTROLLERS_PATH. ("/profil_ctlr.php");
     break;
 
   default:
-    require_once APP_PATH . ("/controllers/error_ctlr.php");
+    require_once CONTROLLERS_PATH. ("/error_ctlr.php");
     break;
 }

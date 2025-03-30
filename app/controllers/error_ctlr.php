@@ -1,3 +1,3 @@
 <?php
 
-require_once RACINE . '../app/views/error.php';
+require_once VIEWS_PATH . '/views/error.php';

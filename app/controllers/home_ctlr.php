@@ -5,8 +5,8 @@ if (!isset($_SESSION)) {
 
 
 
-require APP_PATH . "/views/partials/header_searchbar.php";
+require VIEWS_PATH . "/partials/header_searchbar.php";
 
-require_once APP_PATH . '/views/home.php';
+require_once VIEWS_PATH . '/home.php';
 
-require APP_PATH . "/views/partials/footer.php";
+require VIEWS_PATH . "/partials/footer.php";
