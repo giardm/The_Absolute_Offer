@@ -55,10 +55,12 @@ header {
       width: 75%;
 
       &::placeholder {
+        font-weight: bold;
         color: $neutral_low;
       }
 
       &:focus {
+        font-weight: bold;
         color: #fff;
         border: none;
         outline: none;

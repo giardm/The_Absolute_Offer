@@ -114,13 +114,21 @@ video {
     background: $brand_medium;
   }
 
-  img {
+  .imgContainer {
     width: 240px;
     height: 90px;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 6px;
-    transition: all 0.3s ease;
+    display: inline-block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
   }
+
 
   .gameInfo {
     display: flex;
@@ -131,6 +139,7 @@ video {
     .title {
       font-weight: bold;
       font-size: 1.1rem;
+      letter-spacing: 2px;
     }
 
     .cheapest {

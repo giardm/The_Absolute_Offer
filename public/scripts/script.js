@@ -1,3 +1,4 @@
+// récuperation id base de donnée
 fetch("../app/models/get_featured_offers.php")
   .then((response) => response.json())
   .then((data) => {
@@ -21,6 +22,8 @@ fetch("../app/models/get_featured_offers.php")
 
 const searchInput = document.getElementById("gameSearchInput");
 
+
+// barre de recherche
 searchInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     let query = searchInput.value.trim().toLowerCase().replace(/\s+/g, '');
@@ -30,6 +33,7 @@ searchInput.addEventListener("keydown", function (e) {
   }
 });
 
+//video
 document.addEventListener("DOMContentLoaded", () => {
   const query = typeof searchQuery !== "undefined"
     ? searchQuery
@@ -42,34 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     video.playbackRate = 3;
   }
 
+  // requete api
   if (!query) return;
-
-  // todo ne pas oublier de retirer le faux delai au deploiement !!!
-
-  // fetch(`https://www.cheapshark.com/api/1.0/games?title=${query}`)
-  //   .then((res) => res.json())
-  //   .then((games) => {
-  //     const container = document.getElementById("searchResults");
-  //     loader.style.display = "none";
-  //     container.innerHTML = "";
-
-  //     if (games.length === 0) {
-  //       container.innerHTML = "<p>Aucun jeu trouvé.</p>";
-  //       return;
-  //     }
-
-  //     games.forEach((game) => {
-  //       const card = document.createElement("div");
-  //       card.classList.add("gameCard");
-  //       card.innerHTML = `
-  //         <img src="${game.thumb}" alt="${game.external}">
-  //         <p>${game.external}</p>
-  //         <p>${game.cheapest} €</p>
-  //       `;
-  //       container.appendChild(card);
-  //     });
-  //   })
-
   fetch(`https://www.cheapshark.com/api/1.0/games?title=${query}`)
     .then((res) => res.json())
     .then((games) => {
@@ -87,12 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         games.forEach((game, index) => {
           const card = document.createElement("a");
-          card.href = "?action=product";
+          card.href = `?action=product&id=${game.gameID}&`;
           card.classList.add("searchCard", "animated");
           card.style.animationDelay = `${index * 100}ms`;
 
           card.innerHTML = `
+            <div class=imgContainer>
             <img src="${game.thumb}" alt="${game.external}">
+            </div>
             <div class="gameInfo">
               <p class="title">${game.external}</p>
               
@@ -103,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
           container.appendChild(card);
         });
 
-      }, 3000); //  délai simulé : 3 sec
+      }, 1000);
     })
 
     .catch((err) => {

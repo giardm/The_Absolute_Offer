@@ -12,6 +12,10 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/searchController.php");
     break;
 
+  case 'product':
+    require_once CONTROLLERS_PATH . ("/productController.php");
+    break;
+
   case 'profil':
     require_once CONTROLLERS_PATH . ("/profilController.php");
     break;
