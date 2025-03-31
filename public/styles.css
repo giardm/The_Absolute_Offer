@@ -471,6 +471,11 @@ video {
   margin: 0;
 }
 
+.productInformations {
+  display: flex;
+  justify-content: space-around;
+}
+
 ul {
   list-style: none;
   padding: 0;
