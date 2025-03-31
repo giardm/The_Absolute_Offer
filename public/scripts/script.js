@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         games.forEach((game, index) => {
           const card = document.createElement("div");
           card.classList.add("searchCard", "animated");
-          card.style.animationDelay = `${index * 100}ms`; // cascade 100ms d'écart
+          card.style.animationDelay = `${index * 100}ms`;
 
           card.innerHTML = `
             <img src="${game.thumb}" alt="${game.external}">

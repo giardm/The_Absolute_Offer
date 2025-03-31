@@ -356,7 +356,7 @@ video {
   gap: 1rem;
   padding: 1rem;
   border-radius: 12px;
-  transition: background 0.3s ease;
+  background-color: rgba(90, 101, 117, 0.35);
   overflow: hidden;
   margin: 1rem auto;
   width: 100%;
