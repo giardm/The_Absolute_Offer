@@ -320,7 +320,6 @@ video {
   max-width: 250px;
   text-align: center;
   background-color: #3D4754;
-  padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
@@ -334,19 +333,7 @@ video {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  margin-bottom: 1rem;
   display: block;
-}
-
-.gameTitle {
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.gamePrice {
-  color: #F5F7FA;
-  font-size: 1.1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

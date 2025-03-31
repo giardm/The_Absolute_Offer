@@ -1,6 +1,6 @@
 <?php
 
-require RACINE . "/app/views/partials/header.php";
+require APP_PATH . "/views/partials/header_searchbar.php";
 ?>
 
 <div class="container">
@@ -9,4 +9,4 @@ require RACINE . "/app/views/partials/header.php";
 </div>
 
 <?
-require RACINE . "/app/views/partials/footer.php";
+require APP_PATH . "/views/partials/footer.php";
