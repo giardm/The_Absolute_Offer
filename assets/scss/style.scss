@@ -83,3 +83,90 @@ video {
   border-radius: 12px;
   display: block;
 }
+
+#loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#loaderContainer.hidden {
+  opacity: 0;
+}
+
+.searchCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+  overflow: hidden;
+  margin: 1rem auto;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+
+
+
+  img {
+    width: 240px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .gameInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .cheapest {
+      background-color: $success_medium;
+      color: white;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      text-align: center;
+    }
+
+  }
+
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}

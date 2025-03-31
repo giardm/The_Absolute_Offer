@@ -1,6 +1,6 @@
 <?php
 
-require APP_PATH . "/views/partials/header_searchbar.php";
+require VIEWS_PATH . "/partials/headerView.php";
 ?>
 
 <div class="container">
@@ -9,4 +9,4 @@ require APP_PATH . "/views/partials/header_searchbar.php";
 </div>
 
 <?
-require APP_PATH . "/views/partials/footer.php";
+require VIEWS_PATH . "/partials/footerView.php";

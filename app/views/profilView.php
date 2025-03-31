@@ -1,10 +1,6 @@
 <?php
 
-require APP_PATH . "/views/partials/header.php";
-?>
+require VIEWS_PATH . "/partials/headerView.php";
 
 
-<?
-
-
-require APP_PATH . "/views/partials/footer.php";
+require VIEWS_PATH . "/partials/footerView.php";

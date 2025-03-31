@@ -1,8 +1,8 @@
 <?php
 
 
-require VIEWS_PATH . "/partials/header_searchbar.php";
+require VIEWS_PATH . "/partials/headerView.php";
 
-require VIEWS_PATH . '/home.php';
+require VIEWS_PATH . '/homeView.php';
 
-require VIEWS_PATH . "/partials/footer.php";
+require VIEWS_PATH . "/partials/footerView.php";

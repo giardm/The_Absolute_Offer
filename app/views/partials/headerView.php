@@ -20,8 +20,9 @@
     <div class="searchContainer">
       <div class="searchInput">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Recherchez un jeu au meilleur prix...">
+        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix...">
       </div>
+
       <button class="searchButton">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
