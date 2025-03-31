@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . ("/config/config.php");
+// require_once BASE_PATH . ("/config/config.php");
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
