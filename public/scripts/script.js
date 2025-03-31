@@ -1,4 +1,4 @@
-fetch("../app/api/get_featured_offers.php")
+fetch("../app/models/get_featured_offers.php")
   .then((response) => response.json())
   .then((data) => {
     const gameIds = data.map((item) => item.game_id); // assuming 'game_id' is the actual key
