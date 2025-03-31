@@ -105,15 +105,14 @@ video {
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba($neutral_medium, 0.35);
+  transition: background 0.3s ease;
   overflow: hidden;
   margin: 1rem auto;
   width: 100%;
 
-  @media (min-width: 768px) {
-    width: 50%;
+  &:hover {
+    background: $brand_medium;
   }
-
-
 
   img {
     width: 240px;
@@ -152,6 +151,9 @@ video {
 
   }
 
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 }
 
 @keyframes fadeInUp {

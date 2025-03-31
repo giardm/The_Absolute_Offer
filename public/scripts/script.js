@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         games.forEach((game, index) => {
-          const card = document.createElement("div");
+          const card = document.createElement("a");
+          card.href = "?action=product";
           card.classList.add("searchCard", "animated");
           card.style.animationDelay = `${index * 100}ms`;
 
