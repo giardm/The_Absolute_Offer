@@ -1,0 +1,158 @@
+.hidden-offre {
+  display: none;
+}
+
+#openOffersOverlay {
+  display: block;
+  margin: 2rem auto;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: $brand_medium;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background-color: rgba($brand_medium, 0.50);
+  }
+}
+
+
+#offersOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+}
+
+#offersOverlay .overlayContent {
+  background: $neutral_high;
+  padding: 20px;
+  margin: 50px auto;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+#offersOverlay .offerList {
+  list-style: none;
+  padding: 0;
+}
+
+// .offerItem {
+
+//   // border-bottom: 2px solid #fff;
+//   border-bottom-width: thin;
+
+
+
+//   ::after {
+//     content: "";
+//     position: absolute;
+//     bottom: 0;
+//     left: 10%;
+//     width: 80%; // ou 60%, 70%…
+//     height: 1px;
+//     background-color: rgba(255, 255, 255, 0.1);
+//   }
+// }
+.offerItem {
+  position: relative;
+  transition: background 0.1s ease;
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: $brand_medium;
+  }
+}
+
+
+
+
+
+#offersOverlay .offerItem {
+  margin-bottom: 10px;
+
+
+}
+
+#offersOverlay #closeOffersOverlay {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #fff;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#offersOverlay #closeOffersOverlay:hover {
+  background: #f5f5f5;
+}
+
+.offers {
+  width: 40%;
+}
+
+.offerCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    height: 48px;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .offerInfo {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    width: 100%;
+
+    .storeName {
+      font-weight: bold;
+      padding: 4px;
+    }
+
+    .price {
+      padding-right: 24px;
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .discount {
+      color: white;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

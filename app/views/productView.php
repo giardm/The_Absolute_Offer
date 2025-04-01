@@ -44,32 +44,66 @@ $afficheUrl = $steamAppID
       <div class="offers">
         <h3>Offres disponibles</h3>
         <ul class="offerList">
-          <?php foreach ($gameData['deals'] as $deal): ?>
+          <?php $storeMap = $storeList; ?>
+          <?php foreach ($gameData['deals'] as $index => $deal): ?>
             <?php
-            $storeID = (int)$deal['storeID']; // <-- Corrigé ici
+            $storeID = (int)$deal['storeID'];
             $store = $storeMap[$storeID] ?? ['name' => 'Store inconnu', 'logo' => ''];
             $savings = round($deal['savings']);
             $dealUrl = "https://www.cheapshark.com/redirect?dealID={$deal['dealID']}";
+            $hiddenClass = $index >= 4 ? 'hidden-offre' : '';
             ?>
-            <li class="offerItem">
+            <li class="offerItem <?= $hiddenClass ?>">
               <a class="offerCard" href="<?= $dealUrl ?>" target="_blank">
                 <?php if ($store['logo']): ?>
                   <img class="storeLogo" src="<?= $store['logo'] ?>" alt="<?= $store['name'] ?>">
                 <?php endif; ?>
                 <div class="offerInfo">
                   <p class="storeName"><?= $store['name'] ?></p>
-                  <p class="prices">
-                    <span class="price"><?= $deal['price'] ?> €</span>
-                    <span class="retailPrice"><?= $deal['retailPrice'] ?> €</span>
-                  </p>
-                  <span class="discount">-<?= $savings ?>%</span>
+                  <p class="price"><?= $deal['price'] ?> €</p>
+                  <span class="discount" data-savings="<?= $savings ?>">
+                    -<?= $savings ?>%
+                  </span>
                 </div>
               </a>
             </li>
           <?php endforeach; ?>
-
         </ul>
 
+        <?php if (count($gameData['deals']) > 4): ?>
+          <button id="openOffersOverlay">Afficher toutes les offres</button>
+
+          <div id="offersOverlay">
+            <div class="overlayContent">
+              <h3>Toutes les offres</h3>
+              <button id="closeOffersOverlay" aria-label="Fermer">&times;</button>
+              <ul class="offerList">
+                <?php foreach ($gameData['deals'] as $deal): ?>
+                  <?php
+                  $storeID = (int)$deal['storeID'];
+                  $store = $storeMap[$storeID] ?? ['name' => 'Store inconnu', 'logo' => ''];
+                  $savings = round($deal['savings']);
+                  $dealUrl = "https://www.cheapshark.com/redirect?dealID={$deal['dealID']}";
+                  ?>
+                  <li class="offerItem">
+                    <a class="offerCard" href="<?= $dealUrl ?>" target="_blank">
+                      <?php if ($store['logo']): ?>
+                        <img class="storeLogo" src="<?= $store['logo'] ?>" alt="<?= $store['name'] ?>">
+                      <?php endif; ?>
+                      <div class="offerInfo">
+                        <p class="storeName"><?= $store['name'] ?></p>
+                        <p class="price"><?= $deal['price'] ?> €</p>
+                        <span class="discount" data-savings="<?= $savings ?>">
+                          -<?= $savings ?>%
+                        </span>
+                      </div>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
 

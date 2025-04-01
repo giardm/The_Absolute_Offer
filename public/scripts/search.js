@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         games.forEach((game, index) => {
           const card = document.createElement("a");
-          card.href = `?action=product&id=${game.gameID}&`;
+          // card.href = `?action=product&id=${game.gameID}`;
           card.classList.add("searchCard", "animated");
           card.style.animationDelay = `${index * 100}ms`;
 
@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="gameInfo">
               <p class="title">${game.external}</p>
-              
-              <p class="cheapest">${game.cheapest} €</p>
+              <p class="retailPrice">Prix d'origine : ${game.cheapest} €</p>
+              <a class="cheapest" href= "?action=product&id=${game.gameID}">Voir les offres</a>
             </div>
           `;
 

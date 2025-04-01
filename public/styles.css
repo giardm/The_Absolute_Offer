@@ -1,3 +1,93 @@
+/* lexend-100 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-200 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-200.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-300 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-300.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-regular - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-regular.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-500 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-500.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-600 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-600.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-700 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-700.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-800 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-800.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lexend-900 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../assets/fonts/lexend/lexend-v24-latin-900.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 /* -------- Reset -------- */
 html,
 body,
@@ -171,96 +261,6 @@ header {
     display: block;
   }
 }
-/* lexend-100 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 100;
-  src: url("../fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-200 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 200;
-  src: url("../fonts/lexend/lexend-v24-latin-200.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-300 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 300;
-  src: url("../fonts/lexend/lexend-v24-latin-300.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-regular - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/lexend/lexend-v24-latin-regular.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-500 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/lexend/lexend-v24-latin-500.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-600 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 600;
-  src: url("../fonts/lexend/lexend-v24-latin-600.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-700 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/lexend/lexend-v24-latin-700.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-800 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 800;
-  src: url("../fonts/lexend/lexend-v24-latin-800.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lexend-900 - latin */
-@font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Lexend";
-  font-style: normal;
-  font-weight: 900;
-  src: url("../fonts/lexend/lexend-v24-latin-900.woff2") format("woff2");
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
 .container {
   width: 100%;
   align-items: center;
@@ -274,6 +274,47 @@ video {
   width: 360px;
   height: auto;
   object-fit: cover;
+}
+
+.videos,
+.screenshots {
+  margin-bottom: 3rem;
+}
+.videos h2,
+.screenshots h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.videos video,
+.screenshots video {
+  width: 75%;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+.videos .screenshotsGallery,
+.screenshots .screenshotsGallery {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.videos .screenshotsGallery img,
+.screenshots .screenshotsGallery img {
+  max-width: 200px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.videos .screenshotsGallery img:hover,
+.screenshots .screenshotsGallery img:hover {
+  transform: scale(1.03);
+}
+
+h3 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 #homeHero {
@@ -359,13 +400,9 @@ video {
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(90, 101, 117, 0.35);
-  transition: background 0.3s ease;
   overflow: hidden;
   margin: 1rem auto;
   width: 100%;
-}
-.searchCard:hover {
-  background: #357DF2;
 }
 .searchCard .imgContainer {
   width: 240px;
@@ -394,17 +431,24 @@ video {
 .searchCard .gameInfo .cheapest {
   background-color: #85C71A;
   color: white;
+  transition: background 0.3s ease;
   padding: 0.6rem;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 900;
   letter-spacing: 0.05em;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
   text-align: center;
+  width: 80px;
+  height: 50px;
+  line-height: 1.2;
+  flex-shrink: 0;
+  white-space: pre-line;
+}
+.searchCard .gameInfo .cheapest:hover {
+  background: #4F7812;
 }
 @media (min-width: 768px) {
   .searchCard {
@@ -475,6 +519,9 @@ video {
   display: flex;
   justify-content: space-around;
 }
+.productInformations .informations {
+  width: 50%;
+}
 
 ul {
   list-style: none;
@@ -519,45 +566,21 @@ ul li {
   align-items: center;
   margin-bottom: 4rem;
 }
-.medias .videos,
-.medias .screenshots {
-  margin-bottom: 3rem;
-}
-.medias .videos h2,
-.medias .screenshots h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-.medias .videos video,
-.medias .screenshots video {
-  width: 75%;
-  height: auto;
-  border-radius: 12px;
-  margin-top: 1rem;
-}
-.medias .videos .screenshotsGallery,
-.medias .screenshots .screenshotsGallery {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.medias .videos .screenshotsGallery img,
-.medias .screenshots .screenshotsGallery img {
-  max-width: 200px;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-.medias .videos .screenshotsGallery img:hover,
-.medias .screenshots .screenshotsGallery img:hover {
-  transform: scale(1.03);
+
+.discount.q1 {
+  background-color: #B81D1D;
 }
 
-h3 {
-  font-size: 2rem;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.discount.q2 {
+  background-color: #ED4545;
+}
+
+.discount.q3 {
+  background-color: #F2AD0C;
+}
+
+.discount.q4 {
+  background-color: #85C71A;
 }
 
 .lightbox {
@@ -601,6 +624,134 @@ h3 {
   margin: 0 0.5rem;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.hidden-offre {
+  display: none;
+}
+
+#openOffersOverlay {
+  display: block;
+  margin: 2rem auto;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #357DF2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#openOffersOverlay:hover {
+  background-color: rgba(53, 125, 242, 0.5);
+}
+
+#offersOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+}
+
+#offersOverlay .overlayContent {
+  background: #3D4754;
+  padding: 20px;
+  margin: 50px auto;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+#offersOverlay .offerList {
+  list-style: none;
+  padding: 0;
+}
+
+.offerItem {
+  position: relative;
+  transition: background 0.1s ease;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.offerItem:hover {
+  background-color: #357DF2;
+}
+
+#offersOverlay .offerItem {
+  margin-bottom: 10px;
+}
+
+#offersOverlay #closeOffersOverlay {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #fff;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#offersOverlay #closeOffersOverlay:hover {
+  background: #f5f5f5;
+}
+
+.offers {
+  width: 40%;
+}
+
+.offerCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.offerCard img {
+  height: 48px;
+  width: auto;
+  flex-shrink: 0;
+}
+.offerCard .offerInfo {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  width: 100%;
+}
+.offerCard .offerInfo .storeName {
+  font-weight: bold;
+  padding: 4px;
+}
+.offerCard .offerInfo .price {
+  padding-right: 24px;
+  text-align: right;
+  font-weight: 800;
+}
+.offerCard .offerInfo .discount {
+  color: white;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=styles.css.map */

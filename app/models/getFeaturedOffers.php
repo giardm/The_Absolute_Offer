@@ -10,12 +10,12 @@ try {
     PDO::ATTR_EMULATE_PREPARES => false
   ]);
 
-  $sql = "SELECT game_id FROM featured_offers";
+  $sql = "SELECT steam_id, api_id FROM featured_offers";
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
 
-  $featured_offers_id = $stmt->fetchAll();
-  echo json_encode($featured_offers_id);
+  $featured_offers_ids = $stmt->fetchAll();
+  echo json_encode($featured_offers_ids);
 } catch (PDOException $e) {
   echo json_encode(["error" => $e->getMessage()]);
 }

@@ -1,0 +1,58 @@
+.container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+video {
+  padding: 40px;
+  width: 360px;
+  height: auto;
+  object-fit: cover;
+}
+
+.videos,
+.screenshots {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  video {
+    width: 75%;
+    height: auto;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+
+  .screenshotsGallery {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+
+    img {
+      max-width: 200px;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+  }
+}
+
+
+h3 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
