@@ -29,9 +29,9 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </div>
-    <div class="profil">
+    <div class="login">
       <i class="fa-solid fa-bars"></i>
-      <a href="?action=profil">
+      <a href="?action=login">
         <i class="fa-regular fa-user"></i>
       </a>
     </div>

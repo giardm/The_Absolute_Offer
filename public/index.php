@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 require dirname(__DIR__) . "/config/config.php";
 
 if (isset($_GET["action"])) {
@@ -9,4 +13,4 @@ if (isset($_GET["action"])) {
 }
 
 
-require CONTROLLERS_PATH. "/router.php";
+require CONTROLLERS_PATH . "/router.php";

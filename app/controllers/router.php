@@ -1,5 +1,4 @@
 <?php
-// require_once BASE_PATH . ("/config/config.php");
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
@@ -16,8 +15,8 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/productController.php");
     break;
 
-  case 'profil':
-    require_once CONTROLLERS_PATH . ("/profilController.php");
+  case 'login':
+    require_once CONTROLLERS_PATH . ("/loginController.php");
     break;
 
   default:
