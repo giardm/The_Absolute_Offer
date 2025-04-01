@@ -46,9 +46,7 @@ $afficheUrl = $steamAppID
         <ul class="offerList">
           <?php foreach ($gameData['deals'] as $deal): ?>
             <?php
-            // $storeID = $deal['storeID'];
-            $storeID = (string)$deal['storeID'];
-            echo "<!-- Store ID: $storeID -->"; // Voir dans le code source HTML
+            $storeID = (int)$deal['storeID']; // <-- Corrigé ici
             $store = $storeMap[$storeID] ?? ['name' => 'Store inconnu', 'logo' => ''];
             $savings = round($deal['savings']);
             $dealUrl = "https://www.cheapshark.com/redirect?dealID={$deal['dealID']}";
@@ -69,6 +67,7 @@ $afficheUrl = $steamAppID
               </a>
             </li>
           <?php endforeach; ?>
+
         </ul>
 
       </div>
