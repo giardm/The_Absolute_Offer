@@ -494,13 +494,19 @@ ul li {
   padding: 2rem;
   border-radius: 12px;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: 1.4rem;
   margin-bottom: 3rem;
+}
+.description h2 {
+  font-size: 1.8rem;
 }
 .description p,
 .description ul,
 .description ol {
   margin-bottom: 1rem;
+}
+.description ul li {
+  font-size: 1.4rem;
 }
 .description img {
   max-width: 100%;
