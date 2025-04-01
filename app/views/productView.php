@@ -25,7 +25,6 @@ $afficheUrl = $steamAppID
       <div class="informations">
         <ul>
           <h3>Informations</h3>
-          <li><strong>Meilleur prix jamais enregistré :</strong> <?= $cheapsharkPrice ?> €</li>
           <?php if (!empty($steamData)): ?>
             <li><strong>Date de sortie :</strong> <?= $steamData['release_date']['date'] ?? '' ?></li>
             <li><strong>Éditeur(s) :</strong> <?= implode(', ', $steamData['publishers']) ?></li>
