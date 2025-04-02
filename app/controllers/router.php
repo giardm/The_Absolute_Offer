@@ -19,6 +19,10 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/loginController.php");
     break;
 
+  case 'register':
+    require_once CONTROLLERS_PATH . ("/registerController.php");
+    break;
+
   default:
     require_once CONTROLLERS_PATH . ("/errorController.php");
     break;
