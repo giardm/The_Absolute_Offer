@@ -21,7 +21,7 @@ function createUser($email, $username, $hashedPassword) {
     }
 
     // Insérer le nouvel utilisateur
-    $insert = "INSERT INTO users (email, username, hash_password, role, created_at)
+    $insert = "INSERT INTO users (email, username, hash_password, role, added_at)
     VALUES (:email, :username, :password, :role, :created_at)";
     $stmt = $pdo->prepare($insert);
     return $stmt->execute([
