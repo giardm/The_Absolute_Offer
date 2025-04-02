@@ -1,7 +1,7 @@
 <?php
 require_once MODELS_PATH . '/userModel.php';
 
-if isLoggedOn()
+// if isLoggedOn()
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupération et nettoyage des données
