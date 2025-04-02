@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = createUser($email, $username, $hashedPassword);
 
     if ($result) {
-        echo "Inscription réussie. <a href='/login'>Connectez-vous</a>";
+        echo "Inscription réussie. <a href='?action=login'>Connectez-vous</a>";
     } else {
         echo "Erreur : L'utilisateur existe peut-être déjà.";
     }
