@@ -1,8 +1,10 @@
 // Attend que le contenu HTML de la page soit complètement chargé avant d'exécuter le script
 document.addEventListener("DOMContentLoaded", () => {
 
+
   // Envoie une requête pour récupérer les offres en vedette depuis un fichier PHP
-  fetch("../app/models/getFeaturedOffers.php")
+  fetch("./app/models/getFeaturedOffers.php")
+
     .then((response) => response.json()) // Convertit la réponse en JSON
     .then((data) => { // Une fois les données reçues et converties
 

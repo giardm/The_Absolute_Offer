@@ -1,7 +1,7 @@
 <div class="container" id="homeHero">
   <video autoplay loop muted playsinline>
     <!-- <source src="./videos/logo.mp4" type="video/mp4"> -->
-    <source src="./videos/logo.webm" type="video/webm">
+    <source src="./public/videos/logo.webm" type="video/webm">
   </video>
   <h1>The Absolute Offer</h1>
   <p>Vos jeux préférés aux prix que vous voulez</p>
@@ -10,10 +10,7 @@
 <div class="container" id="homeFeaturedOffers">
   <h2 class="sectionTitle">Jeux du moment</h2>
 
-
   <div id="featuredGamesContainer"></div>
-
-
 </div>
 
 

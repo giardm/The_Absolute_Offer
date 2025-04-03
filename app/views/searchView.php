@@ -1,6 +1,6 @@
 <div id="loaderContainer">
   <video id="loaderVideo" autoplay muted loop playsinline>
-    <source src="./videos/logo.webm" type="video/webm">
+    <source src="./public/videos/logo.webm" type="video/webm">
   </video>
 </div>
 

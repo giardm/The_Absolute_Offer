@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
+require_once MODELS_PATH . '/connexionDB.php';
 
 function getUserByUsername($username)
 {
@@ -11,7 +11,7 @@ function getUserByUsername($username)
     $req->bindValue(':username', $username, PDO::PARAM_STR);
     $req->execute();
 
-    $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    $resultat = $req->fetchAll();
   } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage();
     die();

@@ -32,6 +32,26 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Récuperer les informations sur les differents stores
+fetch('https://www.cheapshark.com/api/1.0/stores')
+  .then(response => response.json())
+  .then(data => {
+    const storeList = {};
+
+    data.forEach(store => {
+      storeList[store.storeID] = {
+        name: store.storeName,
+        logo: 'https://www.cheapshark.com' + store.images.logo
+      };
+    });
+  })
+
+  .catch(error => {
+    console.error('Erreur lors de la récupération des stores :', error);
+  });
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // Miniatures d’images
   const thumbs = document.querySelectorAll(".screenshotThumb");

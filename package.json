@@ -12,8 +12,5 @@
   "description": "",
   "devDependencies": {
     "sass": "^1.86.0"
-  },
-  "dependencies": {
-    "swiper": "^11.2.6"
   }
 }
