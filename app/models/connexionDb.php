@@ -1,5 +1,7 @@
 <?php
 
+require_once BASE_PATH . '/config/config.php';
+
 function connexionPDO()
 {
   try {

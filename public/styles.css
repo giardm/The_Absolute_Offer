@@ -476,6 +476,10 @@ h3 {
   margin: auto;
 }
 
+.productMain {
+  display: flex;
+}
+
 .productHeader {
   position: relative;
   width: 100%;

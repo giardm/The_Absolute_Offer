@@ -1,141 +1,421 @@
-// Exécute le code une fois que le DOM est entièrement chargé
-document.addEventListener('DOMContentLoaded', function () {
-  // Bouton pour ouvrir la modale
-  const openBtn = document.getElementById('openOffersOverlay');
-  // Bouton pour fermer la modale
-  const closeBtn = document.getElementById('closeOffersOverlay');
-  // L'élément de superposition (modale)
-  const overlay = document.getElementById('offersOverlay');
-  // Le contenu interne de la modale
-  const overlayContent = overlay.querySelector('.overlayContent');
-
-  // Si le bouton d'ouverture existe, on lui ajoute un événement "click"
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
-      overlay.style.display = 'block'; // Affiche la modale
-    });
-  }
-
-  // Si le bouton de fermeture existe, on lui ajoute un événement "click"
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      overlay.style.display = 'none'; // Cache la modale
-    });
-  }
-
-  // Ferme la modale si on clique en dehors du contenu
-  overlay.addEventListener('click', function (e) {
-    if (!overlayContent.contains(e.target)) {
-      overlay.style.display = 'none'; // Cache la modale
-    }
-  });
+/**
+ * Point d'entrée principal une fois le DOM entièrement chargé.
+ * Lance le chargement des offres CheapShark.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  getCheapSharkInfos();
 });
 
+/**
+ * Récupère l'ID du jeu depuis l'attribut data-id du conteneur principal.
+ * @returns {string} - L'identifiant du jeu pour CheapShark.
+ */
+function getProductId() {
+  const container = document.querySelector(".productContainer");
+  const gameId = container.dataset.id;
+  return gameId;
+}
 
-// Récuperer les informations sur les differents stores
-fetch('https://www.cheapshark.com/api/1.0/stores')
-  .then(response => response.json())
-  .then(data => {
-    const storeList = {};
+/**
+ * Récupère les offres d'un jeu via l'API CheapShark et injecte les résultats dans le DOM.
+ * Fonction asynchrone.
+ */
+async function getCheapSharkInfos() {
+  const gameId = getProductId();
 
-    data.forEach(store => {
-      storeList[store.storeID] = {
-        name: store.storeName,
-        logo: 'https://www.cheapshark.com' + store.images.logo
-      };
+  const storeList = await getStoresList(); // Liste des magasins avec leur nom/logo
+  const offerListElement = document.querySelector(".offerList");
+  const overlayList = document.querySelector("#offersOverlay .offerList");
+  const openBtn = document.getElementById("openOffersOverlay");
+
+  // Récupère les données du jeu via son ID
+  fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameId}`)
+    .then((res) => res.json())
+    .then((infos) => {
+      if (!infos.deals || infos.deals.length === 0) {
+        offerListElement.innerHTML = "<li>Aucune offre disponible.</li>";
+        return;
+      }
+
+      const steamAppID = infos.info.steamAppID;
+      if (steamAppID) {
+        getSteamInfos(steamAppID);
+      }
+
+      // Génération des éléments HTML pour chaque offre
+      infos.deals.forEach((deal, index) => {
+        const store = storeList[deal.storeID] || { name: "Inconnu", logo: "" };
+        const offerElement = createOffer(deal, store);
+
+        // Ajout des 4 premières offres dans la page principale
+        if (index < 4) {
+          offerListElement.appendChild(offerElement.cloneNode(true));
+        }
+
+        // Toutes les offres sont ajoutées à la modale
+        overlayList.appendChild(offerElement);
+      });
+
+      // Affiche le bouton "Afficher toutes les offres" si plus de 4
+      if (infos.deals.length > 4 && openBtn) {
+        openBtn.classList.remove("hidden");
+      }
+
+      createModal();
+      addSavingscolors(); // Applique une couleur selon le niveau de réduction
+    })
+    .catch((err) => {
+      console.error("Erreur lors du chargement des offres :", err);
     });
-  })
+}
 
-  .catch(error => {
-    console.error('Erreur lors de la récupération des stores :', error);
+/**
+ * Récupère les infos d’un jeu via l’API Steam Store.
+ * @param {string} steamAppID - L’ID du jeu sur Steam (ex: 367520)
+ */
+async function getSteamInfos(steamAppID) {
+  try {
+    const res = await fetch(`?action=steamInfo&appid=${steamAppID}`);
+    const data = await res.json();
+
+    if (data[steamAppID] && data[steamAppID].success) {
+      const steamData = data[steamAppID].data;
+
+      renderSteamHeader(steamData);
+      renderSteamInformations(steamData);
+      renderSteamMedia(steamData);
+    }
+
+
+    if (!data[steamAppID] || !data[steamAppID].success) {
+      console.warn("Données Steam non disponibles pour ce jeu.");
+      return;
+    }
+
+    const steamData = data[steamAppID].data;
+
+    renderSteamHeader(steamData);
+
+    renderSteamInformations(steamData);
+
+    renderSteamMedia(steamData);
+
+  } catch (error) {
+    console.error("Erreur lors de la récupération des infos Steam :", error);
+  }
+}
+
+/**
+ * Remplit dynamiquement l'entête du jeu (bannière, jaquette, titre).
+ * @param {Object} steamData - Données du jeu depuis l'API Steam.
+ */
+function renderSteamHeader(steamData) {
+  const headerImage = document.querySelector(".headerImage");
+  const gameCover = document.querySelector(".gameCover");
+  const gameTitle = document.querySelector(".gameTitle");
+
+  if (!headerImage || !gameCover || !gameTitle) return;
+
+  // Bannière horizontale (ex : 460x215)
+  headerImage.src = steamData.header_image;
+
+  // Affiche verticale (portrait) via ID Steam
+  gameCover.src = `https://cdn.akamai.steamstatic.com/steam/apps/${steamData.steam_appid}/library_600x900.jpg`;
+
+  // Titre
+  gameTitle.textContent = steamData.name;
+}
+
+
+/**
+ * Injecte les données Steam dans la section "Informations" du DOM.
+ * @param {Object} steamData - Données de l'API Steam pour un jeu.
+ */
+function renderSteamInformations(steamData) {
+  const infoList = document.querySelector(".productInformations .informations ul");
+
+  if (!infoList) {
+    console.warn("Bloc .informations introuvable dans le DOM.");
+    return;
+  }
+
+  // On vide tout sauf le <h3> Informations
+  infoList.innerHTML = "<h3>Informations</h3>";
+
+  // Date de sortie
+  if (steamData.release_date && steamData.release_date.date) {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>Date de sortie :</strong> ${steamData.release_date.date}`;
+    infoList.appendChild(li);
+  }
+
+  // Éditeurs
+  if (steamData.publishers && steamData.publishers.length > 0) {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>Éditeur(s) :</strong> ${steamData.publishers.join(", ")}`;
+    infoList.appendChild(li);
+  }
+
+  // Genres
+  if (steamData.genres && steamData.genres.length > 0) {
+    const li = document.createElement("li");
+    const genreList = steamData.genres.map(g => g.description).join(", ");
+    li.innerHTML = `<strong>Genres :</strong> ${genreList}`;
+    infoList.appendChild(li);
+  }
+
+  // Score Metacritic
+  if (steamData.metacritic && steamData.metacritic.score) {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>Score Metacritic :</strong> ${steamData.metacritic.score}/100`;
+    infoList.appendChild(li);
+  }
+
+  // Recommandations / avis Steam
+  if (steamData.recommendations && steamData.recommendations.total) {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>Évaluations Steam :</strong> ${steamData.recommendations.total.toLocaleString()} avis`;
+    infoList.appendChild(li);
+  }
+}
+
+/**
+ * Affiche la description longue, la première vidéo et les screenshots d'un jeu.
+ * @param {Object} steamData - Données complètes du jeu via l'API Steam.
+ */
+function renderSteamMedia(steamData) {
+  // Description
+  const descBlock = document.querySelector(".description");
+  if (descBlock && steamData.about_the_game) {
+    descBlock.innerHTML = steamData.about_the_game;
+  }
+
+  // Sélectionne les éléments vidéo
+  const videoBlock = document.querySelector(".videos");
+  const videoElement = videoBlock?.querySelector("video");
+  const trailerSource = videoElement?.querySelector("source");
+
+  if (
+    videoBlock &&
+    videoElement &&
+    trailerSource &&
+    steamData.movies &&
+    steamData.movies.length > 0
+  ) {
+    const videoUrl = steamData.movies[0].webm.max.replace(/^http:/, 'https:');
+    trailerSource.src = videoUrl;
+    videoElement.load(); // Recharge la source
+  } else {
+    if (videoBlock) videoBlock.style.display = "none";
+  }
+
+
+  // Screenshots
+  const gallery = document.querySelector(".screenshotsGallery");
+  if (gallery && steamData.screenshots && steamData.screenshots.length > 0) {
+    gallery.innerHTML = ""; // Nettoyage
+
+    steamData.screenshots.forEach((shot, index) => {
+      const img = document.createElement("img");
+      img.src = shot.path_thumbnail;
+      img.dataset.full = shot.path_full;
+      img.dataset.index = index;
+      img.className = "screenshotThumb";
+      img.alt = "Screenshot";
+
+      gallery.appendChild(img);
+    });
+    addLightbox();
+  }
+}
+
+/**
+ * Crée dynamiquement un élément HTML <li> représentant une offre.
+ * @param {Object} deal - Données de l'offre (prix, savings, dealID...).
+ * @param {Object} store - Données du magasin (nom, logo).
+ * @returns {HTMLElement} - Élément <li> prêt à être inséré dans le DOM.
+ */
+function createOffer(deal, store) {
+  const savings = Math.round(deal.savings);
+  const dealUrl = `https://www.cheapshark.com/redirect?dealID=${deal.dealID}`;
+
+  const li = document.createElement("li");
+  li.className = "offerItem";
+
+  const link = document.createElement("a");
+  link.className = "offerCard";
+  link.href = dealUrl;
+  link.target = "_blank";
+
+  // Logo du store
+  if (store.logo) {
+    const img = document.createElement("img");
+    img.className = "storeLogo";
+    img.src = store.logo;
+    img.alt = store.name;
+    link.appendChild(img);
+  }
+
+  // Détails de l'offre
+  const infoDiv = document.createElement("div");
+  infoDiv.className = "offerInfo";
+
+  const nameP = document.createElement("p");
+  nameP.className = "storeName";
+  nameP.textContent = store.name;
+
+  const priceP = document.createElement("p");
+  priceP.className = "price";
+  priceP.textContent = `${deal.price} €`;
+
+  const discountSpan = document.createElement("span");
+  discountSpan.className = "discount";
+  discountSpan.dataset.savings = savings;
+  discountSpan.textContent = `-${savings}%`;
+
+  // Assemblage des éléments
+  infoDiv.appendChild(nameP);
+  infoDiv.appendChild(priceP);
+  infoDiv.appendChild(discountSpan);
+  link.appendChild(infoDiv);
+  li.appendChild(link);
+
+  return li;
+}
+
+/**
+ * Récupère la liste des magasins disponibles via l'API CheapShark.
+ * @returns {Promise<Object>} - Un objet contenant les magasins indexés par leur storeID.
+ */
+async function getStoresList() {
+  const storeMap = {};
+  const res = await fetch("https://www.cheapshark.com/api/1.0/stores");
+  const stores = await res.json();
+
+  stores.forEach((store) => {
+    storeMap[store.storeID] = {
+      name: store.storeName,
+      logo: "https://www.cheapshark.com" + store.images.logo
+    };
   });
 
+  return storeMap;
+}
 
+/**
+ * Gère l'ouverture et la fermeture de la modale contenant toutes les offres.
+ * Active les interactions liées à l'overlay.
+ */
+function createModal() {
+  const openBtn = document.getElementById("openOffersOverlay");
+  const closeBtn = document.getElementById("closeOffersOverlay");
+  const overlay = document.getElementById("offersOverlay");
+  const overlayContent = overlay.querySelector(".overlayContent");
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Miniatures d’images
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      overlay.style.display = "block";
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      overlay.style.display = "none";
+    });
+  }
+
+  overlay.addEventListener("click", (e) => {
+    if (!overlayContent.contains(e.target)) {
+      overlay.style.display = "none";
+    }
+  });
+}
+
+/**
+ * Système de lightbox pour l'affichage des captures d'écran en grand format.
+ */
+function addLightbox() {
   const thumbs = document.querySelectorAll(".screenshotThumb");
-  const lightbox = document.getElementById("lightbox"); // conteneur lightbox
-  const lightboxImg = document.getElementById("lightboxImage"); // image en plein écran
-  const closeBtn = document.querySelector(".lightbox .close"); // bouton de fermeture
-  const prevBtn = document.getElementById("prev"); // bouton image précédente
-  const nextBtn = document.getElementById("next"); // bouton image suivante
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImage");
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+  const closeLightboxBtn = document.querySelector(".lightbox .close");
 
-  let currentIndex = 0; // index de l’image affichée
-  // Liste des URLs d’images en grand format
+  let currentIndex = 0;
   const fullImages = Array.from(thumbs).map(img => img.dataset.full);
 
-  // Affiche l’image dans la lightbox
+  // Affiche une image dans la lightbox
   function showLightbox(index) {
     currentIndex = index;
     lightboxImg.src = fullImages[currentIndex];
-    lightbox.classList.remove("hidden"); // Affiche la lightbox
+    lightbox.classList.remove("hidden");
   }
 
-  // Clique sur une miniature : ouvre la lightbox avec l’image correspondante
-  thumbs.forEach(thumb => {
+  // Événements pour les miniatures
+  thumbs.forEach((thumb) => {
     thumb.addEventListener("click", () => {
       const index = parseInt(thumb.dataset.index);
       showLightbox(index);
     });
   });
 
-  // Ferme la lightbox si on clique en dehors de l’image
+  // Ferme la lightbox si clic à l’extérieur
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) {
       lightbox.classList.add("hidden");
     }
   });
 
-  // Navigue vers l’image précédente
+  // Navigation avec les flèches
   prevBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + fullImages.length) % fullImages.length;
     showLightbox(currentIndex);
   });
 
-  // Navigue vers l’image suivante
   nextBtn.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % fullImages.length;
     showLightbox(currentIndex);
   });
 
-  // Navigation au clavier
+  // Navigation clavier
   document.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("hidden")) {
-      if (e.key === "ArrowLeft") prevBtn.click();     // flèche gauche
-      if (e.key === "ArrowRight") nextBtn.click();     // flèche droite
-      if (e.key === "Escape") closeBtn.click();        // touche Échap
+      if (e.key === "ArrowLeft") prevBtn.click();
+      if (e.key === "ArrowRight") nextBtn.click();
+      if (e.key === "Escape" && closeLightboxBtn) closeLightboxBtn.click();
     }
   });
-});
+}
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Sélectionne tous les éléments ayant un pourcentage d’économie
-  const savingsElements = document.querySelectorAll(".discount[data-savings]");
+/**
+ * Applique des classes CSS sur les offres en fonction de leur niveau de réduction.
+ * Permet de colorer les pourcentages selon un gradient de quartiles.
+ */
+function addSavingscolors() {
+  const savingsElements = document.querySelectorAll(".discount");
   const savingsValues = Array.from(savingsElements).map(el => parseFloat(el.dataset.savings));
 
-  if (savingsValues.length === 0) return; // Si pas d’économie, on sort
+  if (savingsValues.length > 0) {
+    const min = Math.min(...savingsValues);
+    const max = Math.max(...savingsValues);
+    const range = max - min;
 
-  // Calcule les valeurs min, max et les quartiles
-  const min = Math.min(...savingsValues);
-  const max = Math.max(...savingsValues);
-  const range = max - min;
+    const q1 = min + range * 0.25;
+    const q2 = min + range * 0.5;
+    const q3 = min + range * 0.75;
 
-  const q1 = min + range * 0.25;
-  const q2 = min + range * 0.5;
-  const q3 = min + range * 0.75;
+    savingsElements.forEach(el => {
+      const val = parseFloat(el.dataset.savings);
+      let className = "";
 
-  // Pour chaque élément, on lui applique une classe CSS selon sa position dans les quartiles
-  savingsElements.forEach(el => {
-    const val = parseFloat(el.dataset.savings);
-    let className = "";
+      if (val <= q1) className = "q1";
+      else if (val <= q2) className = "q2";
+      else if (val <= q3) className = "q3";
+      else className = "q4";
 
-    if (val <= q1) className = "q1";     // Économie faible
-    else if (val <= q2) className = "q2";
-    else if (val <= q3) className = "q3";
-    else className = "q4";               // Économie forte
-
-    el.classList.add(className); // Ajoute la classe CSS
-  });
-});
+      el.classList.add(className);
+    });
+  }
+}

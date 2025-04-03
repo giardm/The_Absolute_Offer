@@ -23,6 +23,10 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/registerController.php");
     break;
 
+  case 'steamInfo':
+    require_once CONTROLLERS_PATH . ("/steamController.php");
+    break;
+
   default:
     require_once CONTROLLERS_PATH . ("/errorController.php");
     break;

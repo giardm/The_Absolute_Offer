@@ -9,8 +9,21 @@
 
 <div class="container" id="homeFeaturedOffers">
   <h2 class="sectionTitle">Jeux du moment</h2>
+  <div id="featuredGamesContainer">
+    <?php foreach ($featuredGames as $game): ?>
+      <?php
+      $steamId = $game['steam_id'];
+      $apiId = $game['api_id'];
+      $imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/{$steamId}/library_600x900.jpg";
+      ?>
+      <div class="gameCard">
+        <a href="?action=product&id=<?= $apiId ?>">
+          <img src="<?= $imageUrl ?>" alt="Game <?= $steamId ?>">
+        </a>
+      </div>
+    <?php endforeach; ?>
 
-  <div id="featuredGamesContainer"></div>
+  </div>
 </div>
 
 
