@@ -12,5 +12,8 @@
   "description": "",
   "devDependencies": {
     "sass": "^1.86.0"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.5"
   }
 }
