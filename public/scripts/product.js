@@ -1,7 +1,13 @@
 /**
+ * Import fonction d'affichage et de gestion des messages
+ */
+import { showMessage } from "./messageDisplay.js";
+
+/**
  * Point d'entrée principal une fois le DOM entièrement chargé.
  * Lance le chargement des offres CheapShark.
  */
+
 document.addEventListener("DOMContentLoaded", async () => {
   const loader = document.getElementById("loaderContainer");
   const mainContent = document.querySelector(".productContainer");
@@ -450,23 +456,10 @@ function addFeaturedOfferButton(steamId, apiId, title) {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.success) showNotification("Ajouté à la sélection !");
-        else showNotification("Erreur : " + data.message);
+        if (data.success) showMessage("Ajouté à la sélection !", "success");
+        else showMessage("Erreur : " + data.message, "error");
       })
-      .catch(() => showNotification("Erreur réseau"));
+      .catch(() => showMessage("Erreur réseau", "error"));
   });
 }
 
-
-
-function showNotification(msg) {
-  const notif = document.getElementById("notification");
-  notif.textContent = msg;
-  notif.classList.remove("hidden");
-  notif.style.opacity = "1";
-
-  setTimeout(() => {
-    notif.style.opacity = "0";
-    setTimeout(() => notif.classList.add("hidden"), 300);
-  }, 3000);
-}

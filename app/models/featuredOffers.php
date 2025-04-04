@@ -22,7 +22,6 @@ function getFeaturedOffers()
 
 function addFeaturedOffer($steamId,  $apiId,  $userId,  $gameTitle)
 {
-
   try {
     $pdo = connexionPDO();
     $sql = "
@@ -36,6 +35,29 @@ function addFeaturedOffer($steamId,  $apiId,  $userId,  $gameTitle)
       ':user_id'    => $userId,
       ':game_title' => $gameTitle
     ]);
+  } catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+  }
+}
+
+function cleanupFeaturedOffers()
+{
+  try {
+    $pdo = connexionPDO();
+    $sql = "
+    DELETE FROM featured_offers
+    WHERE featured_offer_id NOT IN (
+        SELECT featured_offer_id
+        FROM (
+            SELECT featured_offer_id
+            FROM featured_offers
+            ORDER BY added_at DESC
+            LIMIT 5
+        ) AS to_keep
+    )
+";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
   } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage();
   }

@@ -25,6 +25,10 @@ $success = addFeaturedOffer(
   trim($input['game_title'])
 );
 
+if ($success) {
+  cleanupFeaturedOffers();
+}
+
 echo json_encode([
   'success' => $success,
   'message' => $success ? 'Jeu ajouté avec succès !' : 'Échec de l’ajout.'
