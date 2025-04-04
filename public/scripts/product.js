@@ -93,15 +93,6 @@ async function getSteamInfos(steamAppID) {
     const res = await fetch(`?action=steamInfo&appid=${steamAppID}`);
     const data = await res.json();
 
-    if (data[steamAppID] && data[steamAppID].success) {
-      const steamData = data[steamAppID].data;
-
-      renderSteamHeader(steamData);
-      renderSteamInformations(steamData);
-      renderSteamMedia(steamData);
-    }
-
-
     if (!data[steamAppID] || !data[steamAppID].success) {
       console.warn("Données Steam non disponibles pour ce jeu.");
       return;
