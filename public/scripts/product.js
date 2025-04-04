@@ -252,6 +252,7 @@ function createOffer(deal, store) {
   link.className = "offerCard";
   link.href = dealUrl;
   link.target = "_blank";
+  link.rel = "noopener noreferrer";
 
   // Logo du store
   if (store.logo) {
