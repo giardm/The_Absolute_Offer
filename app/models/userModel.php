@@ -1,48 +1,69 @@
 <?php
-// app/models/userModel.php
-require_once __DIR__ . '/../../config/config.php';
+
+require_once MODELS_PATH . '/connexionDB.php';
 
 
-function createUser($email, $username, $hashedPassword) {
-    $role='user'; //role user par défaut
-    $now = date('Y-m-d H:i:s'); 
-
-    // Vérifier si l'utilisateur existe déjà
+function createUser($email, $username, $hashedPassword)
+{
+  try {
     $pdo = connexionPDO();
-    $query = "SELECT user_id FROM users WHERE email = :email OR username = :username";
-    $stmt = $pdo->prepare($query);
+    $sql = "
+        SELECT user_id FROM users WHERE email = :email
+    ";
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        'email' => $email,
-        'username' => $username
+      'email' => $email,
     ]);
+  } catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+  }
 
-    if ($stmt->fetch()) {
-        return false; // utilisateur déjà existant
-    }
+  $role = 'user'; //role user par défaut
+  $now = date('Y-m-d H:i:s');
 
-    // Insérer le nouvel utilisateur
+  try {
+    $pdo = connexionPDO();
     $insert = "INSERT INTO users (email, username, hash_password, role, added_at)
     VALUES (:email, :username, :password, :role, :created_at)";
     $stmt = $pdo->prepare($insert);
     return $stmt->execute([
-    'email' => $email,
-    'username' => $username,
-    'password' => $hashedPassword,
-    'role' => $role,
-    'created_at' => $now
-]);
-
+      'email' => $email,
+      'username' => $username,
+      'password' => $hashedPassword,
+      'role' => $role,
+      'created_at' => $now
+    ]);
+  } catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+  }
 }
 
-function getUserByEmailOrUsername($identifier) {
+function getUserByEmailOrUsername($identifier)
+{
+  try {
     $pdo = connexionPDO();
     $sql = "SELECT * FROM users WHERE email = :email OR username = :username";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        'email' => $identifier,
-        'username' => $identifier
+      'email' => $identifier,
+      'username' => $identifier
     ]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+    return false;
+  }
 }
 
 
+
+
+function isLoggedOn()
+{
+  return isset($_SESSION['user']);
+}
+
+function getLoggedUser()
+{
+  return $_SESSION['user'] ?? null;
+}

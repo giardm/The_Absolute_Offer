@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   setTimeout(() => {
     if (loader) loader.classList.add("hidden");
     if (mainContent) mainContent.style.display = "block";
-  }, 1800); // ← ajuste ici à ta convenance
+  }, 1800); // ← ajuster ici le timer
 });
 
 

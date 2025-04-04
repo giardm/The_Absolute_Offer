@@ -1,32 +1,45 @@
 <?php
-require_once MODELS_PATH . '/auth.php';
 require_once MODELS_PATH . '/userModel.php';
+// ===============================
+//  Verification etat de connexion
+// ===============================
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username_or_email = trim($_POST['username_or_email'] ?? '');
-    $password = $_POST['password'] ?? '';
-
-    $user = getUserByEmailOrUsername($username_or_email);
-
-    if (!$user || !password_verify($password, $user['hash_password'])) {
-        echo "Identifiants incorrects.";
-        exit;
-    }
-
-    // Stocker l'utilisateur en session
-    $_SESSION['user'] = [
-        'id' => $user['user_id'],
-        'username' => $user['username'],
-        'role' => $user['role']
-    ];
-
-    // Redirection après connexion
-    header("Location: index.php?action=home");
-
-    exit;
-} else {
-    include VIEWS_PATH. '/partials/headerView.php';
-    include VIEWS_PATH. '/loginView.php';
-    include VIEWS_PATH. '/partials/footerView.php';
+if (isLoggedOn()) {
+  die(var_dump($_SESSION['user']));
 }
+
+// ===============================
+//  Traitement de la soumission AJAX (POST)
+// ===============================
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  header('Content-Type: application/json');
+
+  $identifier = $_POST['identifier'] ?? '';
+  $password = $_POST['password'] ?? '';
+
+  $user = getUserByEmailOrUsername($identifier);
+
+  if ($user && password_verify($password, $user['hash_password'])) {
+    $_SESSION['user_id'] = $user['user_id'];
+
+    echo json_encode([
+      'success' => true,
+      'message' => 'Connexion réussie.'
+    ]);
+  } else {
+    echo json_encode([
+      'success' => false,
+      'message' => 'Identifiants invalides.'
+    ]);
+  }
+
+  exit;
+}
+
+// ===============================
+//  Affichage du formulaire (GET)
+// ===============================
+
+require_once VIEWS_PATH . '/partials/headerView.php';
+require_once VIEWS_PATH . '/loginView.php';
+require_once VIEWS_PATH . '/partials/FooterView.php';
