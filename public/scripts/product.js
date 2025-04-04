@@ -53,6 +53,7 @@ async function getCheapSharkInfos() {
       }
 
       const steamAppID = infos.info.steamAppID;
+      const gameTitle = infos.info.title;
       if (steamAppID) {
         getSteamInfos(steamAppID);
       }
@@ -75,7 +76,9 @@ async function getCheapSharkInfos() {
       if (infos.deals.length > 4 && openBtn) {
         openBtn.classList.remove("hidden");
       }
-
+      //Ajoute le bouton pour l'admin
+      // todo condition if(session"user"=admin) pour verifier le role de la personne connectée 
+      addFeaturedOfferButton(steamAppID, gameId, gameTitle);
       createModal();
       addSavingscolors(); // Applique une couleur selon le niveau de réduction
     })
@@ -425,4 +428,45 @@ function addSavingscolors() {
       el.classList.add(className);
     });
   }
+}
+
+function addFeaturedOfferButton(steamId, apiId, title) {
+  const button = document.getElementById("featureOfferBtn");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    fetch("?action=addFeaturedOffer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        steam_id: steamId,
+        api_id: apiId,
+        user_id: 3, // À adapter 
+        game_title: title
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) showNotification("Ajouté à la sélection !");
+        else showNotification("Erreur : " + data.message);
+      })
+      .catch(() => showNotification("Erreur réseau"));
+  });
+}
+
+
+
+function showNotification(msg) {
+  const notif = document.getElementById("notification");
+  notif.textContent = msg;
+  notif.classList.remove("hidden");
+  notif.style.opacity = "1";
+
+  setTimeout(() => {
+    notif.style.opacity = "0";
+    setTimeout(() => notif.classList.add("hidden"), 300);
+  }, 3000);
 }

@@ -15,6 +15,11 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/productController.php");
     break;
 
+  case 'addFeaturedOffer':
+    file_put_contents("log_debug.txt", "Contrôleur appelé\n", FILE_APPEND);
+    require_once CONTROLLERS_PATH . "/featuredOffersController.php";
+    break;
+
   case 'login':
     require_once CONTROLLERS_PATH . ("/loginController.php");
     break;

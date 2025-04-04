@@ -14,11 +14,12 @@
       <?php
       $steamId = $game['steam_id'];
       $apiId = $game['api_id'];
+      $gameTitle = $game['game_title'];
       $imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/{$steamId}/library_600x900.jpg";
       ?>
       <div class="gameCard">
         <a href="?action=product&id=<?= $apiId ?>">
-          <img src="<?= $imageUrl ?>" alt="Game <?= $steamId ?>">
+          <img src="<?= $imageUrl ?>" alt="<?= $gameTitle ?>">
         </a>
       </div>
     <?php endforeach; ?>

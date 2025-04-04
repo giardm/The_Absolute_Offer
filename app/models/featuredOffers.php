@@ -8,7 +8,8 @@ function getFeaturedOffers()
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT steam_id, api_id FROM featured_offers";
+    $sql = "SELECT steam_id, api_id, game_title FROM featured_offers ORDER BY added_at DESC LIMIT 5;
+";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
 
@@ -19,35 +20,23 @@ function getFeaturedOffers()
   return $featuredGames;
 }
 
+function addFeaturedOffer($steamId,  $apiId,  $userId,  $gameTitle)
+{
 
-
-
-
-
-
-
-
-
-
-
-
-
-//require_once(__DIR__ . '/connexionDB.php');
-// die(MODELS_PATH . '/connexionDB.php');
-// require_once(MODELS_PATH . '/connexionDB.php');
-
-// header('Content-Type: application/json');
-
-// try {
-//   $pdo = connexionPDO();
-//   $sql = "SELECT steam_id, api_id FROM featured_offers";
-//   $stmt = $pdo->prepare($sql);
-//   $stmt->execute();
-
-//   $featured_offers_ids = $stmt->fetchAll();
-
-//   echo json_encode($featured_offers_ids);
-// } catch (PDOException $e) {
-//   http_response_code(500);
-//   echo json_encode(["error" => "Erreur de base de données : " . $e->getMessage()]);
-// }
+  try {
+    $pdo = connexionPDO();
+    $sql = "
+        INSERT INTO featured_offers (steam_id, api_id, user_id, game_title)
+        VALUES (:steam_id, :api_id, :user_id, :game_title)
+    ";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
+      ':steam_id'   => $steamId,
+      ':api_id'     => $apiId,
+      ':user_id'    => $userId,
+      ':game_title' => $gameTitle
+    ]);
+  } catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+  }
+}

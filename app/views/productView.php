@@ -10,7 +10,10 @@
     </div>
     <div class="overlayContent">
       <img class="gameCover" src="<?= $afficheUrl ?>" alt="Affiche du jeu">
+      <div class="lowerOverlayContent"></div>
       <h2 class="gameTitle"></h2>
+      <button id="featureOfferBtn">Mettre en vedette</button>
+      <div id="notification" class="hidden">Jeu ajouté à la page d'accueil !</div>
     </div>
   </div>
   <div class="productMain">
