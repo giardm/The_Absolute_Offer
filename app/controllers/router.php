@@ -1,4 +1,5 @@
 <?php
+require_once MODELS_PATH . '/userModel.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
@@ -11,17 +12,25 @@ switch ($action) {
     require_once CONTROLLERS_PATH . ("/searchController.php");
     break;
 
+  case 'profil':
+    require_once CONTROLLERS_PATH . ("/profilController.php");
+    break;
+
   case 'product':
     require_once CONTROLLERS_PATH . ("/productController.php");
     break;
 
   case 'addFeaturedOffer':
-    file_put_contents("log_debug.txt", "Contrôleur appelé\n", FILE_APPEND);
     require_once CONTROLLERS_PATH . "/featuredOffersController.php";
     break;
 
   case 'login':
     require_once CONTROLLERS_PATH . ("/loginController.php");
+    break;
+
+  case 'logout':
+    // logout();
+    require_once CONTROLLERS_PATH . ("/homeController.php");
     break;
 
   case 'register':

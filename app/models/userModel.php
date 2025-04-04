@@ -63,7 +63,16 @@ function isLoggedOn()
   return isset($_SESSION['user']);
 }
 
-function getLoggedUser()
+function isAdmin()
 {
-  return $_SESSION['user'] ?? null;
+  if ($_SESSION['user']['role'] === 'admin') {
+    return true;
+  }
 }
+
+// function logout()
+// {
+//   $_SESSION = [];
+
+//   session_destroy();
+// }

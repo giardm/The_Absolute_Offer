@@ -1,12 +1,5 @@
 <?php
 require_once MODELS_PATH . '/userModel.php';
-// ===============================
-//  Verification etat de connexion
-// ===============================
-
-if (isLoggedOn()) {
-  die(var_dump($_SESSION['user']));
-}
 
 // ===============================
 //  Traitement de la soumission AJAX (POST)

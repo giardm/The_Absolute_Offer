@@ -32,7 +32,12 @@
     </div>
     <div class="login">
       <i class="fa-solid fa-bars"></i>
-      <a href="?action=login">
+      <a href=<?php if (isLoggedOn()):
+                echo "?action=profil" ?>
+        <?php else :
+                echo "?action=login" ?>
+        <?php endif; ?>>
+
         <i class="fa-regular fa-user"></i>
       </a>
     </div>
