@@ -1,3 +1,8 @@
+<div id="loaderContainer">
+  <video id="loaderVideo" autoplay muted loop playsinline>
+    <source src="./public/videos/logo.webm" type="video/webm">
+  </video>
+</div>
 <div class="productContainer" data-id="<?= $gameId ?>">
   <div class="productHeader">
     <div class="headerImageWrapper">

@@ -180,6 +180,10 @@ a {
   text-decoration: none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 header {
   background-color: #357DF2;
   height: 8vh;
@@ -478,6 +482,7 @@ h3 {
 
 .productMain {
   display: flex;
+  width: 100%;
 }
 
 .productHeader {
@@ -522,6 +527,7 @@ h3 {
 .productInformations {
   display: flex;
   justify-content: space-around;
+  width: 50%;
 }
 .productInformations .informations {
   width: 50%;
@@ -714,7 +720,7 @@ ul li {
 }
 
 .offers {
-  width: 40%;
+  width: 50%;
 }
 
 .offerCard {

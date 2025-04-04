@@ -2,9 +2,24 @@
  * Point d'entrée principal une fois le DOM entièrement chargé.
  * Lance le chargement des offres CheapShark.
  */
-document.addEventListener("DOMContentLoaded", () => {
-  getCheapSharkInfos();
+document.addEventListener("DOMContentLoaded", async () => {
+  const loader = document.getElementById("loaderContainer");
+  const mainContent = document.querySelector(".productContainer");
+  const loaderVideo = document.getElementById("loaderVideo");
+
+  if (mainContent) mainContent.style.display = "none";
+  if (loaderVideo) loaderVideo.playbackRate = 3;
+
+  // Charge toutes les infos (CheapShark + Steam)
+  await getCheapSharkInfos();
+
+  // Optionnel : pré-attente pour laisser le layout se stabiliser (200–400ms max)
+  setTimeout(() => {
+    if (loader) loader.classList.add("hidden");
+    if (mainContent) mainContent.style.display = "block";
+  }, 1800); // ← ajuste ici à ta convenance
 });
+
 
 /**
  * Récupère l'ID du jeu depuis l'attribut data-id du conteneur principal.
