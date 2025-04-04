@@ -60,19 +60,21 @@ function getUserByEmailOrUsername($identifier)
 
 function isLoggedOn()
 {
-  return isset($_SESSION['user']);
+  return isset($_SESSION['username']);
 }
 
 function isAdmin()
 {
-  if ($_SESSION['user']['role'] === 'admin') {
+  if ($_SESSION['role'] == 'admin') {
     return true;
   }
 }
 
-// function logout()
-// {
-//   $_SESSION = [];
+function logout()
+{
+  if(isset($_SESSION)){
+    $_SESSION= [];
+  } ;
 
-//   session_destroy();
-// }
+  session_destroy();
+}

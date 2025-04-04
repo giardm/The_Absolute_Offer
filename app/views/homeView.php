@@ -1,3 +1,4 @@
+<?php var_dump($_SESSION);?>
 <div class="container" id="homeHero">
   <video autoplay loop muted playsinline>
     <!-- <source src="./videos/logo.mp4" type="video/mp4"> -->

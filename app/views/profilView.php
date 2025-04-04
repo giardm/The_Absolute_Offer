@@ -1,4 +1,4 @@
-<?php foreach ($variable as $_SESSION) {
+<?php foreach ($_SESSION as $variable) {
   echo $variable;
 } ?>
 <a href="?action=logout">Deconnexion.</a>

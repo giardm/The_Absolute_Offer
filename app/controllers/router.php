@@ -29,7 +29,7 @@ switch ($action) {
     break;
 
   case 'logout':
-    // logout();
+    logout();
     require_once CONTROLLERS_PATH . ("/homeController.php");
     break;
 
