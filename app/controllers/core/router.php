@@ -1,47 +1,33 @@
 <?php
 require_once MODELS_PATH . '/userModel.php';
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'home';
+// Nouvelle table de routage avec chemins mis à jour
+$routes = [
+    'home'             => 'home/homeController.php',
+    'search'           => 'products/searchController.php',
+    'profil'           => 'users/profilController.php',
+    'product'          => 'products/productController.php',
+    'addFeaturedOffer' => 'home/featuredOffersController.php',
+    'login'            => 'users/loginController.php',
+    'logout'           => function() {
+        logout();
+        require_once CONTROLLERS_PATH . '/home/homeController.php';
+    },
+    'register'         => 'users/registerController.php',
+    'steamInfo'        => 'proxy/steamController.php',
+];
 
-switch ($action) {
-  case 'home':
-    require_once CONTROLLERS_PATH . ("/homeController.php");
-    break;
+// Action demandée
+$action = $_GET['action'] ?? 'home';
 
-  case 'search':
-    require_once CONTROLLERS_PATH . ("/searchController.php");
-    break;
+if (isset($routes[$action])) {
+    $route = $routes[$action];
 
-  case 'profil':
-    require_once CONTROLLERS_PATH . ("/profilController.php");
-    break;
-
-  case 'product':
-    require_once CONTROLLERS_PATH . ("/productController.php");
-    break;
-
-  case 'addFeaturedOffer':
-    require_once CONTROLLERS_PATH . "/featuredOffersController.php";
-    break;
-
-  case 'login':
-    require_once CONTROLLERS_PATH . ("/loginController.php");
-    break;
-
-  case 'logout':
-    logout();
-    require_once CONTROLLERS_PATH . ("/homeController.php");
-    break;
-
-  case 'register':
-    require_once CONTROLLERS_PATH . ("/registerController.php");
-    break;
-
-  case 'steamInfo':
-    require_once CONTROLLERS_PATH . ("/steamController.php");
-    break;
-
-  default:
-    require_once CONTROLLERS_PATH . ("/errorController.php");
-    break;
+    if (is_callable($route)) {
+        $route(); // exécute logout() + redirection
+    } else {
+        require_once CONTROLLERS_PATH . '/' . $route;
+    }
+} else {
+    require_once CONTROLLERS_PATH . '/core/errorController.php';
 }
