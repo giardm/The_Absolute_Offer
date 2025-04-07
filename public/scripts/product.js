@@ -60,8 +60,15 @@ async function getCheapSharkInfos() {
 
       const steamAppID = infos.info.steamAppID;
       const gameTitle = infos.info.title;
+      const domGameTitle = document.querySelector(".gameTitle");
+
+      domGameTitle.textContent = gameTitle;
+
       if (steamAppID) {
         getSteamInfos(steamAppID);
+      } else {
+        console.log("toto");
+        cleanDom();
       }
 
       // Génération des éléments HTML pour chaque offre
@@ -83,7 +90,6 @@ async function getCheapSharkInfos() {
         openBtn.classList.remove("hidden");
       }
       //Ajoute le bouton pour l'admin
-      // todo condition if(session"user"=admin) pour verifier le role de la personne connectée 
       addFeaturedOfferButton(steamAppID, gameId, gameTitle);
       createModal();
       addSavingscolors(); // Applique une couleur selon le niveau de réduction
@@ -461,5 +467,29 @@ function addFeaturedOfferButton(steamId, apiId, title) {
       })
       .catch(() => showMessage("Erreur réseau", "error"));
   });
+}
+
+function cleanDom() {
+  const selectors = [
+    ".headerImageWrapper",
+    ".productInformations",
+    "#descriptionTitle",
+    ".description",
+    ".medias",
+    ".disclaimer"
+  ];
+
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.style.display = "none";
+    });
+  });
+
+  const overlays = document.querySelectorAll(".overlayContent");
+
+  overlays.forEach(el => {
+    el.style.position = "relative";
+  });
+
 }
 

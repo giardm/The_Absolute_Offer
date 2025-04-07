@@ -49,7 +49,7 @@
     </div>
     <!-- FIN OFFRES -->
   </div>
-  <h3>Description</h3>
+  <h3 id="descriptionTitle">Description</h3>
   <div class="description"></div>
   <div class="medias">
     <div class="videos">

@@ -7,7 +7,7 @@ function getNews()
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT news_id, title, thumb FROM news ORDER BY added_at DESC LIMIT 6";
+    $sql = "SELECT news_id, title, thumb, thumb_alt FROM news ORDER BY added_at DESC LIMIT 6";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
 

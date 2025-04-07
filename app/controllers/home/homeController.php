@@ -1,7 +1,7 @@
 <?php
 
 require_once MODELS_PATH . '/featuredOffers.php';
-require_once MODELS_PATH . '/news.php';
+require_once MODELS_PATH . '/newsModel.php';
 
 $featuredGames = getFeaturedOffers();
 $news = getNews();

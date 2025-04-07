@@ -93,3 +93,9 @@ a {
 .hidden {
   display: none !important;
 }
+
+body,
+html {
+  overflow-x: hidden;
+  width: 100%;
+}

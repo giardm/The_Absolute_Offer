@@ -1,10 +1,10 @@
 <?php
 
-require RACINE . "/app/views/partials/header.php";
+require VIEWS_PATH . "/partials/headerView.php";
 ?>
 
 
 <?
 
 
-require RACINE . "/app/views/partials/footer.php";
+require VIEWS_PATH . "/partials/footerView.php";

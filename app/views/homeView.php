@@ -29,12 +29,12 @@
 
 
 <div class="container" id="newsContainer">
-  <h3>News</h3>
+  <h2 class="sectionTitle">News</h2>
   <!-- css grid -->
   <div class="news-grid">
     <?php foreach ($news as $n): ?>
       <a href="?action=newsPage&id=<?= $n['news_id'] ?>" class="news-item">
-        <img src=".<?= $n['thumb'] ?>" alt="Thumbnail" class="thumb">
+        <img src=".<?= $n['thumb'] ?>" alt="<?= $n['thumb_alt'] ?>" class="thumb">
         <div class="overlay">
           <h3><?= mb_strimwidth($n['title'], 0, 60, '...') ?></h3>
         </div>
@@ -44,12 +44,14 @@
 
 </div>
 
-<div class="container">
-  <!-- css grid -->
-  <div class="favorites">
-    <h3>Mes Favoris</h3>
+<?php if (isLoggedOn()) : ?>
+  <div class="container">
+    <!-- css grid -->
+    <div class="favorites">
+      <h3>Mes Favoris</h3>
+    </div>
+    <div class="topics">
+      <h3>Topics</h3>
+    </div>
   </div>
-  <div class="topics">
-    <h3>Topics</h3>
-  </div>
-</div>
+<?php endif; ?>

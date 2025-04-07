@@ -22,7 +22,7 @@
 }
 
 #newsContainer {
-  padding: 2rem;
+  padding-top: 2rem;
   box-sizing: border-box;
   overflow-x: hidden;
   max-width: 100%;
@@ -36,6 +36,7 @@
     box-sizing: border-box;
 
     @media (min-width: 768px) {
+      padding: 2rem;
       width: 70%;
       grid-template-columns: repeat(3, 1fr);
     }
@@ -53,6 +54,18 @@
       &:hover {
         transform: scale(1.05);
 
+      }
+
+      h3 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+
+        @media (min-width: 768px) {
+          font-size: 2rem;
+          margin-top: 3rem;
+          margin-bottom: 1rem;
+        }
       }
 
       img.thumb {
