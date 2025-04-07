@@ -54,7 +54,7 @@ function getUserByEmailOrUsername($identifier)
       $registrationDate = new DateTime($user['added_at']);
       $now = new DateTime();
       $diffInSeconds = $now->getTimestamp() - $registrationDate->getTimestamp();
-      $user['added_at'] = formatDurationFromSeconds($diffInSeconds); 
+      $user['added_at'] = formatDurationFromSeconds($diffInSeconds);
     }
 
     return $user;
@@ -72,23 +72,23 @@ function isLoggedOn()
 
 function isAdmin()
 {
-  if ($_SESSION['role'] == 'admin') {
-    return true;
-  }
+  return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
+
 
 function logout()
 {
-  if(isset($_SESSION)){
-    $_SESSION= [];
-  } ;
+  if (isset($_SESSION)) {
+    $_SESSION = [];
+  };
 
   session_destroy();
 }
 
 
 // Fonction pour formater la durée
-function formatDurationFromSeconds(int $seconds): string {
+function formatDurationFromSeconds(int $seconds): string
+{
   if ($seconds < 60) {
     return "Moins d'une minute";
   } elseif ($seconds < 3600) {
@@ -102,7 +102,7 @@ function formatDurationFromSeconds(int $seconds): string {
     return $days . ' jour' . ($days > 1 ? 's' : '');
   } elseif ($seconds < 31536000) {
     $months = floor($seconds / 2592000);
-    return $months . ' mois' ;
+    return $months . ' mois';
   } else {
     $years = floor($seconds / 31536000);
     return $years . ' an' . ($years > 1 ? 's' : '');
