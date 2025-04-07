@@ -41,7 +41,9 @@
       </a>
     <?php endforeach; ?>
   </div>
-
+  <?php if (isAdmin()): ?>
+    <a href="?action=addArticle" id="addArticle">Ajouter une News.</a>
+  <?php endif; ?>
 </div>
 
 <?php if (isLoggedOn()) : ?>
