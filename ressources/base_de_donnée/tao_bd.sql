@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 27 mars 2025 à 16:32
+-- Généré le : ven. 04 avr. 2025 à 16:30
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `content` text NOT NULL,
-  `created_at` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `topic_id` int(11) NOT NULL
@@ -57,7 +57,7 @@ CREATE TABLE `comments` (
 CREATE TABLE `favorites` (
   `favorite_id` int(11) NOT NULL,
   `game_id` int(11) NOT NULL,
-  `added_at` datetime DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -69,21 +69,23 @@ CREATE TABLE `favorites` (
 
 CREATE TABLE `featured_offers` (
   `featured_offer_id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
-  `added_at` datetime NOT NULL,
-  `user_id` int(11) NOT NULL
+  `steam_id` int(11) DEFAULT NULL,
+  `game_title` varchar(255) DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL,
+  `api_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `featured_offers`
 --
 
-INSERT INTO `featured_offers` (`featured_offer_id`, `game_id`, `added_at`, `user_id`) VALUES
-(6, 165363, '2025-03-27 16:17:25', 1),
-(7, 287215, '2025-03-27 16:17:25', 1),
-(8, 235827, '2025-03-27 16:17:25', 1),
-(9, 236717, '2025-03-27 16:17:25', 1),
-(10, 287450, '2025-03-27 16:17:25', 1);
+INSERT INTO `featured_offers` (`featured_offer_id`, `steam_id`, `game_title`, `added_at`, `user_id`, `api_id`) VALUES
+(39, 1245620, 'ELDEN RING', '2025-04-04 10:52:56', 3, 236717),
+(40, 2246340, 'Monster Hunter Wilds', '2025-04-04 12:05:22', 3, 287215),
+(41, 2622380, 'ELDEN RING NIGHTREIGN', '2025-04-04 12:05:38', 3, 297970),
+(42, 367520, 'Hollow Knight', '2025-04-04 12:05:51', 3, 165363),
+(43, 504230, 'Celeste', '2025-04-04 12:06:06', 3, 177485);
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,7 @@ CREATE TABLE `news` (
   `news_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `content` text DEFAULT NULL,
-  `added_at` datetime DEFAULT NULL,
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -110,7 +112,7 @@ CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `content` text NOT NULL,
-  `created_at` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -126,7 +128,7 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `hash_password` varchar(250) NOT NULL,
   `role` varchar(50) NOT NULL,
-  `added_at` datetime DEFAULT NULL
+  `added_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -134,11 +136,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `hash_password`, `role`, `added_at`) VALUES
-(1, 'xx_dark_sasuke_xx', 'dark_sasuke@example.com', 'hashed_password_1', 'user', '2025-03-27 11:45:30'),
-(2, 'the_great_pineapple_king', 'pineapple_king@example.com', 'hashed_password_2', 'user', '2025-03-27 11:45:30'),
-(3, 'super_ninja_sonic', 'ninja_banana@example.com', 'hashed_password_3', 'user', '2025-03-27 11:45:30'),
-(4, 'queen_of_the_universe_42', 'queen_universe@example.com', 'hashed_password_4', 'user', '2025-03-27 11:45:30'),
-(5, 'mighty_icecream', 'icecream_hero@example.com', 'hashed_password_5', 'user', '2025-03-27 11:45:30');
+(1, 'xx_dark_sasuke_xx', 'dark_sasuke@example.com', 'hashed_password_1', 'user', '2025-03-27 10:45:30'),
+(2, 'the_great_pineapple_king', 'pineapple_king@example.com', 'hashed_password_2', 'user', '2025-03-27 10:45:30'),
+(3, 'super_ninja_sonic', 'ninja_banana@example.com', 'hashed_password_3', 'user', '2025-03-27 10:45:30'),
+(4, 'queen_of_the_universe_42', 'queen_universe@example.com', 'hashed_password_4', 'user', '2025-03-27 10:45:30'),
+(5, 'mighty_icecream', 'icecream_hero@example.com', 'hashed_password_5', 'user', '2025-03-27 10:45:30'),
+(6, 'superadmin', 'superadmin@admin.com', '$2y$10$6nGw.N2iHXpTfbtiXtSdjebuFFqIjk.6CeutI2LsnWfe7AcTV1G.2', 'admin', '2025-04-04 12:25:56');
 
 --
 -- Index pour les tables déchargées
@@ -223,7 +226,7 @@ ALTER TABLE `favorites`
 -- AUTO_INCREMENT pour la table `featured_offers`
 --
 ALTER TABLE `featured_offers`
-  MODIFY `featured_offer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `featured_offer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT pour la table `news`
@@ -241,7 +244,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées
