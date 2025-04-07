@@ -19,8 +19,8 @@
 
     <!-- Signature -->
     <footer class="newsFooter">
-      <span class="newsAuthor">Written by <strong><?= htmlspecialchars($article['username']) ?></strong></span>
-      <span class="newsDate">on <?= date('F j, Y', strtotime($article['added_at'])) ?></span>
+      <span class="newsAuthor">Ecrit par <strong><?= htmlspecialchars($article['username']) ?></strong></span>
+      <span class="newsDate">le <?= date('F j, Y', strtotime($article['added_at'])) ?></span>
     </footer>
 
   </article>
