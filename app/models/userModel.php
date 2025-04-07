@@ -48,7 +48,16 @@ function getUserByEmailOrUsername($identifier)
       'email' => $identifier,
       'username' => $identifier
     ]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && isset($user['added_at'])) {
+      $registrationDate = new DateTime($user['added_at']);
+      $now = new DateTime();
+      $diffInSeconds = $now->getTimestamp() - $registrationDate->getTimestamp();
+      $user['added_at'] = formatDurationFromSeconds($diffInSeconds); 
+    }
+
+    return $user;
   } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage();
     return false;
@@ -56,23 +65,46 @@ function getUserByEmailOrUsername($identifier)
 }
 
 
-
-
 function isLoggedOn()
 {
-  return isset($_SESSION['user']);
+  return isset($_SESSION['username']);
 }
 
 function isAdmin()
 {
-  if ($_SESSION['user']['role'] === 'admin') {
+  if ($_SESSION['role'] == 'admin') {
     return true;
   }
 }
 
-// function logout()
-// {
-//   $_SESSION = [];
+function logout()
+{
+  if(isset($_SESSION)){
+    $_SESSION= [];
+  } ;
 
-//   session_destroy();
-// }
+  session_destroy();
+}
+
+
+// Fonction pour formater la durée
+function formatDurationFromSeconds(int $seconds): string {
+  if ($seconds < 60) {
+    return "Moins d'une minute";
+  } elseif ($seconds < 3600) {
+    $minutes = floor($seconds / 60);
+    return $minutes . ' minute' . ($minutes > 1 ? 's' : '');
+  } elseif ($seconds < 86400) {
+    $hours = floor($seconds / 3600);
+    return $hours . ' heure' . ($hours > 1 ? 's' : '');
+  } elseif ($seconds < 2592000) {
+    $days = floor($seconds / 86400);
+    return $days . ' jour' . ($days > 1 ? 's' : '');
+  } elseif ($seconds < 31536000) {
+    $months = floor($seconds / 2592000);
+    return $months . ' mois' ;
+  } else {
+    $years = floor($seconds / 31536000);
+    return $years . ' an' . ($years > 1 ? 's' : '');
+  }
+}

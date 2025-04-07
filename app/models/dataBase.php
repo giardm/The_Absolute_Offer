@@ -11,7 +11,7 @@ function getUserByUsername($username)
     $req->bindValue(':username', $username, PDO::PARAM_STR);
     $req->execute();
 
-    $resultat = $req->fetchAll();
+    return $req->fetch();
   } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage();
     die();

@@ -13,4 +13,4 @@ if (isset($_GET["action"])) {
 }
 
 
-require CONTROLLERS_PATH . "/router.php";
+require CONTROLLERS_PATH . "/core/router.php";
