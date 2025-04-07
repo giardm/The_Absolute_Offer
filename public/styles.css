@@ -389,7 +389,7 @@ h3 {
 }
 @media (min-width: 768px) {
   #newsContainer .news-grid .news-item h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 3rem;
     margin-bottom: 1rem;
   }
