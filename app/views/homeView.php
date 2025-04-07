@@ -1,5 +1,3 @@
-<?php var_dump($_SESSION);?>
-<?php echo password_hash('hashed_password_1', PASSWORD_DEFAULT);?>
 <div class="container" id="homeHero">
   <video autoplay loop muted playsinline>
     <!-- <source src="./videos/logo.mp4" type="video/mp4"> -->
@@ -31,9 +29,7 @@
 
 
 <div class="container">
-
-
-  <h2>News</h2>
+  <h3>News</h3>
 
   <!-- css grid -->
 

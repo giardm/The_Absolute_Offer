@@ -128,3 +128,15 @@ ul {
 .discount.q4 {
   background-color: $success_medium;
 }
+
+.disclaimer {
+  font-size: 0.75rem;
+  font-weight: 300;
+  padding: 24px 80px;
+  text-align: center;
+
+  a {
+    color: $brand_medium;
+    font-weight: 500;
+  }
+}

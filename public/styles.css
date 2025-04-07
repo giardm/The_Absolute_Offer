@@ -593,6 +593,17 @@ ul li {
   background-color: #85C71A;
 }
 
+.disclaimer {
+  font-size: 0.75rem;
+  font-weight: 300;
+  padding: 24px 80px;
+  text-align: center;
+}
+.disclaimer a {
+  color: #357DF2;
+  font-weight: 500;
+}
+
 .lightbox {
   position: fixed;
   top: 0;

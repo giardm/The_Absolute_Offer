@@ -1,10 +1,6 @@
 <div class="profil">
-  <p><strong>Pseudo : <?=$user['username']?></strong></p>
-  <p><strong>Adresse mail : <?=$user['email']?></strong></p>
-  <p><strong>Membre depuis : <?=$user['added_at']?></strong></p>
-
-  <?php
-  var_dump($user);
-  ?>
+  <p><strong>Pseudo : </strong><?= $user['username'] ?></p>
+  <p><strong>Adresse mail :</strong> <?= $user['email'] ?></p>
+  <p><strong>Membre depuis :</strong> <?= $user['added_at'] ?></p>
 </div>
-<a href="?action=logout">Deconnexion.</a>
+<a id="deconnexion" href="?action=logout">Deconnexion.</a>

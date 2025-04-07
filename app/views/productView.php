@@ -63,6 +63,7 @@
       <div class="screenshotsGallery"></div>
     </div>
   </div>
+  <p class="disclaimer">Les informations du jeu affichées sur cette page proviennent de <a target="_blank" href="https://store.steampowered.com/">Steam (© Valve Corporation)</a>. Tous les noms, marques et images associés sont la propriété de leurs détenteurs respectifs. Ce site n'est ni affilié, ni approuvé par Valve Corporation.</p>
 </div>
 <!-- lightbox -->
 <div id="lightbox" class="lightbox hidden">
