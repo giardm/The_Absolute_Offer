@@ -2,8 +2,8 @@
   padding-top: 80px;
   padding-bottom: 80px;
   background:
-    url("./images/ellipse1.png") no-repeat center bottom,
-    url("./images/ellipse2.png") no-repeat center bottom;
+    url("./images/logo/ellipse1.png") no-repeat center bottom,
+    url("./images/logo/ellipse2.png") no-repeat center bottom;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -19,4 +19,65 @@
   padding: 24px;
   font-weight: 400;
   font-size: 32px;
+}
+
+#newsContainer {
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
+
+  .news-grid {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media (min-width: 768px) {
+      width: 70%;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .news-item {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+
+      }
+
+      img.thumb {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+
+        @media (min-width: 768px) {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
 }

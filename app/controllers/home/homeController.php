@@ -1,8 +1,10 @@
 <?php
 
 require_once MODELS_PATH . '/featuredOffers.php';
+require_once MODELS_PATH . '/news.php';
 
 $featuredGames = getFeaturedOffers();
+$news = getNews();
 
 require VIEWS_PATH . "/partials/headerView.php";
 

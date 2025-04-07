@@ -28,10 +28,19 @@
 </div>
 
 
-<div class="container">
+<div class="container" id="newsContainer">
   <h3>News</h3>
-
   <!-- css grid -->
+  <div class="news-grid">
+    <?php foreach ($news as $n): ?>
+      <a href="?action=newsPage&id=<?= $n['news_id'] ?>" class="news-item">
+        <img src=".<?= $n['thumb'] ?>" alt="Thumbnail" class="thumb">
+        <div class="overlay">
+          <h3><?= mb_strimwidth($n['title'], 0, 60, '...') ?></h3>
+        </div>
+      </a>
+    <?php endforeach; ?>
+  </div>
 
 </div>
 

@@ -17,8 +17,8 @@
 <body>
   <header>
     <div class="logo">
-      <a href="?action=home"><img id="mobileLogo" src="./public/images/logo-03-b.png" alt=""></a>
-      <a href="?action=home"><img id="desktopLogo" src="./public/images/logo-04-b.png" alt=""></a>
+      <a href="?action=home"><img id="mobileLogo" src="./public/images/logo/logo-03-b.png" alt=""></a>
+      <a href="?action=home"><img id="desktopLogo" src="./public/images/logo/logo-04-b.png" alt=""></a>
     </div>
     <div class="searchContainer">
       <div class="searchInput">
