@@ -36,7 +36,7 @@
       <a href="?action=newsPage&id=<?= $n['news_id'] ?>" class="news-item">
         <img src=".<?= $n['thumb'] ?>" alt="<?= $n['thumb_alt'] ?>" class="thumb">
         <div class="overlay">
-          <h3><?= mb_strimwidth($n['title'], 0, 60, '...') ?></h3>
+          <h3><?= mb_strimwidth($n['title'], 0, 35, '...') ?></h3>
         </div>
       </a>
     <?php endforeach; ?>
