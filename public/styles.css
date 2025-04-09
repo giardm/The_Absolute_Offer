@@ -184,12 +184,13 @@ a {
   display: none !important;
 }
 
-body,
-html {
-  overflow-x: hidden;
-  width: 100%;
+@media (max-width: 768px) {
+  body,
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
 }
-
 header {
   background-color: #357DF2;
   height: 8vh;
@@ -334,6 +335,7 @@ h3 {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
+  text-align: center;
 }
 
 #homeHero h1 {
