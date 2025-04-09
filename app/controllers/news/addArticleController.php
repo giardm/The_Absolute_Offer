@@ -6,72 +6,117 @@ require_once MODELS_PATH . '/newsModel.php';
 // ===============================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sécurité & nettoyage
-    $title = $_POST['title'] ?? '';
-    $content = $_POST['content'] ?? '';
-    $category = intval($_POST['category'] ?? 0);
-    $image = $_FILES['image'] ?? null;
 
-    // Validation simple
-    if (!$title || !$content || !$category || !$image || $image['error'] !== 0) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Données invalides ou image manquante.'
-        ]);
-    }
+  // Vérifie que toutes les données attendues sont bien présentes dans $_POST
+  if (!isset($_POST['title'], $_POST['content'], $_POST['category'], $_POST['thumbAlt'])) {
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => false,
+      'message' => 'Le formulaire est incomplet ou invalide.'
+    ]);
+    exit;
+  }
 
-    // Gérer l'upload de l'image
-    $uploadDir = __DIR__ . '/public/images/news';
-    $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-    $filename = uniqid('img_') . '.' . $extension;
-    $targetPath = $uploadDir . $filename;
+  // Récupération des données envoyées par le formulaire
+  $title = $_POST['title'];
+  $content = $_POST['content'];
+  $categoryId = $_POST['category'];
+  $thumbAlt = $_POST['thumbAlt'];
+  $userId = $_SESSION['user_id'] ?? null;
 
-    // Vérifier extension et MIME type
-    $allowedExt = 'png';
-    $allowedMime = 'image/png';
+  // Vérification de la présence des champs obligatoires
+  if (empty($title) || empty($content) || empty($categoryId) || !$userId) {
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => false,
+      'message' => 'Tous les champs sont requis.'
+    ]);
+    exit;
+  }
 
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = finfo_file($finfo, $image['tmp_name']);
-    finfo_close($finfo);
+  // Sécurisation basique contre injection HTML
+  $title = strip_tags($title);
+  $content = strip_tags($content, '<p><br><strong><em><u><ul><ol><li><a>');
+  $thumbAlt = htmlspecialchars($thumbAlt);
 
-    if ($extension !== $allowedExt || $mimeType !== $allowedMime) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Seuls les fichiers PNG sont autorisés.'
-        ]);
-    }
+  // ----------------------------------------
+  // GESTION DE L’IMAGE UPLOADÉE
+  // ----------------------------------------
 
+  // L’image est obligatoire pour publier un article
+  if (
+    !isset($_FILES['image']) ||
+    $_FILES['image']['error'] !== UPLOAD_ERR_OK
+  ) {
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => false,
+      'message' => 'Une image est requise pour publier l’article.'
+    ]);
+    exit;
+  }
 
+  $thumbPath = null;
+
+  if (
+    isset($_FILES['image']) &&
+    $_FILES['image']['error'] === UPLOAD_ERR_OK
+  ) {
+    $tmpFile = $_FILES['image']['tmp_name'];
+    $originalName = basename($_FILES['image']['name']);
+    $uniqueName = uniqid() . '_' . $originalName;
+    $uploadDir = 'public/image/uploads/';
+
+    // Création du dossier de destination s’il n’existe pas
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+      mkdir($uploadDir, 0755, true);
     }
 
-    if (!move_uploaded_file($image['tmp_name'], $targetPath)) {
-        die('Échec de l’upload de l’image.');
-    }
+    $destination = $uploadDir . $uniqueName;
 
-    // Appel à la fonction d'insertion
-    if (createArticle($title, $content, $category, $filename)) {
-        echo json_encode([
-            'success' => true,
-            'message' => 'Article ajouté !'
-        ]);
+    // Déplacement du fichier uploadé
+    if (move_uploaded_file($tmpFile, $destination)) {
+      $thumbPath = $destination;
     } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Erreur lors de l’ajout de l’article.'
-        ]);
+      // Échec du déplacement du fichier image
+      header('Content-Type: application/json');
+      echo json_encode([
+        'success' => false,
+        'message' => 'Erreur lors de l’enregistrement de l’image.'
+      ]);
+      exit; // On stoppe ici si le fichier ne peut pas être déplacé
     }
+  }
+
+  // ----------------------------------------
+  // AJOUT DE L’ARTICLE DANS LA BASE DE DONNÉES
+  // ----------------------------------------
+
+  $success = addArticle($title, $content, $thumbPath, $thumbAlt, $userId, $categoryId);
+
+  if ($success) {
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => true,
+      'message' => 'Article ajouté avec succès !'
+    ]);
+    exit;
+  } else {
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => false,
+      'message' => 'Erreur lors de l’ajout de l’article.'
+    ]);
+    exit;
+  }
 } else {
-    http_response_code(405);
-    echo "Méthode non autorisée.";
+  // ===============================
+  //  Affichage du formulaire (GET)
+  // ===============================
+
+  $categories = getCategories();
+
+  require_once VIEWS_PATH . '/partials/headerView.php';
+  require_once VIEWS_PATH . '/addArticleView.php';
+  require_once VIEWS_PATH . '/partials/FooterView.php';
 }
-
-
-// ===============================
-//  Affichage du formulaire (GET)
-// ===============================
-
-require_once VIEWS_PATH . '/partials/headerView.php';
-require_once VIEWS_PATH . '/addArticleView.php';
-require_once VIEWS_PATH . '/partials/FooterView.php';

@@ -4,8 +4,7 @@
     <!-- Thumbnail -->
     <div class="newsThumbnailWrapper">
       <img
-        src=".<?= htmlspecialchars($article['thumb']) ?>"
-        alt="<?= htmlspecialchars($article['thumb_alt']) ?>"
+        src="<?= $article['thumb_path'] ?>" alt="<?= $article['thumb_alt'] ?>"
         class="newsThumbnail">
     </div>
 
@@ -14,7 +13,7 @@
 
     <!-- Content -->
     <div class="newsContent">
-      <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+      <?= $article['content'] ?>
     </div>
 
     <!-- Signature -->

@@ -353,7 +353,6 @@ h3 {
 #newsContainer {
   padding-top: 2rem;
   box-sizing: border-box;
-  overflow-x: hidden;
   max-width: 100%;
 }
 #newsContainer .news-grid {
@@ -907,7 +906,7 @@ ul li {
 }
 
 .newsContent {
-  text-align: center;
+  text-align: left;
   padding: 0 32px 48px 32px;
   font-size: 1.125rem;
   line-height: 1.6;
@@ -918,6 +917,11 @@ ul li {
   font-style: italic;
   color: #666;
   margin-top: 32px;
+}
+
+.newsArticle {
+  max-width: 1000px;
+  margin: auto;
 }
 
 /*# sourceMappingURL=styles.css.map */
