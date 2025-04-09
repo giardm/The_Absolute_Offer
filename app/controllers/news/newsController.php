@@ -1,6 +1,5 @@
 <?php
 require_once MODELS_PATH . '/newsModel.php';
-require_once MODELS_PATH . '/newsModel.php';
 
 $id = $_GET['id'] ?? null;
 

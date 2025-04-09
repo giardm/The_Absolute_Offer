@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tmpFile = $_FILES['image']['tmp_name'];
     $originalName = basename($_FILES['image']['name']);
     $uniqueName = uniqid() . '_' . $originalName;
-    $uploadDir = 'public/image/uploads/';
+    $uploadDir = 'public/images/uploads/';
 
     // Création du dossier de destination s’il n’existe pas
     if (!is_dir($uploadDir)) {

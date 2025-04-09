@@ -1,0 +1,20 @@
+@mixin glow-background($color) {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170%;
+    height: 60%; // ➤ plus ovale (horizontal large)
+    transform: translate(-50%, -50%);
+    background: $color;
+    filter: blur(20px); // ➤ moins diffus, plus net
+    opacity: 0.9; // ➤ moins transparent
+    border-radius: 40% / 60%; // ➤ forme ovale
+    z-index: -1;
+    transition: all 0.4s ease; // ➤ transition douce
+  }
+}
