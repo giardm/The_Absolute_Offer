@@ -1,24 +1,25 @@
 import { showMessage } from "./messageDisplay.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", displayLoginStatus);
+  const articleForm = document.getElementById("articleForm");
+  if (articleForm) {
+    articleForm.addEventListener("submit", submitArticle);
+  }
 });
 
 /**
- * Gère la soumission du formulaire de connexion via fetch.
+ * Gère la soumission du formulaire d’article via fetch.
  * Affiche un toast en cas de succès ou d’erreur.
  * @param {Event} e
  */
-async function displayLoginStatus(e) {
+async function submitArticle(e) {
   e.preventDefault();
 
   const form = e.target;
   const formData = new FormData(form);
 
   try {
-    const res = await fetch("?action=login", {
+    const res = await fetch("?action=addArticle", {
       method: "POST",
       body: formData,
     });
@@ -27,7 +28,6 @@ async function displayLoginStatus(e) {
 
     if (data.success) {
       showMessage(data.message, "success");
-
       setTimeout(() => {
         window.location.href = "?action=home";
       }, 1000);
@@ -36,6 +36,6 @@ async function displayLoginStatus(e) {
     }
   } catch (err) {
     console.error(err);
-    showMessage("Erreur réseau lors de la connexion", "error");
+    showMessage("Erreur réseau lors de l’envoi de l’article", "error");
   }
 }

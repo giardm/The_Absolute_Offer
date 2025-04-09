@@ -11,7 +11,7 @@ $routes = [
   'product'          => 'products/productController.php',
   'addFeaturedOffer' => 'home/featuredOffersController.php',
   'login'            => 'users/loginController.php',
-  'logout'           => 'home/homeController.php',
+  'logout'           => 'users/logoutController.php',
   'register'         => 'users/registerController.php',
   'steamInfo'        => 'proxy/steamController.php',
 ];

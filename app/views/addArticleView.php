@@ -1,4 +1,4 @@
-<form action="save_article.php" method="post" enctype="multipart/form-data">
+<form id="articleForm" action="save_article.php" method="post" enctype="multipart/form-data">
   <label for="title">Titre :</label><br>
   <input type="text" name="title" id="title" required><br><br>
 
@@ -13,7 +13,7 @@
   </select><br><br>
 
   <label for="image">Image :</label><br>
-  <input type="file" name="image" id="image" accept="image/*" required><br><br>
+  <input type="file" name="image" id="image" accept="image/png" required><br><br>
 
   <button type="submit">Créer l’article</button>
 </form>
