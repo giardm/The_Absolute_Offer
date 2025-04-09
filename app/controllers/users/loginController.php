@@ -35,6 +35,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //  Affichage du formulaire (GET)
 // ===============================
 
-require_once VIEWS_PATH . '/partials/headerView.php';
-require_once VIEWS_PATH . '/loginView.php';
-require_once VIEWS_PATH . '/partials/FooterView.php';
+require_once VIEWS_PATH . '/users/loginView.php';

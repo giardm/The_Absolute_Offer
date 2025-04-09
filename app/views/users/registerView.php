@@ -1,5 +1,7 @@
+<?php require VIEWS_PATH . "/partials/headerView.php"; ?>
+
 <h2>Créer un compte</h2>
-<form action="?action=register" method="post">
+<form id="registerForm" method="post">
   <div>
     <label for="email">Adresse e-mail :</label><br>
     <input type="email" id="email" name="email" required>
@@ -24,3 +26,5 @@
     <button type="submit">S'inscrire</button>
   </div>
 </form>
+
+<?php require VIEWS_PATH . "/partials/footerView.php"; ?>

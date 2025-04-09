@@ -5,10 +5,11 @@ $id = $_GET['id'] ?? null;
 
 if ($id && ctype_digit($id)) {
   $article = getArticleById($id);
-} else {
-  require_once CONTROLLERS_PATH . '/home/homeController.php';
-}
 
-require_once VIEWS_PATH . '/partials/headerView.php';
-require_once VIEWS_PATH . '/newsArticleView.php';
-require_once VIEWS_PATH . '/partials/footerView.php';
+  require_once VIEWS_PATH . '/news/newsArticleView.php';
+} else {
+
+  $news = getNews(20);
+
+  require_once VIEWS_PATH . '/news/allNewsView.php';
+}

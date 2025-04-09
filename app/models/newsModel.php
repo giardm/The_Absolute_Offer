@@ -1,13 +1,14 @@
 <?php
 require_once MODELS_PATH . '/connexionDB.php';
 
-function getNews()
+function getNews($limit)
 {
   $news = array();
+  $limit = (int)$limit;
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT news_id, title, thumb_path, thumb_alt FROM news ORDER BY added_at DESC LIMIT 6";
+    $sql = "SELECT news_id, title, thumb_path, thumb_alt FROM news ORDER BY added_at DESC LIMIT $limit ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
 

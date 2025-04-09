@@ -1,3 +1,5 @@
+<?php require VIEWS_PATH . "/partials/headerView.php"; ?>
+
 <div id="loaderContainer">
   <video id="loaderVideo" autoplay muted loop playsinline>
     <source src="./public/videos/logo.webm" type="video/webm">
@@ -73,3 +75,5 @@
     <button id="next">&rarr;</button>
   </div>
 </div>
+
+<?php require VIEWS_PATH . "/partials/footerView.php"; ?>

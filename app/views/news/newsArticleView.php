@@ -1,3 +1,5 @@
+<?php require VIEWS_PATH . "/partials/headerView.php"; ?>
+
 <?php if (!empty($article)) : ?>
   <article class="newsArticle" id="newsArticle<?= $article['news_id'] ?>">
 
@@ -26,3 +28,5 @@
 <?php else : ?>
   <p class="newsNotFound">Désolé, cette page n'existe pas.</p>
 <?php endif;  ?>
+
+<?php require VIEWS_PATH . "/partials/footerView.php"; ?>

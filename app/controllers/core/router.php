@@ -5,8 +5,8 @@ require_once MODELS_PATH . '/userModel.php';
 $routes = [
   'home'             => 'home/homeController.php',
   'search'           => 'products/searchController.php',
-  'newsPage'         => 'news/newsController.php',
-  'addArticle'         => 'news/addArticleController.php',
+  'news'             => 'news/newsController.php',
+  'addArticle'       => 'news/addArticleController.php',
   'profil'           => 'users/profilController.php',
   'product'          => 'products/productController.php',
   'addFeaturedOffer' => 'home/featuredOffersController.php',

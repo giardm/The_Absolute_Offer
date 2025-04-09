@@ -1,3 +1,5 @@
+<?php require VIEWS_PATH . "/partials/headerView.php"; ?>
+
 <div class="container" id="homeHero">
   <video autoplay loop muted playsinline>
     <!-- <source src="./videos/logo.mp4" type="video/mp4"> -->
@@ -29,11 +31,13 @@
 
 
 <div class="container" id="newsContainer">
-  <h2 class="sectionTitle">News</h2>
+  <a href="?action=news">
+    <h2 class="sectionTitle">News</h2>
+  </a>
   <!-- css grid -->
   <div class="news-grid">
     <?php foreach ($news as $n): ?>
-      <a href="?action=newsPage&id=<?= $n['news_id'] ?>" class="news-item">
+      <a href="?action=news&id=<?= $n['news_id'] ?>" class="news-item">
         <img src="<?= $n['thumb_path'] ?>" alt="<?= $n['thumb_alt'] ?>" class="thumb">
         <div class="overlay">
           <h3><?= mb_strimwidth($n['title'], 0, 35, '...') ?></h3>
@@ -57,3 +61,5 @@
     </div>
   </div>
 <?php endif; ?>
+
+<?php require VIEWS_PATH . "/partials/footerView.php"; ?>

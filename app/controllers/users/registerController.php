@@ -2,7 +2,7 @@
 require_once MODELS_PATH . '/userModel.php';
 
 if (isLoggedOn()) {
-  die('afficher page profil');
+  require_once CONTROLLERS_PATH . '/users/profilController.php';
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,7 +37,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Erreur : L'utilisateur existe peut-être déjà.";
   }
 } else {
-  include VIEWS_PATH . '/partials/headerView.php';
-  include VIEWS_PATH . '/registerView.php';
-  include VIEWS_PATH . '/partials/footerView.php';
+  include VIEWS_PATH . '/users/registerView.php';
 }
