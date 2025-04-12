@@ -5,24 +5,39 @@ if (isLoggedOn()) {
   require_once CONTROLLERS_PATH . '/users/profilController.php';
 }
 
+// ===============================
+//  Traitement de la soumission AJAX (POST)
+// ===============================
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Récupération et nettoyage des données
   $email = trim($_POST['email'] ?? '');
   $username = trim($_POST['username'] ?? '');
   $password = $_POST['password'] ?? '';
-  $confirm_password = $_POST['confirm_password'] ?? '';
+  $confirm_password = $_POST['confirmPassword'] ?? '';
 
   // Vérifications
   if ($password !== $confirm_password) {
-    die("Les mots de passe ne correspondent pas.");
+    echo json_encode([
+      'success' => false,
+      'message' => 'Les mots de passe ne correspondent pas.'
+    ]);
+    exit;
   }
 
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die("Adresse e-mail invalide.");
+    echo json_encode([
+      'success' => false,
+      'message' => 'Adresse e-mail invalide.'
+    ]);
   }
 
   if (strlen($password) < 6) {
-    die("Le mot de passe doit contenir au moins 6 caractères.");
+    echo json_encode([
+      'success' => false,
+      'message' => 'Le mot de passe doit contenir au moins 6 caractères.'
+    ]);
+    exit;
   }
 
   // Hachage du mot de passe
@@ -31,11 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Enregistrement
   $result = createUser($email, $username, $hashedPassword);
 
-  if ($result) {
-    echo "Inscription réussie. <a href='?action=login'>Connectez-vous</a>";
-  } else {
-    echo "Erreur : L'utilisateur existe peut-être déjà.";
-  }
-} else {
-  include VIEWS_PATH . '/users/registerView.php';
+  echo json_encode([
+    'success' => $result['success'],
+    'message' => $result['message']
+  ]);
+  exit;
+
+  exit;
 }
+
+// ===============================
+//  Affichage du formulaire (GET)
+// ===============================
+
+require_once VIEWS_PATH . '/users/registerView.php';

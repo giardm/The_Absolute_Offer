@@ -5,38 +5,55 @@ require_once MODELS_PATH . '/connexionDB.php';
 
 function createUser($email, $username, $hashedPassword)
 {
-  try {
-    $pdo = connexionPDO();
-    $sql = "
-        SELECT user_id FROM users WHERE email = :email
-    ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-      'email' => $email,
-    ]);
-  } catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage();
-  }
-
-  $role = 'user'; //role user par défaut
+  $role = 'user';
   $now = date('Y-m-d H:i:s');
 
   try {
     $pdo = connexionPDO();
     $insert = "INSERT INTO users (email, username, hash_password, role, added_at)
-    VALUES (:email, :username, :password, :role, :created_at)";
+               VALUES (:email, :username, :password, :role, :created_at)";
     $stmt = $pdo->prepare($insert);
-    return $stmt->execute([
+    $stmt->execute([
       'email' => $email,
       'username' => $username,
       'password' => $hashedPassword,
       'role' => $role,
       'created_at' => $now
     ]);
+    return [
+      'success' => true,
+      'message' => "Inscription réussie."
+    ];
   } catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage();
+    if ($e->getCode() == 23000) {
+      $message = $e->getMessage();
+      if (strpos($message, 'email') !== false) {
+        return [
+          'success' => false,
+          'message' => "Cette adresse email est déjà utilisée."
+        ];
+      } elseif (strpos($message, 'username') !== false) {
+        return [
+          'success' => false,
+          'message' => "Ce nom d'utilisateur est déjà utilisé."
+        ];
+      } else {
+        return [
+          'success' => false,
+          'message' => "Un champ unique est déjà utilisé."
+        ];
+      }
+    } else {
+      return [
+        'success' => false,
+        'message' => "Erreur SQL : " . $e->getMessage()
+      ];
+    }
   }
 }
+
+
+
 
 function getUserByEmailOrUsername($identifier)
 {
