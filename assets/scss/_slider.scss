@@ -1,0 +1,58 @@
+.sliderContainer {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+  .sliderWrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .slide {
+    flex-shrink: 0;
+    text-align: center;
+    width: 250px;
+    margin: 0 10px;
+    transform: scale(0.8);
+    opacity: 0.5;
+    z-index: 1;
+    transition: 
+      transform 0.5s ease, 
+      opacity 0.5s ease;
+
+      .gameTitle{
+        padding-top: 26px;
+        text-transform: capitalize;
+        font-size: 24px;
+      }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    &.active {
+      transform: scale(1.2);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    &.prev,
+    &.next {
+      transform: scale(1);
+      opacity: 0.7;
+      z-index: 2;
+    }
+
+    &.prev2,
+    &.next2 {
+      transform: scale(0.80);
+      opacity: 0.5;
+      z-index: 1;
+    }
+  }
+}

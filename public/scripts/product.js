@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }, 1800); // ← ajuster ici le timer
 });
 
-
 /**
  * Récupère l'ID du jeu depuis l'attribut data-id du conteneur principal.
  * @returns {string} - L'identifiant du jeu pour CheapShark.
@@ -67,7 +66,6 @@ async function getCheapSharkInfos() {
       if (steamAppID) {
         getSteamInfos(steamAppID);
       } else {
-        console.log("toto");
         cleanDom();
       }
 
@@ -120,7 +118,6 @@ async function getSteamInfos(steamAppID) {
     renderSteamInformations(steamData);
 
     renderSteamMedia(steamData);
-
   } catch (error) {
     console.error("Erreur lors de la récupération des infos Steam :", error);
   }
@@ -147,13 +144,14 @@ function renderSteamHeader(steamData) {
   gameTitle.textContent = steamData.name;
 }
 
-
 /**
  * Injecte les données Steam dans la section "Informations" du DOM.
  * @param {Object} steamData - Données de l'API Steam pour un jeu.
  */
 function renderSteamInformations(steamData) {
-  const infoList = document.querySelector(".productInformations .informations ul");
+  const infoList = document.querySelector(
+    ".productInformations .informations ul"
+  );
 
   if (!infoList) {
     console.warn("Bloc .informations introuvable dans le DOM.");
@@ -173,14 +171,16 @@ function renderSteamInformations(steamData) {
   // Éditeurs
   if (steamData.publishers && steamData.publishers.length > 0) {
     const li = document.createElement("li");
-    li.innerHTML = `<strong>Éditeur(s) :</strong> ${steamData.publishers.join(", ")}`;
+    li.innerHTML = `<strong>Éditeur(s) :</strong> ${steamData.publishers.join(
+      ", "
+    )}`;
     infoList.appendChild(li);
   }
 
   // Genres
   if (steamData.genres && steamData.genres.length > 0) {
     const li = document.createElement("li");
-    const genreList = steamData.genres.map(g => g.description).join(", ");
+    const genreList = steamData.genres.map((g) => g.description).join(", ");
     li.innerHTML = `<strong>Genres :</strong> ${genreList}`;
     infoList.appendChild(li);
   }
@@ -223,13 +223,12 @@ function renderSteamMedia(steamData) {
     steamData.movies &&
     steamData.movies.length > 0
   ) {
-    const videoUrl = steamData.movies[0].webm.max.replace(/^http:/, 'https:');
+    const videoUrl = steamData.movies[0].webm.max.replace(/^http:/, "https:");
     trailerSource.src = videoUrl;
     videoElement.load(); // Recharge la source
   } else {
     if (videoBlock) videoBlock.style.display = "none";
   }
-
 
   // Screenshots
   const gallery = document.querySelector(".screenshotsGallery");
@@ -317,7 +316,7 @@ async function getStoresList() {
   stores.forEach((store) => {
     storeMap[store.storeID] = {
       name: store.storeName,
-      logo: "https://www.cheapshark.com" + store.images.logo
+      logo: "https://www.cheapshark.com" + store.images.logo,
     };
   });
 
@@ -365,7 +364,7 @@ function addLightbox() {
   const closeLightboxBtn = document.querySelector(".lightbox .close");
 
   let currentIndex = 0;
-  const fullImages = Array.from(thumbs).map(img => img.dataset.full);
+  const fullImages = Array.from(thumbs).map((img) => img.dataset.full);
 
   // Affiche une image dans la lightbox
   function showLightbox(index) {
@@ -410,14 +409,15 @@ function addLightbox() {
   });
 }
 
-
 /**
  * Applique des classes CSS sur les offres en fonction de leur niveau de réduction.
  * Permet de colorer les pourcentages selon un gradient de quartiles.
  */
 function addSavingscolors() {
   const savingsElements = document.querySelectorAll(".discount");
-  const savingsValues = Array.from(savingsElements).map(el => parseFloat(el.dataset.savings));
+  const savingsValues = Array.from(savingsElements).map((el) =>
+    parseFloat(el.dataset.savings)
+  );
 
   if (savingsValues.length > 0) {
     const min = Math.min(...savingsValues);
@@ -428,7 +428,7 @@ function addSavingscolors() {
     const q2 = min + range * 0.5;
     const q3 = min + range * 0.75;
 
-    savingsElements.forEach(el => {
+    savingsElements.forEach((el) => {
       const val = parseFloat(el.dataset.savings);
       let className = "";
 
@@ -451,17 +451,17 @@ function addFeaturedOfferButton(steamId, apiId, title) {
     fetch("?action=addFeaturedOffer", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         steam_id: steamId,
         api_id: apiId,
-        user_id: 3, // À adapter 
-        game_title: title
-      })
+        user_id: 3, // À adapter
+        game_title: title,
+      }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.success) showMessage("Ajouté à la sélection !", "success");
         else showMessage("Erreur : " + data.message, "error");
       })
@@ -476,20 +476,18 @@ function cleanDom() {
     "#descriptionTitle",
     ".description",
     ".medias",
-    ".disclaimer"
+    ".disclaimer",
   ];
 
-  selectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach(el => {
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => {
       el.style.display = "none";
     });
   });
 
   const overlays = document.querySelectorAll(".overlayContent");
 
-  overlays.forEach(el => {
+  overlays.forEach((el) => {
     el.style.position = "relative";
   });
-
 }
-

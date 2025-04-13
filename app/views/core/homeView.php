@@ -12,23 +12,26 @@
 <div class="container" id="homeFeaturedOffers">
   <h2 class="sectionTitle">Jeux du moment</h2>
   <div id="featuredGamesContainer">
-    <?php foreach ($featuredGames as $game): ?>
-      <?php
-      $steamId = $game['steam_id'];
-      $apiId = $game['api_id'];
-      $gameTitle = $game['game_title'];
-      $imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/{$steamId}/library_600x900.jpg";
-      ?>
-      <div class="gameCard">
-        <a href="?action=product&id=<?= $apiId ?>">
-          <img src="<?= $imageUrl ?>" alt="<?= $gameTitle ?>">
-        </a>
+    <div class="sliderContainer">
+      <div class="sliderWrapper">
+        <?php foreach ($featuredGames as $game): ?>
+          <?php
+          $steamId = $game['steam_id'];
+          $apiId = $game['api_id'];
+          $gameTitle = $game['game_title'];
+          $imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/{$steamId}/library_600x900.jpg";
+          ?>
+          <div class="slide">
+            <a href="?action=product&id=<?= $apiId ?>">
+              <img src="<?= $imageUrl ?>" alt="<?= $gameTitle ?>">
+            </a>
+            <p class="gameTitle"><?= $game['game_title'] ?></p>
+          </div>
+        <?php endforeach; ?>
       </div>
-    <?php endforeach; ?>
-
+    </div>
   </div>
 </div>
-
 
 <div class="container" id="newsContainer">
   <a href="?action=news">
