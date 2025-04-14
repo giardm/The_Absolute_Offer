@@ -101,6 +101,7 @@ async function getCheapSharkInfos() {
       }
       //Ajoute le bouton pour l'admin
       addFeaturedOfferButton(steamAppID, gameId, gameTitle);
+      addFavorite(gameId);
       createModal();
       addSavingscolors(); // Applique une couleur selon le niveau de réduction
     })
@@ -475,7 +476,6 @@ function addFeaturedOfferButton(steamId, apiId, title) {
       body: JSON.stringify({
         steam_id: steamId,
         api_id: apiId,
-        user_id: 3, // À adapter
         game_title: title,
       }),
     })
@@ -511,5 +511,29 @@ function cleanDom() {
 
   overlays.forEach((el) => {
     el.style.position = "relative";
+  });
+}
+
+function addFavorite(gameId) {
+  const button = document.getElementById("favoriteBtn");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    fetch("?action=favorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        game_id: gameId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) showMessage(data.message, "success");
+        else showMessage("Erreur : " + data.message, "error");
+      })
+      .catch(() => showMessage("Erreur réseau", "error"));
   });
 }

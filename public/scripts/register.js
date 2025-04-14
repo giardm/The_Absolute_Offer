@@ -88,10 +88,9 @@ async function registerStatus(e) {
         window.location.href = "?action=login";
       }, 1000);
     } else {
-      showMessage(data.message, "warning");
+      showMessage(data.message, "error");
     }
   } catch (err) {
-    console.error("Erreur lors de la requête d'inscription :", err);
     showMessage("Erreur réseau lors de l'inscription", "error");
   }
 }

@@ -10,6 +10,7 @@ $routes = [
   'profil'           => 'users/profilController.php',
   'product'          => 'products/productController.php',
   'addFeaturedOffer' => 'home/featuredOffersController.php',
+  'favorite'         => 'users/favoriteController.php',
   'login'            => 'users/loginController.php',
   'logout'           => 'users/logoutController.php',
   'register'         => 'users/registerController.php',

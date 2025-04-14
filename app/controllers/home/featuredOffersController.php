@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($input['steam_id'], $input['api_id'], $input['user_id'], $input['game_title'])) {
+if (!isset($input['steam_id'], $input['api_id'], $_SESSION['user_id'], $input['game_title'])) {
   http_response_code(400);
   echo json_encode(['success' => false, 'message' => 'Paramètres manquants']);
   exit;
@@ -21,7 +21,7 @@ if (!isset($input['steam_id'], $input['api_id'], $input['user_id'], $input['game
 $success = addFeaturedOffer(
   $input['steam_id'],
   $input['api_id'],
-  $input['user_id'],
+  $_SESSION['user_id'],
   trim($input['game_title'])
 );
 
