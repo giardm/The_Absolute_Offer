@@ -1,6 +1,42 @@
-const sliderWrapper = document.querySelector(".sliderWrapper");
+/**
+ * ============================================
+ * Slider Carousel – Défilement horizontal animé
+ * --------------------------------------------
+ * Comportement :
+ * - Slide automatique toutes les 3s
+ * - Slide manuel via clavier (← →)
+ * - Pause au survol ou interaction utilisateur
+ * - Position des slides gérée par classes CSS
+ * ============================================
+ */
 
-// Fonction utilitaire pour calculer dynamiquement la largeur d'une slide
+/**
+ * Variables globales de contrôle du carrousel.
+ */
+let autoSlideInterval; // ID de l’intervalle du défilement auto
+let isHovered = false; // État de survol de la zone slider
+let autoPausedByUser = false; // Indique si un utilisateur a interagi
+let userInteractionTimeout; // Timeout pour relancer l'auto-slide après interaction
+let sliderWrapper; // Élément DOM contenant les slides (rempli au chargement)
+
+/**
+ * Point d’entrée principal : initialise le carrousel une fois le DOM prêt.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  sliderWrapper = document.querySelector(".sliderWrapper");
+
+  updateSlideClasses(); // Attribue les classes initiales aux slides
+  startAutoSlide(); // Démarre l'animation automatique
+  setupKeyboardControls(); // Active la navigation clavier ← →
+  setupHoverPause(); // Active la pause du slider au survol
+});
+
+/**
+ * Calcule dynamiquement la largeur d’une slide,
+ * en incluant les marges horizontales.
+ *
+ * @returns {number} Largeur totale d'une slide en pixels.
+ */
 function getSlideWidth() {
   const slide = sliderWrapper.querySelector(".slide");
   const style = getComputedStyle(slide);
@@ -8,12 +44,27 @@ function getSlideWidth() {
   return slide.offsetWidth + margin;
 }
 
-// Fonction qui applique les classes d'état (active, next, etc.)
+/**
+ * Applique des classes CSS spécifiques selon la position
+ * des slides visibles :
+ * - .active : au centre
+ * - .prev / .next : adjacentes
+ * - .prev2 / .next2 : plus éloignées
+ *
+ * Utilisé pour les effets de scale, opacité, etc.
+ */
 function updateSlideClasses() {
   const slides = sliderWrapper.querySelectorAll(".slide");
 
   slides.forEach((slide) => {
-    slide.classList.remove("active", "prev", "next", "prev2", "next2");
+    slide.classList.remove(
+      "active",
+      "prev",
+      "next",
+      "prev2",
+      "next2",
+      "fadeOut"
+    );
   });
 
   if (slides.length >= 5) {
@@ -25,24 +76,29 @@ function updateSlideClasses() {
   }
 }
 
-// Fonction principale : fait glisser le slider vers la gauche avec effet smooth
+/**
+ * Effectue un glissement vers la droite (visuellement) :
+ * - Déplace le dernier élément en tête
+ * - Translate le wrapper vers la gauche
+ * - Anime le retour à la position neutre
+ */
 function slideNext() {
   const width = getSlideWidth();
 
-  // en déplaçant le dernier élément au tout début SANS transition
+  // Étape 1 : réorganisation DOM (dernier élément → début)
   sliderWrapper.style.transition = "none";
   sliderWrapper.insertBefore(
     sliderWrapper.lastElementChild,
     sliderWrapper.firstElementChild
   );
 
-  // On positionne le wrapper légèrement à gauche pour que ça ait l'air naturel
+  // Étape 2 : translation initiale vers la gauche
   sliderWrapper.style.transform = `translateX(-${width}px)`;
 
-  // Met à jour les classes pendant le mouvement
+  // Étape 3 : mise à jour des classes CSS
   updateSlideClasses();
 
-  // Ensuite, on déclenche la vraie animation vers 0
+  // Étape 4 : animation retour vers la position 0
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       sliderWrapper.style.transition = "transform 0.5s ease";
@@ -51,8 +107,94 @@ function slideNext() {
   });
 }
 
-// Lance l'animation toutes les 3 secondes
-setInterval(slideNext, 3000);
+/**
+ * Effectue un glissement vers la gauche (visuellement) :
+ * - Déplace le premier élément à la fin
+ * - Translate le wrapper vers la droite
+ * - Anime le retour à la position neutre
+ */
+function slidePrev() {
+  const width = getSlideWidth();
 
-// Initialisation au chargement
-updateSlideClasses();
+  // Étape 1 : réorganisation DOM (premier élément → fin)
+  sliderWrapper.style.transition = "none";
+  sliderWrapper.appendChild(sliderWrapper.firstElementChild);
+
+  // Étape 2 : translation initiale vers la droite
+  sliderWrapper.style.transform = `translateX(${width}px)`;
+
+  // Étape 3 : mise à jour des classes CSS
+  updateSlideClasses();
+
+  // Étape 4 : animation retour vers la position 0
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      sliderWrapper.style.transition = "transform 0.5s ease";
+      sliderWrapper.style.transform = "translateX(0)";
+    });
+  });
+}
+
+/**
+ * Démarre le défilement automatique du carrousel
+ * avec une fréquence de 3 secondes.
+ * Le slide se déclenche uniquement si le curseur
+ * n’est pas en survol et si aucune interaction utilisateur récente.
+ */
+function startAutoSlide() {
+  autoSlideInterval = setInterval(() => {
+    if (!isHovered && !autoPausedByUser) {
+      slideNext();
+    }
+  }, 3000);
+}
+
+/**
+ * Met en pause le défilement automatique lorsque
+ * l'utilisateur survole la zone du slider.
+ */
+function setupHoverPause() {
+  const container = document.querySelector(".sliderContainer");
+
+  container.addEventListener("mouseenter", () => {
+    isHovered = true;
+  });
+
+  container.addEventListener("mouseleave", () => {
+    isHovered = false;
+  });
+}
+
+/**
+ * Active les contrôles clavier pour naviguer manuellement :
+ * - Flèche droite : slide suivant
+ * - Flèche gauche : slide précédent
+ * Une interaction manuelle met en pause temporairement l’auto-slide.
+ */
+function setupKeyboardControls() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      slideNext();
+      pauseAutoSlideTemporarily();
+    }
+    if (e.key === "ArrowLeft") {
+      slidePrev();
+      pauseAutoSlideTemporarily();
+    }
+  });
+}
+
+/**
+ * Interrompt temporairement le défilement automatique
+ * lorsqu'une interaction manuelle a lieu (clavier).
+ * Le carrousel redémarre automatiquement après 10 secondes.
+ */
+function pauseAutoSlideTemporarily() {
+  autoPausedByUser = true;
+
+  clearTimeout(userInteractionTimeout); // Réinitialisation si plusieurs interactions
+
+  userInteractionTimeout = setTimeout(() => {
+    autoPausedByUser = false;
+  }, 10000); // Pause de 10s
+}

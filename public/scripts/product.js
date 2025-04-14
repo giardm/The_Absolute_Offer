@@ -1,4 +1,14 @@
 /**
+ * ============================================
+ * Product.js – Gestion des offres via CheapShark & Steam
+ * --------------------------------------------
+ * Comportement :
+ * - Charge dynamiquement les offres d'un jeu (prix, visuels, détails)
+ * - Utilise les APIs CheapShark & Steam
+ * - Gère modale, lightbox, interactions, affichage enrichi
+ * ============================================
+ */
+/**
  * Import fonction d'affichage et de gestion des messages
  */
 import { showMessage } from "./messageDisplay.js";
@@ -27,8 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /**
- * Récupère l'ID du jeu depuis l'attribut data-id du conteneur principal.
- * @returns {string} - L'identifiant du jeu pour CheapShark.
+ * Extrait l'identifiant du jeu depuis le conteneur principal.
+ * @returns {string} ID utilisé pour les requêtes CheapShark.
  */
 function getProductId() {
   const container = document.querySelector(".productContainer");
@@ -37,8 +47,10 @@ function getProductId() {
 }
 
 /**
- * Récupère les offres d'un jeu via l'API CheapShark et injecte les résultats dans le DOM.
- * Fonction asynchrone.
+ * Récupère les offres d’un jeu depuis l’API CheapShark
+ * et injecte les résultats dans le DOM (modale, lightbox, etc.).
+ * @async
+ * @returns {Promise<void>}
  */
 async function getCheapSharkInfos() {
   const gameId = getProductId();
@@ -98,8 +110,8 @@ async function getCheapSharkInfos() {
 }
 
 /**
- * Récupère les infos d’un jeu via l’API Steam Store.
- * @param {string} steamAppID - L’ID du jeu sur Steam (ex: 367520)
+ * Récupère les informations Steam d’un jeu via l’API interne.
+ * @param {string} steamAppID - Identifiant du jeu sur Steam.
  */
 async function getSteamInfos(steamAppID) {
   try {
@@ -124,8 +136,8 @@ async function getSteamInfos(steamAppID) {
 }
 
 /**
- * Remplit dynamiquement l'entête du jeu (bannière, jaquette, titre).
- * @param {Object} steamData - Données du jeu depuis l'API Steam.
+ * Injecte la bannière, la jaquette et le titre du jeu dans le header.
+ * @param {Object} steamData - Données du jeu récupérées via Steam.
  */
 function renderSteamHeader(steamData) {
   const headerImage = document.querySelector(".headerImage");
@@ -145,8 +157,8 @@ function renderSteamHeader(steamData) {
 }
 
 /**
- * Injecte les données Steam dans la section "Informations" du DOM.
- * @param {Object} steamData - Données de l'API Steam pour un jeu.
+ * Affiche les informations générales du jeu (date, genres, éditeur).
+ * @param {Object} steamData - Informations textuelles du jeu Steam.
  */
 function renderSteamInformations(steamData) {
   const infoList = document.querySelector(
@@ -201,8 +213,8 @@ function renderSteamInformations(steamData) {
 }
 
 /**
- * Affiche la description longue, la première vidéo et les screenshots d'un jeu.
- * @param {Object} steamData - Données complètes du jeu via l'API Steam.
+ * Injecte la description, la bande-annonce et les captures d'écran du jeu.
+ * @param {Object} steamData - Données multimédia issues de Steam.
  */
 function renderSteamMedia(steamData) {
   // Description
@@ -255,6 +267,7 @@ function renderSteamMedia(steamData) {
  * @param {Object} store - Données du magasin (nom, logo).
  * @returns {HTMLElement} - Élément <li> prêt à être inséré dans le DOM.
  */
+
 function createOffer(deal, store) {
   const savings = Math.round(deal.savings);
   const dealUrl = `https://www.cheapshark.com/redirect?dealID=${deal.dealID}`;
@@ -305,8 +318,8 @@ function createOffer(deal, store) {
 }
 
 /**
- * Récupère la liste des magasins disponibles via l'API CheapShark.
- * @returns {Promise<Object>} - Un objet contenant les magasins indexés par leur storeID.
+ * Récupère la liste des magasins disponibles via CheapShark.
+ * @returns {Promise<Object>} - Mapping storeID => {name, logo}
  */
 async function getStoresList() {
   const storeMap = {};
@@ -442,6 +455,12 @@ function addSavingscolors() {
   }
 }
 
+/**
+ * Gère l’ajout manuel d’un jeu aux offres en vedette (admin only).
+ * @param {string} steamId
+ * @param {string} apiId
+ * @param {string} title
+ */
 function addFeaturedOfferButton(steamId, apiId, title) {
   const button = document.getElementById("featureOfferBtn");
 
@@ -469,6 +488,9 @@ function addFeaturedOfferButton(steamId, apiId, title) {
   });
 }
 
+/**
+ * Supprime les sections dépendantes des données Steam si absentes.
+ */
 function cleanDom() {
   const selectors = [
     ".headerImageWrapper",

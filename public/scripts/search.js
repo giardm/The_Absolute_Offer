@@ -1,49 +1,76 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Récupère la requête de recherche (si elle est définie globalement, sinon depuis le HTML)
-  const query = typeof searchQuery !== "undefined"
-    ? searchQuery
-    : document.getElementById("searchResults").dataset.query;
+/**
+ * ============================================
+ * Search Results Handler – Intégration CheapShark
+ * --------------------------------------------
+ * Comportement :
+ * - Récupère une requête utilisateur (depuis JS ou HTML)
+ * - Effectue une recherche de jeux via l’API CheapShark
+ * - Affiche dynamiquement des cartes de résultats
+ * - Gère les cas vides et les erreurs réseau
+ * ============================================
+ */
 
-  // Références à l’élément loader et à la vidéo d’animation de chargement
+/**
+ * Point d’entrée principal : exécuté dès que le DOM est entièrement chargé.
+ * Initialise la logique de recherche, appelle l’API CheapShark et gère l’affichage.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  /**
+   * Récupère la requête de recherche soit depuis une variable JS globale (`searchQuery`),
+   * soit depuis un attribut HTML `data-query` de l’élément contenant les résultats.
+   * @type {string}
+   */
+  const query =
+    typeof searchQuery !== "undefined"
+      ? searchQuery
+      : document.getElementById("searchResults").dataset.query;
+
+  // Références DOM : animation de chargement
   const loader = document.getElementById("loaderContainer");
   const video = document.getElementById("loaderVideo");
 
-  // Si la vidéo existe, on accélère sa vitesse de lecture
+  // Accélère la lecture de la vidéo du loader (x3)
   if (video) {
-    video.playbackRate = 3; // Lecture x3
+    video.playbackRate = 3;
   }
 
-  // Si aucune requête de recherche n’est disponible, on arrête l’exécution
+  // Si aucune requête n’est disponible, on interrompt le script
   if (!query) return;
 
-  // Appel de l’API CheapShark pour chercher des jeux correspondant au titre
+  /**
+   * Requête à l'API CheapShark avec le titre du jeu
+   */
   fetch(`https://www.cheapshark.com/api/1.0/games?title=${query}`)
-    .then((res) => res.json()) // On convertit la réponse en JSON
+    .then((res) => res.json()) // Transforme la réponse en JSON
     .then((games) => {
-      // Simulation d’un petit délai (1s ici) pour laisser le temps au loader de jouer
+      /**
+       * Simulation d’un délai d’animation avant affichage (UX)
+       * Permet de laisser le loader visible 1 seconde
+       */
       setTimeout(() => {
         const container = document.getElementById("searchResults");
-        loader.classList.add("hidden"); // Cache le loader
 
-        container.innerHTML = ""; // Vide les résultats précédents
+        // Cache le loader visuel
+        loader.classList.add("hidden");
 
-        // Si aucun jeu n’est trouvé
+        // Vide les résultats précédents s'il y en avait
+        container.innerHTML = "";
+
+        // Si aucun jeu n’a été trouvé
         if (games.length === 0) {
           container.innerHTML = "<p>Aucun jeu trouvé.</p>";
           return;
         }
 
-        // Sinon, pour chaque jeu trouvé :
+        // Pour chaque jeu trouvé, créer une carte
         games.forEach((game, index) => {
-          const card = document.createElement("a"); // Crée une carte de résultat
-          // Lien désactivé ici, mais peut être activé si besoin :
-          // card.href = `?action=product&id=${game.gameID}`;
-          card.classList.add("searchCard", "animated"); // Ajoute les classes de style/animation
-          card.style.animationDelay = `${index * 100}ms`; // Décalage de l’animation selon l’index
+          const card = document.createElement("a");
+          card.classList.add("searchCard", "animated");
+          card.style.animationDelay = `${index * 100}ms`;
 
-          // Structure HTML de la carte
+          // Structure HTML injectée dans la carte
           card.innerHTML = `
-            <div class=imgContainer>
+            <div class="imgContainer">
               <img src="${game.thumb}" alt="${game.external}">
             </div>
             <div class="gameInfo">
@@ -52,16 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           `;
 
-          // Ajoute la carte dans le conteneur
+          // Ajoute la carte au conteneur
           container.appendChild(card);
         });
-
-      }, 1000); // Délai d'une seconde
+      }, 1000);
     })
-
-    // Gestion des erreurs en cas d’échec de la requête
+    /**
+     * Gestion des erreurs réseau ou de parsing JSON
+     */
     .catch((err) => {
       console.error("Erreur :", err);
-      loader.style.display = "none"; // Cache le loader en cas d’erreur
+      loader.style.display = "none"; // Cache le loader en cas d’échec
     });
 });

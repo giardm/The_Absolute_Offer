@@ -1,17 +1,40 @@
-// Récupère l'élément input de recherche (champ texte)
+/**
+ * ============================================
+ * Game Search Input – Déclenchement par touche "Entrée"
+ * --------------------------------------------
+ * Comportement :
+ * - Récupère le champ de recherche de jeu
+ * - Sur appui de "Entrée", redirige vers la page de résultats
+ * - Nettoie et encode la requête pour l’URL
+ * ============================================
+ */
+
+/**
+ * Récupère l’élément du champ texte de recherche.
+ * @type {HTMLInputElement}
+ */
 const searchInput = document.getElementById("gameSearchInput");
 
-// Ajoute un écouteur sur l'événement "keydown" (touche enfoncée)
+/**
+ * Attache un écouteur clavier pour détecter l’appui sur la touche "Entrée".
+ * Si la requête est valide, déclenche une redirection vers la page de résultats.
+ * @param {KeyboardEvent} e - Événement déclenché lors de l’appui sur une touche
+ */
 searchInput.addEventListener("keydown", function (e) {
-  // Vérifie si l'utilisateur a appuyé sur la touche "Entrée"
+  // Si la touche pressée est "Enter"
   if (e.key === "Enter") {
-    // Récupère la valeur saisie, enlève les espaces, convertit en minuscule, supprime les espaces internes
-    let query = searchInput.value.trim().toLowerCase().replace(/\s+/g, '');
+    /**
+     * Traitement de la saisie :
+     * - trim() : supprime les espaces en début/fin
+     * - toLowerCase() : uniformise la casse
+     * - replace(/\s+/g, '') : retire tous les espaces internes
+     */
+    let query = searchInput.value.trim().toLowerCase().replace(/\s+/g, "");
 
-    // Si la requête n'est pas vide
+    // Si la requête est non vide, redirige vers les résultats
     if (query.length > 0) {
-      // Redirige vers la page de recherche avec la requête encodée dans l'URL
-      window.location.href = `?action=search&query=${encodeURIComponent(query)}`;
+      const encoded = encodeURIComponent(query);
+      window.location.href = `?action=search&query=${encoded}`;
     }
   }
 });
