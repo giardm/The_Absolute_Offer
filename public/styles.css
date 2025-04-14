@@ -590,6 +590,140 @@ h3 {
   animation: fadeInUp 0.4s ease forwards;
 }
 
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+@media (min-width: 768px) {
+  .profileContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.profileSection {
+  flex: 1;
+}
+.profileSection .profileInfo p {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #fff;
+}
+.profileSection .profileInfo p strong {
+  color: #fff;
+}
+.profileSection .logoutWrapper {
+  text-align: center;
+  margin-top: 2rem;
+}
+.profileSection .logoutWrapper .logoutButton {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+.profileSection .logoutWrapper .logoutButton:hover {
+  background-color: #c0392b;
+}
+
+.favoritesSection {
+  flex: 2;
+}
+.favoritesSection .favoritesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.favoriteCard {
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.favoriteCard .favoriteLink {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.favoriteCard .imageWrapper {
+  width: 100%;
+}
+.favoriteCard .imageWrapper .gameImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.favoriteCard .hoverOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.favoriteCard .hoverOverlay .viewOffersButton {
+  background: #2ecc71;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: white;
+}
+.favoriteCard .gameTitle {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+}
+.favoriteCard:hover {
+  transform: scale(1.07);
+}
+.favoriteCard:hover .hoverOverlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@keyframes skeletonPulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+.skeleton {
+  animation: skeletonPulse 1.2s infinite ease-in-out;
+  color: transparent !important;
+  pointer-events: none;
+  user-select: none;
+}
+
 .productContainer {
   width: 80%;
   margin: auto;

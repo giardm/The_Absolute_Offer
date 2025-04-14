@@ -15,13 +15,14 @@ require_once MODELS_PATH . '/connexionDB.php';
  * @param int $userId - Identifiant de l'utilisateur
  * @return array - Tableau contenant les favoris récupérés depuis la base de données
  */
-function getFavorites($userId)
+function getFavorites($userId, $limit)
 {
   $favorites = array();
+  $limit = (int)$limit;
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT * FROM favorites WHERE user_id=:userId ORDER BY added_at LIMIT 3;";
+    $sql = "SELECT * FROM favorites WHERE user_id=:userId ORDER BY added_at LIMIT $limit;";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
       'userId' => $userId
