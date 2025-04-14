@@ -14,8 +14,6 @@
   .slide {
     flex-shrink: 0;
     text-align: center;
-    border: 1px solid rgba(204, 211, 219, 0.35);
-    border-radius: 24px;
     width: 250px;
     margin: 0 10px;
     transform: scale(0.8);
@@ -25,14 +23,16 @@
       transform 0.5s ease, 
       opacity 0.5s ease;
 
-      .gameTitle{
-        padding-top: 26px;
-        text-transform: capitalize;
-        font-size: 24px;
-      }
+    .gameTitle{
+      padding-top: 26px;
+       text-transform: capitalize;
+      font-size: 24px;
+    }
 
     img {
       width: 100%;
+    border: 2px solid rgba(204, 211, 219, 0.35);
+
       border-radius: 24px;
       display: block;
     }
@@ -56,5 +56,13 @@
       opacity: 0.5;
       z-index: 1;
     }
+    
+    .slide.fadeOut {
+  opacity: 0 !important;
+  transition: opacity 0.5s ease;
+}
+
   }
 }
+
+
