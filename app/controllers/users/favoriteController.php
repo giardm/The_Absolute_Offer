@@ -42,7 +42,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //  Traitement de la soumission AJAX (DELETE)
 // ===============================
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-  $favoriteId =  $_GET['favoriteId'];
+  header('Content-Type: application/json');
+  $input = json_decode(file_get_contents("php://input"), true);
+  $favoriteId = $input['favoriteId'] ?? null;
 
-  $result = addFavorite($userId, $gameId);
+  $result = deleteFavorite($favoriteId);
+
+  if ($result['success']) {
+    echo json_encode([
+      'success' => true,
+      'message' => 'Jeu supprimé des favoris.'
+    ]);
+  } else {
+    echo json_encode([
+      'success' => false,
+      'message' => ' Erreur lors de la suppresion du favori.'
+    ]);
+  }
+
+  exit;
 }

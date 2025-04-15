@@ -640,90 +640,6 @@ h3 {
   background-color: #c0392b;
 }
 
-.favoritesSection {
-  flex: 2;
-}
-.favoritesSection .favoritesWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-.favoriteCard {
-  width: 100%;
-  max-width: 200px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-.favoriteCard .favoriteLink {
-  display: block;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.favoriteCard .imageWrapper {
-  width: 100%;
-}
-.favoriteCard .imageWrapper .gameImage {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.favoriteCard .hoverOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-.favoriteCard .hoverOverlay .viewOffersButton {
-  background: #2ecc71;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  color: white;
-}
-.favoriteCard .gameTitle {
-  margin-top: 0.75rem;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #222;
-}
-.favoriteCard:hover {
-  transform: scale(1.07);
-}
-.favoriteCard:hover .hoverOverlay {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-@keyframes skeletonPulse {
-  0% {
-    background-color: #e0e0e0;
-  }
-  50% {
-    background-color: #f0f0f0;
-  }
-  100% {
-    background-color: #e0e0e0;
-  }
-}
-.skeleton {
-  animation: skeletonPulse 1.2s infinite ease-in-out;
-  color: transparent !important;
-  pointer-events: none;
-  user-select: none;
-}
-
 .productContainer {
   width: 80%;
   margin: auto;
@@ -900,7 +816,7 @@ ul li {
   display: none;
 }
 
-#openOffersOverlay {
+.openOffersOverlay {
   display: block;
   margin: 2rem auto;
   padding: 16px 32px;
@@ -913,11 +829,11 @@ ul li {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-#openOffersOverlay:hover {
+.openOffersOverlay:hover {
   background-color: rgba(53, 125, 242, 0.5);
 }
 
-#offersOverlay {
+.offersOverlay {
   display: none;
   position: fixed;
   top: 0;
@@ -929,7 +845,7 @@ ul li {
   z-index: 1000;
 }
 
-#offersOverlay .overlayContent {
+.offersOverlay .overlayContent {
   background: #3D4754;
   padding: 20px;
   margin: 50px auto;
@@ -937,7 +853,7 @@ ul li {
   border-radius: 8px;
 }
 
-#offersOverlay .offerList {
+.offersOverlay .offerList {
   list-style: none;
   padding: 0;
 }
@@ -956,7 +872,7 @@ ul li {
   margin-bottom: 10px;
 }
 
-#offersOverlay #closeOffersOverlay {
+.offersOverlay .closeOffersOverlay {
   position: absolute;
   top: 15px;
   right: 20px;
@@ -975,7 +891,7 @@ ul li {
   justify-content: center;
 }
 
-#offersOverlay #closeOffersOverlay:hover {
+.offersOverlay .closeOffersOverlay:hover {
   background: #f5f5f5;
 }
 
@@ -1147,6 +1063,137 @@ ul li {
 .newsArticle {
   max-width: 1000px;
   margin: auto;
+}
+
+.favoritesSection {
+  flex: 2;
+}
+.favoritesSection .favoritesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.favoriteCard {
+  background-color: #1f1f2f;
+  border: 1px solid #3a3a50;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 140px;
+  text-align: center;
+  transition: transform 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+.favoriteCard:hover {
+  transform: scale(1.05);
+}
+.favoriteCard .imageWrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.75rem;
+}
+.favoriteCard .imageWrapper .gameImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+.favoriteCard .gameTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-top: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favoriteCard .hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.favoriteCard .hoverOverlay .viewOffersButton,
+.favoriteCard .hoverOverlay .deleteButton {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin: 0.2rem 0;
+}
+.favoriteCard .hoverOverlay .viewOffersButton {
+  background-color: #2ecc71;
+  color: white;
+}
+.favoriteCard .hoverOverlay .deleteButton {
+  background-color: #e74c3c;
+  color: white;
+}
+.favoriteCard.deletionActive .hoverOverlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+.favoriteCard.deletionActive {
+  border-color: #e74c3c;
+}
+
+.deleteModeWrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+.deleteModeWrapper .deleteModeButton {
+  padding: 0.6rem 1.4rem;
+  background-color: #e74c3c;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.deleteModeWrapper .deleteModeButton:hover {
+  background-color: #c0392b;
+}
+.deleteModeWrapper .deleteModeButton.validate {
+  background-color: #2ecc71;
+}
+.deleteModeWrapper .deleteModeButton.validate:hover {
+  background-color: #27ae60;
+}
+
+@keyframes skeletonPulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+.skeleton {
+  animation: skeletonPulse 1.2s infinite ease-in-out;
+  color: transparent !important;
+  pointer-events: none;
+  user-select: none;
+}
+
+.noFavorites {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  padding: 2rem 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

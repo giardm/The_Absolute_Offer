@@ -53,15 +53,44 @@
 </div>
 
 <?php if (isLoggedOn()) : ?>
-  <div class="container">
+  <section class="favoritesSection">
     <!-- css grid -->
     <div class="favorites">
-      <h3>Mes Favoris</h3>
+      <h2 class="sectionTitle">favoris</h2>
+      <?php if (empty($favorites)): ?>
+        <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
+      <?php else: ?>
+        <div class="favoritesWrapper">
+          <?php foreach ($favorites as $favorite): ?>
+            <div class="favoriteCard" data-game-id="<?= $favorite['game_id'] ?>">
+              <a href="?action=product&id=<?= $favorite['game_id'] ?>" class="favoriteLink">
+                <div class="imageWrapper">
+                  <img src="" alt="Chargement..." class="gameImage" />
+                </div>
+                <div class="hoverOverlay">
+                  <span class="viewOffersButton">Voir les offres</span>
+                  <button class="deleteButton" data-favorite-id="<?= $favorite['favorite_id'] ?>">Supprimer</button>
+                </div>
+              </a>
+              <p class="gameTitle">Chargement...</p>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
     </div>
     <div class="topics">
       <h3>Topics</h3>
     </div>
-  </div>
+  </section>
 <?php endif; ?>
+
+<!-- OFFERS MODAL -->
+<div id="offersModal" class="offersModal hidden">
+  <div class="offersModalContent">
+    <button class="closeModal">&times;</button>
+    <h2 class="modalTitle">Offres disponibles</h2>
+    <ul class="offerList"></ul>
+  </div>
+</div>
 
 <?php require VIEWS_PATH . "/partials/footerView.php"; ?>

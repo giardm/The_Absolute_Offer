@@ -43,12 +43,12 @@
       <!-- Offres visibles -->
       <ul class="offerList"></ul>
       <!-- Bouton pour ouvrir la modale -->
-      <button id="openOffersOverlay" class="hidden">Afficher toutes les offres</button>
+      <button class="openOffersOverlay" class="hidden">Afficher toutes les offres</button>
       <!-- Modale avec toutes les offres -->
-      <div id="offersOverlay" style="display: none;">
+      <div class="offersOverlay" style="display: none;">
         <div class="overlayContent">
           <h3>Toutes les offres</h3>
-          <button id="closeOffersOverlay" aria-label="Fermer">&times;</button>
+          <button class="closeOffersOverlay" aria-label="Fermer">&times;</button>
           <ul class="offerList"></ul>
         </div>
       </div>

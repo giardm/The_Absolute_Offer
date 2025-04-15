@@ -80,6 +80,10 @@ function deleteFavorite($favoriteId)
     $stmt->execute([
       'favorite_id' => $favoriteId
     ]);
+    return [
+      'success' => true,
+      'message' => "Jeu supprimé des favoris."
+    ];
   } catch (PDOException) {
     return [
       'success' => false,

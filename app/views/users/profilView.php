@@ -15,21 +15,39 @@
 
   <section class="favoritesSection">
     <h2 class="sectionTitle">Mes favoris</h2>
-    <div class="favoritesWrapper">
-      <?php foreach ($favorites as $favorite): ?>
-        <div class="favoriteCard" data-game-id="<?= $favorite['game_id'] ?>">
-          <a href="?action=product&id=<?= $favorite['game_id'] ?>" class="favoriteLink">
+
+    <?php if (empty($favorites)): ?>
+      <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
+    <?php else: ?>
+      <div class="favoritesWrapper">
+        <?php foreach ($favorites as $favorite): ?>
+          <div class="favoriteCard openOffersOverlay" data-game-id="<?= $favorite['game_id'] ?>">
             <div class="imageWrapper">
-              <img src="" alt="Chargement..." class="gameImage skeleton" />
+              <img src="" alt="Chargement..." class="gameImage" />
             </div>
             <div class="hoverOverlay">
-              <span class="viewOffersButton">Voir les offres</span>
+              <button class="deleteButton" data-favorite-id="<?= $favorite['favorite_id'] ?>">Supprimer</button>
             </div>
-          </a>
-          <p class="gameTitle skeleton">Chargement...</p>
+            <p class="gameTitle">Chargement...</p>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+      <div class="offers">
+        <!-- Modale avec toutes les offres -->
+        <div class="offersOverlay" style="display: none;">
+          <div class="overlayContent">
+            <h3>Toutes les offres</h3>
+            <button class="closeOffersOverlay" aria-label="Fermer">&times;</button>
+            <ul class="offerList"></ul>
+          </div>
         </div>
-      <?php endforeach; ?>
-    </div>
+      </div>
+
+      <div class="deleteModeWrapper">
+        <button id="toggleDeleteMode" class="deleteModeButton">Supprimer un jeu</button>
+      </div>
+    <?php endif; ?>
   </section>
 </div>
 

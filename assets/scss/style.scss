@@ -1,5 +1,3 @@
-// Main style.scss - Reorganised with partials
-// Imports global styles and feature-specific components
 @import '_variables';
 @import '_mixins';
 @import '_fonts';
@@ -20,3 +18,4 @@
 @import '_toast';
 @import '_slider';
 @import '_news';
+@import '_favorites';

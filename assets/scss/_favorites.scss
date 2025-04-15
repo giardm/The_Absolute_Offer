@@ -1,0 +1,152 @@
+// === Favorites Section ===
+.favoritesSection {
+  flex: 2;
+
+  .favoritesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+.favoriteCard {
+  background-color: #1f1f2f;
+  border: 1px solid #3a3a50;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 140px;
+  text-align: center;
+  transition: transform 0.2s ease;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .imageWrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 0.75rem;
+
+    .gameImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px; // carré arrondi
+      display: block;
+    }
+  }
+
+  .gameTitle {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hoverOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    .viewOffersButton,
+    .deleteButton {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin: 0.2rem 0;
+    }
+
+    .viewOffersButton {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .deleteButton {
+      background-color: #e74c3c;
+      color: white;
+    }
+  }
+
+  &.deletionActive .hoverOverlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &.deletionActive {
+    border-color: #e74c3c;
+  }
+}
+
+// === Delete Button Container ===
+.deleteModeWrapper {
+  margin-top: 2rem;
+  text-align: center;
+
+  .deleteModeButton {
+    padding: 0.6rem 1.4rem;
+    background-color: #e74c3c;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #c0392b;
+    }
+
+    &.validate {
+      background-color: #2ecc71;
+
+      &:hover {
+        background-color: #27ae60;
+      }
+    }
+  }
+}
+
+// === Skeleton Loading ===
+@keyframes skeletonPulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+
+  50% {
+    background-color: #f0f0f0;
+  }
+
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+
+.skeleton {
+  animation: skeletonPulse 1.2s infinite ease-in-out;
+  color: transparent !important;
+  pointer-events: none;
+  user-select: none;
+}
+
+// === Message si aucun favori ===
+.noFavorites {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  padding: 2rem 0;
+}

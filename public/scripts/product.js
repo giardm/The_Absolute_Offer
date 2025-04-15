@@ -13,6 +13,8 @@
  */
 import { showMessage } from "./messageDisplay.js";
 
+import { createOffer, getStoresList, createModal } from "./modalOffers.js";
+
 /**
  * Point d'entrée principal une fois le DOM entièrement chargé.
  * Lance le chargement des offres CheapShark.
@@ -57,7 +59,7 @@ async function getCheapSharkInfos() {
 
   const storeList = await getStoresList(); // Liste des magasins avec leur nom/logo
   const offerListElement = document.querySelector(".offerList");
-  const overlayList = document.querySelector("#offersOverlay .offerList");
+  const overlayList = document.querySelector(".offersOverlay .offerList");
   const openBtn = document.getElementById("openOffersOverlay");
 
   // Récupère les données du jeu via son ID
@@ -263,110 +265,6 @@ function renderSteamMedia(steamData) {
 }
 
 /**
- * Crée dynamiquement un élément HTML <li> représentant une offre.
- * @param {Object} deal - Données de l'offre (prix, savings, dealID...).
- * @param {Object} store - Données du magasin (nom, logo).
- * @returns {HTMLElement} - Élément <li> prêt à être inséré dans le DOM.
- */
-
-function createOffer(deal, store) {
-  const savings = Math.round(deal.savings);
-  const dealUrl = `https://www.cheapshark.com/redirect?dealID=${deal.dealID}`;
-
-  const li = document.createElement("li");
-  li.className = "offerItem";
-
-  const link = document.createElement("a");
-  link.className = "offerCard";
-  link.href = dealUrl;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-
-  // Logo du store
-  if (store.logo) {
-    const img = document.createElement("img");
-    img.className = "storeLogo";
-    img.src = store.logo;
-    img.alt = store.name;
-    link.appendChild(img);
-  }
-
-  // Détails de l'offre
-  const infoDiv = document.createElement("div");
-  infoDiv.className = "offerInfo";
-
-  const nameP = document.createElement("p");
-  nameP.className = "storeName";
-  nameP.textContent = store.name;
-
-  const priceP = document.createElement("p");
-  priceP.className = "price";
-  priceP.textContent = `${deal.price} €`;
-
-  const discountSpan = document.createElement("span");
-  discountSpan.className = "discount";
-  discountSpan.dataset.savings = savings;
-  discountSpan.textContent = `-${savings}%`;
-
-  // Assemblage des éléments
-  infoDiv.appendChild(nameP);
-  infoDiv.appendChild(priceP);
-  infoDiv.appendChild(discountSpan);
-  link.appendChild(infoDiv);
-  li.appendChild(link);
-
-  return li;
-}
-
-/**
- * Récupère la liste des magasins disponibles via CheapShark.
- * @returns {Promise<Object>} - Mapping storeID => {name, logo}
- */
-async function getStoresList() {
-  const storeMap = {};
-  const res = await fetch("https://www.cheapshark.com/api/1.0/stores");
-  const stores = await res.json();
-
-  stores.forEach((store) => {
-    storeMap[store.storeID] = {
-      name: store.storeName,
-      logo: "https://www.cheapshark.com" + store.images.logo,
-    };
-  });
-
-  return storeMap;
-}
-
-/**
- * Gère l'ouverture et la fermeture de la modale contenant toutes les offres.
- * Active les interactions liées à l'overlay.
- */
-function createModal() {
-  const openBtn = document.getElementById("openOffersOverlay");
-  const closeBtn = document.getElementById("closeOffersOverlay");
-  const overlay = document.getElementById("offersOverlay");
-  const overlayContent = overlay.querySelector(".overlayContent");
-
-  if (openBtn) {
-    openBtn.addEventListener("click", () => {
-      overlay.style.display = "block";
-    });
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      overlay.style.display = "none";
-    });
-  }
-
-  overlay.addEventListener("click", (e) => {
-    if (!overlayContent.contains(e.target)) {
-      overlay.style.display = "none";
-    }
-  });
-}
-
-/**
  * Système de lightbox pour l'affichage des captures d'écran en grand format.
  */
 function addLightbox() {
@@ -514,6 +412,9 @@ function cleanDom() {
   });
 }
 
+/**
+ * Ajoute le jeux en favoris pour l'utilisateur (users only).
+ */
 function addFavorite(gameId) {
   const button = document.getElementById("favoriteBtn");
 

@@ -1,12 +1,25 @@
+import { showMessage } from "./messageDisplay.js"; // Affichage des messages d’état (toast)
+import { createOffer, getStoresList, createModal } from "./modalOffers.js";
+
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.favoriteCard');
+  const deleteToggleButton = document.getElementById('toggleDeleteMode');
 
+  initializeCards(cards);
+  initializeDeleteMode(cards, deleteToggleButton);
+  bindDeleteActions();
+});
+
+/**
+ * Initialise les cartes : skeleton + données
+ * @param {NodeListOf<HTMLElement>} cards
+ */
+function initializeCards(cards) {
   cards.forEach(async (card) => {
     const gameId = card.dataset.gameId;
     const title = card.querySelector('.gameTitle');
     const image = card.querySelector('.gameImage');
 
-    // 🔷 Active skeleton sur l'image et le titre
     title.classList.add('skeleton');
     image.classList.add('skeleton');
 
@@ -18,11 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderError(card);
     }
 
-    // ✅ Supprime skeleton une fois chargé
     title.classList.remove('skeleton');
     image.classList.remove('skeleton');
   });
-});
+}
 
 /**
  * Récupère les données d’un jeu depuis l’API CheapShark
@@ -41,18 +53,16 @@ async function fetchGameData(gameId) {
 }
 
 /**
- * Injecte les données dans la carte jeu
+ * Injecte les données dans une carte jeu
  * @param {HTMLElement} card
  * @param {Object} game
  */
 function renderGameCard(card, game) {
   const image = card.querySelector('.gameImage');
   const title = card.querySelector('.gameTitle');
-  const link = card.querySelector('.favoriteLink');
 
   const steamAppId = game.info?.steamAppID;
 
-  // ✅ Image version "affiche" Steam
   image.src = steamAppId
     ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${steamAppId}/library_600x900.jpg`
     : game.info.thumb;
@@ -62,10 +72,99 @@ function renderGameCard(card, game) {
 }
 
 /**
- * Affiche une erreur sur la carte en cas d’échec de l’API
+ * Affiche une erreur sur la carte
  * @param {HTMLElement} card
  */
 function renderError(card) {
   const title = card.querySelector('.gameTitle');
   title.textContent = "Erreur de chargement";
+}
+
+/**
+ * Initialise le mode suppression
+ * @param {NodeListOf<HTMLElement>} cards
+ * @param {HTMLElement|null} toggleBtn
+ */
+function initializeDeleteMode(cards, toggleBtn) {
+  let deleteMode = false;
+
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    deleteMode = !deleteMode;
+
+    cards.forEach(card => {
+      card.classList.toggle('deletionActive', deleteMode);
+    });
+
+    toggleBtn.textContent = deleteMode ? 'Valider' : 'Supprimer un jeu';
+    toggleBtn.classList.toggle('validate', deleteMode);
+  });
+}
+
+/**
+ * Gère les clics sur les boutons de suppression individuelle
+ */
+function bindDeleteActions() {
+  document.querySelectorAll('.deleteButton').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const favoriteId = button.dataset.favoriteId;
+
+      deleteFavorite(favoriteId, button.closest('.favoriteCard'));
+    });
+  });
+}
+
+/**
+ * Supprime un favori via AJAX + retire la carte du DOM
+ * @param {string} favoriteId
+ * @param {HTMLElement} cardElement
+ */
+async function deleteFavorite(favoriteId, cardElement) {
+  try {
+    const res = await fetch("?action=favorite", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ favoriteId })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      showMessage(data.message, "success");
+
+      //  Retire la carte du DOM
+      if (cardElement) {
+        cardElement.remove();
+        checkIfFavoritesAreEmpty();
+      }
+    } else {
+      showMessage(data.message, "error");
+    }
+  } catch (err) {
+    showMessage("Erreur réseau lors de la suppression", "error");
+  }
+}
+
+function checkIfFavoritesAreEmpty() {
+  const wrapper = document.querySelector('.favoritesWrapper');
+  const cards = wrapper.querySelectorAll('.favoriteCard');
+
+  if (cards.length === 0) {
+    // 🔹 Afficher le message s’il n’est pas déjà présent
+    if (!document.querySelector('.noFavorites')) {
+      wrapper.insertAdjacentHTML('beforebegin', `
+        <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
+      `);
+    }
+
+    // 🔹 Supprimer le bouton de suppression s’il est présent
+    const deleteToggleButton = document.getElementById('toggleDeleteMode');
+    if (deleteToggleButton) {
+      deleteToggleButton.remove();
+    }
+  }
 }
