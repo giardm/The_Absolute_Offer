@@ -8,6 +8,7 @@
   src: url("../fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-200 - latin */
 @font-face {
   font-display: swap;
@@ -18,6 +19,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-200.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-300 - latin */
 @font-face {
   font-display: swap;
@@ -28,6 +30,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-300.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-regular - latin */
 @font-face {
   font-display: swap;
@@ -38,6 +41,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-regular.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-500 - latin */
 @font-face {
   font-display: swap;
@@ -48,6 +52,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-500.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-600 - latin */
 @font-face {
   font-display: swap;
@@ -58,6 +63,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-600.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-700 - latin */
 @font-face {
   font-display: swap;
@@ -68,6 +74,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-700.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-800 - latin */
 @font-face {
   font-display: swap;
@@ -78,6 +85,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-800.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* lexend-900 - latin */
 @font-face {
   font-display: swap;
@@ -88,6 +96,7 @@
   src: url("../assets/fonts/lexend/lexend-v24-latin-900.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* -------- Reset -------- */
 html,
 body,
@@ -185,12 +194,14 @@ a {
 }
 
 @media (max-width: 768px) {
+
   body,
   html {
     overflow-x: hidden;
     width: 100%;
   }
 }
+
 header {
   background-color: #357DF2;
   height: 8vh;
@@ -217,9 +228,11 @@ header {
   border: 1px solid #F5F7FA;
   border-radius: 10px;
 }
+
 .searchContainer .searchInput {
   display: none;
 }
+
 .searchContainer .searchButton {
   display: block;
   color: #AAB4BF;
@@ -227,6 +240,7 @@ header {
   background: none;
   border: none;
 }
+
 @media (min-width: 768px) {
   .searchContainer .searchInput {
     display: block;
@@ -238,21 +252,25 @@ header {
     font-family: "Lexend", sans-serif;
     font-size: 14px;
   }
+
   .searchContainer .searchInput input {
     background-color: #357DF2;
     border: none;
     width: 75%;
   }
+
   .searchContainer .searchInput input::placeholder {
     font-weight: bold;
     color: #AAB4BF;
   }
+
   .searchContainer .searchInput input:focus {
     font-weight: bold;
     color: #fff;
     border: none;
     outline: none;
   }
+
   .searchContainer .searchButton {
     display: none;
   }
@@ -268,10 +286,12 @@ header {
   #mobileLogo {
     display: none;
   }
+
   #desktopLogo {
     display: block;
   }
 }
+
 .container {
   width: 100%;
   align-items: center;
@@ -291,11 +311,13 @@ video {
 .screenshots {
   margin-bottom: 3rem;
 }
+
 .videos h2,
 .screenshots h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
+
 .videos video,
 .screenshots video {
   width: 75%;
@@ -303,6 +325,7 @@ video {
   border-radius: 12px;
   margin-top: 1rem;
 }
+
 .videos .screenshotsGallery,
 .screenshots .screenshotsGallery {
   display: flex;
@@ -310,6 +333,7 @@ video {
   flex-wrap: wrap;
   gap: 1rem;
 }
+
 .videos .screenshotsGallery img,
 .screenshots .screenshotsGallery img {
   max-width: 200px;
@@ -317,6 +341,7 @@ video {
   transition: transform 0.2s ease;
   cursor: pointer;
 }
+
 .videos .screenshotsGallery img:hover,
 .screenshots .screenshotsGallery img:hover {
   transform: scale(1.03);
@@ -331,7 +356,7 @@ h3 {
 #homeHero {
   padding-top: 80px;
   padding-bottom: 80px;
-  background: url("./images/logo/ellipse1.png") no-repeat center bottom, url("./images/logo/ellipse2.png") no-repeat center bottom;
+  background: url("./images/logo/ellipse1.webp") no-repeat center bottom, url("./images/logo/ellipse2.webp") no-repeat center bottom;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -355,11 +380,13 @@ h3 {
   box-sizing: border-box;
   max-width: 100%;
 }
+
 #newsContainer h2:hover {
   cursor: pointer;
   position: relative;
   z-index: 1;
 }
+
 #newsContainer h2:hover::before {
   content: "";
   position: absolute;
@@ -375,6 +402,7 @@ h3 {
   z-index: -1;
   transition: all 0.4s ease;
 }
+
 #newsContainer .news-grid {
   padding: 2rem;
   display: grid;
@@ -383,6 +411,7 @@ h3 {
   width: 100%;
   box-sizing: border-box;
 }
+
 @media (min-width: 768px) {
   #newsContainer .news-grid {
     padding: 2rem;
@@ -390,6 +419,7 @@ h3 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (min-width: 1024px) {
   #newsContainer .news-grid {
     padding: 2rem;
@@ -397,6 +427,7 @@ h3 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 #newsContainer .news-grid .news-item {
   aspect-ratio: 16/9;
   position: relative;
@@ -407,14 +438,17 @@ h3 {
   overflow: hidden;
   transition: transform 0.2s ease;
 }
+
 #newsContainer .news-grid .news-item:hover {
   transform: scale(1.05);
 }
+
 #newsContainer .news-grid .news-item h3 {
   font-size: 1rem;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
+
 @media (min-width: 768px) {
   #newsContainer .news-grid .news-item h3 {
     font-size: 1rem;
@@ -422,6 +456,7 @@ h3 {
     margin-bottom: 1rem;
   }
 }
+
 @media (min-width: 1024px) {
   #newsContainer .news-grid .news-item h3 {
     font-size: 1.2rem;
@@ -429,6 +464,7 @@ h3 {
     margin-bottom: 1rem;
   }
 }
+
 #newsContainer .news-grid .news-item img.thumb {
   object-fit: cover;
   object-position: center;
@@ -437,6 +473,7 @@ h3 {
   height: auto;
   display: block;
 }
+
 #newsContainer .news-grid .news-item .overlay {
   position: absolute;
   bottom: 0;
@@ -447,11 +484,13 @@ h3 {
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
+
 @media (min-width: 768px) {
   #newsContainer .news-grid .news-item .overlay {
     font-size: 1.3rem;
   }
 }
+
 #newsContainer .news-grid .news-item .overlay h3 {
   margin-bottom: 0.5rem;
 }
@@ -474,7 +513,7 @@ h3 {
   justify-content: space-evenly;
   gap: 2rem;
   padding: 2rem;
-  background: url("./images/logo/ellipse3.png") no-repeat center;
+  background: url("./images/logo/ellipse3.webp") no-repeat center;
 }
 
 .gameCard {
@@ -523,6 +562,7 @@ h3 {
   margin: 1rem auto;
   width: 100%;
 }
+
 .searchCard .imgContainer {
   width: 240px;
   height: 90px;
@@ -530,23 +570,27 @@ h3 {
   border-radius: 6px;
   display: inline-block;
 }
+
 .searchCard .imgContainer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: all 0.3s ease;
 }
+
 .searchCard .gameInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
+
 .searchCard .gameInfo .title {
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 2px;
 }
+
 .searchCard .gameInfo .cheapest {
   background-color: #85C71A;
   color: white;
@@ -566,9 +610,11 @@ h3 {
   flex-shrink: 0;
   white-space: pre-line;
 }
+
 .searchCard .gameInfo .cheapest:hover {
   background: #4F7812;
 }
+
 @media (min-width: 768px) {
   .searchCard {
     width: 50%;
@@ -580,11 +626,13 @@ h3 {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .animated {
   opacity: 0;
   animation: fadeInUp 0.4s ease forwards;
@@ -596,6 +644,7 @@ h3 {
   gap: 2rem;
   padding: 1.5rem;
 }
+
 @media (min-width: 768px) {
   .profileContainer {
     flex-direction: row;
@@ -614,18 +663,22 @@ h3 {
 .profileSection {
   flex: 1;
 }
+
 .profileSection .profileInfo p {
   margin-bottom: 0.75rem;
   font-size: 1rem;
   color: #fff;
 }
+
 .profileSection .profileInfo p strong {
   color: #fff;
 }
+
 .profileSection .logoutWrapper {
   text-align: center;
   margin-top: 2rem;
 }
+
 .profileSection .logoutWrapper .logoutButton {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -636,6 +689,7 @@ h3 {
   font-weight: 500;
   transition: background-color 0.3s ease;
 }
+
 .profileSection .logoutWrapper .logoutButton:hover {
   background-color: #c0392b;
 }
@@ -655,17 +709,20 @@ h3 {
   width: 100%;
   overflow: hidden;
 }
+
 .productHeader .headerImageWrapper {
   width: 100%;
   max-height: 500px;
   overflow: hidden;
 }
+
 .productHeader .headerImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
+
 .productHeader .overlayContent {
   position: absolute;
   bottom: 2rem;
@@ -678,11 +735,13 @@ h3 {
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
+
 .productHeader .overlayContent .gameCover {
   height: 200px;
   width: auto;
   border-radius: 12px;
 }
+
 .productHeader .overlayContent .gameTitle {
   font-size: 64px;
   font-weight: 600;
@@ -694,6 +753,7 @@ h3 {
   justify-content: space-around;
   width: 50%;
 }
+
 .productInformations .informations {
   width: 50%;
 }
@@ -706,6 +766,7 @@ ul {
   flex-direction: column;
   gap: 1rem;
 }
+
 ul li {
   font-size: 1rem;
   line-height: 1.5;
@@ -719,17 +780,21 @@ ul li {
   font-size: 1.4rem;
   margin-bottom: 3rem;
 }
+
 .description h2 {
   font-size: 1.8rem;
 }
+
 .description p,
 .description ul,
 .description ol {
   margin-bottom: 1rem;
 }
+
 .description ul li {
   font-size: 1.4rem;
 }
+
 .description img {
   max-width: 100%;
   height: auto;
@@ -764,6 +829,7 @@ ul li {
   padding: 24px 80px;
   text-align: center;
 }
+
 .disclaimer a {
   color: #357DF2;
   font-weight: 500;
@@ -783,14 +849,17 @@ ul li {
   z-index: 9999;
   padding: 1rem;
 }
+
 .lightbox.hidden {
   display: none;
 }
+
 .lightbox img {
   max-width: 90%;
   max-height: 80vh;
   border-radius: 8px;
 }
+
 .lightbox .close {
   position: absolute;
   top: 1rem;
@@ -799,9 +868,11 @@ ul li {
   color: white;
   cursor: pointer;
 }
+
 .lightbox .lightbox-nav {
   margin-top: 1rem;
 }
+
 .lightbox .lightbox-nav button {
   background: white;
   border: none;
@@ -829,6 +900,7 @@ ul li {
   cursor: pointer;
   transition: background 0.3s ease;
 }
+
 .openOffersOverlay:hover {
   background-color: rgba(53, 125, 242, 0.5);
 }
@@ -864,6 +936,7 @@ ul li {
   padding: 4px 8px;
   border-radius: 8px;
 }
+
 .offerItem:hover {
   background-color: #357DF2;
 }
@@ -905,26 +978,31 @@ ul li {
   align-items: center;
   gap: 1rem;
 }
+
 .offerCard img {
   height: 48px;
   width: auto;
   flex-shrink: 0;
 }
+
 .offerCard .offerInfo {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
   width: 100%;
 }
+
 .offerCard .offerInfo .storeName {
   font-weight: bold;
   padding: 4px;
 }
+
 .offerCard .offerInfo .price {
   padding-right: 24px;
   text-align: right;
   font-weight: 800;
 }
+
 .offerCard .offerInfo .discount {
   color: white;
   padding: 0.6rem;
@@ -982,10 +1060,12 @@ ul li {
   width: 100%;
   padding: 40px 0;
 }
+
 .sliderContainer .sliderWrapper {
   display: flex;
   transition: transform 0.5s ease;
 }
+
 .sliderContainer .slide {
   flex-shrink: 0;
   text-align: center;
@@ -996,32 +1076,40 @@ ul li {
   z-index: 1;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
+
 .sliderContainer .slide .gameTitle {
   padding-top: 26px;
   text-transform: capitalize;
   font-size: 24px;
 }
+
 .sliderContainer .slide img {
   width: 100%;
   border: 2px solid rgba(204, 211, 219, 0.35);
   border-radius: 24px;
   display: block;
 }
+
 .sliderContainer .slide.active {
   transform: scale(1);
   opacity: 1;
   z-index: 3;
 }
-.sliderContainer .slide.prev, .sliderContainer .slide.next {
+
+.sliderContainer .slide.prev,
+.sliderContainer .slide.next {
   transform: scale(0.75);
   opacity: 0.7;
   z-index: 2;
 }
-.sliderContainer .slide.prev2, .sliderContainer .slide.next2 {
+
+.sliderContainer .slide.prev2,
+.sliderContainer .slide.next2 {
   transform: scale(0.6);
   opacity: 0.5;
   z-index: 1;
 }
+
 .sliderContainer .slide .slide.fadeOut {
   opacity: 0 !important;
   transition: opacity 0.5s ease;
@@ -1068,6 +1156,7 @@ ul li {
 .favoritesSection {
   flex: 2;
 }
+
 .favoritesSection .favoritesWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -1086,14 +1175,17 @@ ul li {
   position: relative;
   cursor: pointer;
 }
+
 .favoriteCard:hover {
   transform: scale(1.05);
 }
+
 .favoriteCard .imageWrapper {
   width: 80px;
   height: 80px;
   margin: 0 auto 0.75rem;
 }
+
 .favoriteCard .imageWrapper .gameImage {
   width: 100%;
   height: 100%;
@@ -1101,6 +1193,7 @@ ul li {
   border-radius: 16px;
   display: block;
 }
+
 .favoriteCard .gameTitle {
   font-size: 0.9rem;
   font-weight: 500;
@@ -1110,6 +1203,7 @@ ul li {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .favoriteCard .hoverOverlay {
   position: absolute;
   inset: 0;
@@ -1122,6 +1216,7 @@ ul li {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
+
 .favoriteCard .hoverOverlay .viewOffersButton,
 .favoriteCard .hoverOverlay .deleteButton {
   padding: 0.4rem 0.8rem;
@@ -1131,18 +1226,22 @@ ul li {
   cursor: pointer;
   margin: 0.2rem 0;
 }
+
 .favoriteCard .hoverOverlay .viewOffersButton {
   background-color: #2ecc71;
   color: white;
 }
+
 .favoriteCard .hoverOverlay .deleteButton {
   background-color: #e74c3c;
   color: white;
 }
+
 .favoriteCard.deletionActive .hoverOverlay {
   opacity: 1;
   pointer-events: auto;
 }
+
 .favoriteCard.deletionActive {
   border-color: #e74c3c;
 }
@@ -1151,6 +1250,7 @@ ul li {
   margin-top: 2rem;
   text-align: center;
 }
+
 .deleteModeWrapper .deleteModeButton {
   padding: 0.6rem 1.4rem;
   background-color: #e74c3c;
@@ -1161,12 +1261,15 @@ ul li {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .deleteModeWrapper .deleteModeButton:hover {
   background-color: #c0392b;
 }
+
 .deleteModeWrapper .deleteModeButton.validate {
   background-color: #2ecc71;
 }
+
 .deleteModeWrapper .deleteModeButton.validate:hover {
   background-color: #27ae60;
 }
@@ -1175,13 +1278,16 @@ ul li {
   0% {
     background-color: #e0e0e0;
   }
+
   50% {
     background-color: #f0f0f0;
   }
+
   100% {
     background-color: #e0e0e0;
   }
 }
+
 .skeleton {
   animation: skeletonPulse 1.2s infinite ease-in-out;
   color: transparent !important;
