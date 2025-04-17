@@ -1,6 +1,6 @@
 <?php
 
-require_once MODELS_PATH . '/connexionDB.php';
+require_once MODELS_PATH . '/connexionDb.php';
 
 
 function createUser($email, $username, $hashedPassword)

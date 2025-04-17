@@ -7,7 +7,7 @@
  * ======================================================
  */
 
-require_once MODELS_PATH . '/connexionDB.php';
+require_once MODELS_PATH . '/connexionDb.php';
 
 /**
  * Récupère la liste des jeux favoris d’un utilisateur.

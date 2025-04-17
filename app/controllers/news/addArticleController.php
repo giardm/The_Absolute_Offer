@@ -57,6 +57,16 @@ if (isAdmin()) {
       exit;
     }
 
+    // Vérification taille max (400 Ko)
+    if ($fileSize > 400 * 1024) {
+      header('Content-Type: application/json');
+      echo json_encode([
+        'success' => false,
+        'message' => 'L’image ne doit pas dépasser 400 Ko.'
+      ]);
+      exit;
+    }
+
     $thumbPath = null;
 
     if (

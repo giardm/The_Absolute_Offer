@@ -14,8 +14,8 @@
     <?php endforeach; ?>
   </select><br><br>
 
-  <label for="imageUpload">Image:</label><br>
-  <input type="file" name="image" id="imageUpload" accept="image/*" required><br><br>
+  <label for="imageUpload">Image (format webp):</label><br>
+  <input type="file" name="image" id="imageUpload" accept=".webp" required><br><br>
 
   <label for="thumbAltInput">Description de l'image :</label><br>
   <input type="text" name="thumbAlt" id="thumbAltInput" required><br><br>
