@@ -78,26 +78,89 @@ export async function getStoresList() {
  * Active les interactions liées à l'overlay.
  */
 export function createModal() {
-  const openBtn = document.querySelector('[data-game-id]');
-  const closeBtn = document.querySelector(".closeOffersOverlay");
-  const overlay = document.querySelector(".offersOverlay");
-  const overlayContent = overlay.querySelector(".overlayContent");
+  const openBtns = document.querySelectorAll(".openOffersOverlay");
 
-  if (openBtn) {
-    openBtn.addEventListener("click", () => {
+  openBtns.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const gameId = btn.dataset.gameId;
+      const overlay = document.querySelector(`.offersOverlay[data-game-id="${gameId}"]`);
+
+      if (!overlay) return;
+
       overlay.style.display = "block";
-    });
-  }
 
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      overlay.style.display = "none";
-    });
-  }
+      const offerList = overlay.querySelector(".offerList");
+      offerList.innerHTML = "";
 
-  overlay.addEventListener("click", (e) => {
-    if (!overlayContent.contains(e.target)) {
-      overlay.style.display = "none";
-    }
+      try {
+        const [storeMap, gameData] = await Promise.all([
+          getStoresList(),
+          fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameId}`).then(res => res.json())
+        ]);
+
+        gameData.deals.forEach((deal) => {
+          const store = storeMap[deal.storeID];
+          const offerEl = createOffer(deal, store);
+          offerList.appendChild(offerEl);
+        });
+
+        addSavingscolors();
+
+        if (gameData.deals.length === 0) {
+          offerList.innerHTML = `<li>Aucune offre trouvée pour ce jeu.</li>`;
+        }
+      } catch (err) {
+        console.error("Erreur lors du chargement des offres :", err);
+        offerList.innerHTML = `<li>Erreur de chargement des offres</li>`;
+      }
+
+      const closeBtn = overlay.querySelector(".closeOffersOverlay");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          overlay.style.display = "none";
+        });
+      }
+
+      const overlayContent = overlay.querySelector(".overlayContent");
+      overlay.addEventListener("click", (e) => {
+        if (!overlayContent.contains(e.target)) {
+          overlay.style.display = "none";
+        }
+      });
+    });
   });
 }
+
+/**
+ * Applique des classes CSS sur les offres en fonction de leur niveau de réduction.
+ * Permet de colorer les pourcentages selon un gradient de quartiles.
+ */
+export function addSavingscolors() {
+  const savingsElements = document.querySelectorAll(".discount");
+  const savingsValues = Array.from(savingsElements).map((el) =>
+    parseFloat(el.dataset.savings)
+  );
+
+  if (savingsValues.length > 0) {
+    const min = Math.min(...savingsValues);
+    const max = Math.max(...savingsValues);
+    const range = max - min;
+
+    const q1 = min + range * 0.25;
+    const q2 = min + range * 0.5;
+    const q3 = min + range * 0.75;
+
+    savingsElements.forEach((el) => {
+      const val = parseFloat(el.dataset.savings);
+      let className = "";
+
+      if (val <= q1) className = "q1";
+      else if (val <= q2) className = "q2";
+      else if (val <= q3) className = "q3";
+      else className = "q4";
+
+      el.classList.add(className);
+    });
+  }
+}
+

@@ -15,7 +15,6 @@
 
   <section class="favoritesSection">
     <h2 class="sectionTitle">Mes favoris</h2>
-
     <?php if (empty($favorites)): ?>
       <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
     <?php else: ?>
@@ -32,18 +31,18 @@
           </div>
         <?php endforeach; ?>
       </div>
-
-      <div class="offers">
-        <!-- Modale avec toutes les offres -->
-        <div class="offersOverlay" style="display: none;">
-          <div class="overlayContent">
-            <h3>Toutes les offres</h3>
-            <button class="closeOffersOverlay" aria-label="Fermer">&times;</button>
-            <ul class="offerList"></ul>
+      <?php foreach ($favorites as $favorite): ?>
+        <div class="offers">
+          <!-- Modale avec toutes les offres -->
+          <div class="offersOverlay" data-game-id="<?= $favorite['game_id'] ?>" style="display: none;">
+            <div class="overlayContent">
+              <h3>Toutes les offres</h3>
+              <button class="closeOffersOverlay" aria-label="Fermer">&times;</button>
+              <ul class="offerList"></ul>
+            </div>
           </div>
         </div>
-      </div>
-
+      <?php endforeach; ?>
       <div class="deleteModeWrapper">
         <button id="toggleDeleteMode" class="deleteModeButton">Supprimer un jeu</button>
       </div>

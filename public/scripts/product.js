@@ -13,7 +13,7 @@
  */
 import { showMessage } from "./messageDisplay.js";
 
-import { createOffer, getStoresList, createModal } from "./modalOffers.js";
+import { createOffer, getStoresList, createModal, addSavingscolors } from "./modalOffers.js";
 
 /**
  * Point d'entrée principal une fois le DOM entièrement chargé.
@@ -103,7 +103,9 @@ async function getCheapSharkInfos() {
       }
       //Ajoute le bouton pour l'admin
       addFeaturedOfferButton(steamAppID, gameId, gameTitle);
+      //Ajoute le bouton pour les favoris
       addFavorite(gameId);
+      //creation de la modale
       createModal();
       addSavingscolors(); // Applique une couleur selon le niveau de réduction
     })
@@ -319,39 +321,6 @@ function addLightbox() {
       if (e.key === "Escape" && closeLightboxBtn) closeLightboxBtn.click();
     }
   });
-}
-
-/**
- * Applique des classes CSS sur les offres en fonction de leur niveau de réduction.
- * Permet de colorer les pourcentages selon un gradient de quartiles.
- */
-function addSavingscolors() {
-  const savingsElements = document.querySelectorAll(".discount");
-  const savingsValues = Array.from(savingsElements).map((el) =>
-    parseFloat(el.dataset.savings)
-  );
-
-  if (savingsValues.length > 0) {
-    const min = Math.min(...savingsValues);
-    const max = Math.max(...savingsValues);
-    const range = max - min;
-
-    const q1 = min + range * 0.25;
-    const q2 = min + range * 0.5;
-    const q3 = min + range * 0.75;
-
-    savingsElements.forEach((el) => {
-      const val = parseFloat(el.dataset.savings);
-      let className = "";
-
-      if (val <= q1) className = "q1";
-      else if (val <= q2) className = "q2";
-      else if (val <= q3) className = "q3";
-      else className = "q4";
-
-      el.classList.add(className);
-    });
-  }
 }
 
 /**

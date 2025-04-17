@@ -1,13 +1,16 @@
 import { showMessage } from "./messageDisplay.js"; // Affichage des messages d’état (toast)
-import { createOffer, getStoresList, createModal } from "./modalOffers.js";
+import { createModal } from "./modalOffers.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.favoriteCard');
   const deleteToggleButton = document.getElementById('toggleDeleteMode');
 
+
   initializeCards(cards);
   initializeDeleteMode(cards, deleteToggleButton);
   bindDeleteActions();
+
+  createModal();
 });
 
 /**
@@ -90,6 +93,14 @@ function initializeDeleteMode(cards, toggleBtn) {
 
   if (!toggleBtn) return;
 
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (deleteMode) {
+        e.stopImmediatePropagation(); // empêche la modale
+      }
+    });
+  });
+
   toggleBtn.addEventListener('click', () => {
     deleteMode = !deleteMode;
 
@@ -149,6 +160,10 @@ async function deleteFavorite(favoriteId, cardElement) {
   }
 }
 
+
+/**
+ * Change l'affichage de la section favoris si il n'y a aucun jeux
+ */
 function checkIfFavoritesAreEmpty() {
   const wrapper = document.querySelector('.favoritesWrapper');
   const cards = wrapper.querySelectorAll('.favoriteCard');
