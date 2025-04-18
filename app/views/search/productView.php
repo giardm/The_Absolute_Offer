@@ -5,7 +5,7 @@
     <source src="./public/videos/logo.webm" type="video/webm">
   </video>
 </div>
-<div class="productContainer" data-id="<?= $gameId ?>">
+<div class=" container" data-id="<?= $gameId ?>">
   <div class="productHeader">
     <div class="headerImageWrapper">
       <img class="headerImage" src="" alt="Bannière">

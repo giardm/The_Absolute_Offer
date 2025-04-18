@@ -1,6 +1,6 @@
 <?php require VIEWS_PATH . "/partials/headerView.php"; ?>
 
-<div class="profileContainer">
+<div class="profileContainer container">
   <section class="profileSection">
     <h2 class="sectionTitle">Mon profil</h2>
     <div class="profileInfo">

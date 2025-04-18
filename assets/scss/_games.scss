@@ -7,24 +7,3 @@
   background: url("./images/logo/ellipse3.webp") no-repeat center;
 
 }
-
-.gameCard {
-  flex: 1 1 200px;
-  max-width: 250px;
-  text-align: center;
-  background-color: $neutral_high;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.gameCard:hover {
-  transform: scale(1.05);
-}
-
-.gameCard img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-}

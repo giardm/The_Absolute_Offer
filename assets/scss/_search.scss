@@ -52,11 +52,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      width: 80px; // largeur fixe
-      height: 50px; // hauteur fixe
+      width: 80px;
+      height: 50px;
       line-height: 1.2;
-      flex-shrink: 0; // ne pas rétrécir dans le flex parent
-      white-space: pre-line; // permet les sauts à la ligne avec \n dans le texte
+      flex-shrink: 0;
+      white-space: pre-line;
 
       &:hover {
         background: $success_high;

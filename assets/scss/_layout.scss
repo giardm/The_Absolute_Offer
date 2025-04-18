@@ -1,9 +1,10 @@
 .container {
-  width: 100%;
+  max-width: 1400px;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: auto;
 }
 
 video {
@@ -25,7 +26,6 @@ video {
   video {
     width: 75%;
     height: auto;
-    border-radius: 12px;
     margin-top: 1rem;
   }
 
@@ -38,7 +38,7 @@ video {
 
     img {
       max-width: 200px;
-      border-radius: 8px;
+      border-radius: 24px;
       transition: transform 0.2s ease;
       cursor: pointer;
 

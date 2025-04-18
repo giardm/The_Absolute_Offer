@@ -22,7 +22,7 @@ import { createOffer, getStoresList, createModal, addSavingscolors } from "./mod
 
 document.addEventListener("DOMContentLoaded", async () => {
   const loader = document.getElementById("loaderContainer");
-  const mainContent = document.querySelector(".productContainer");
+  const mainContent = document.querySelector(".container");
   const loaderVideo = document.getElementById("loaderVideo");
 
   if (mainContent) mainContent.style.display = "none";
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
  * @returns {string} ID utilisé pour les requêtes CheapShark.
  */
 function getProductId() {
-  const container = document.querySelector(".productContainer");
+  const container = document.querySelector(".container");
   const gameId = container.dataset.id;
   return gameId;
 }
@@ -159,6 +159,8 @@ function renderSteamHeader(steamData) {
 
   // Titre
   gameTitle.textContent = steamData.name;
+  document.title = "TAO – " + gameTitle.textContent;
+  document.getElementById("pageTitle").textContent = document.title;
 }
 
 /**

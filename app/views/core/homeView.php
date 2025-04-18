@@ -14,15 +14,9 @@
     <div class="sliderContainer">
       <div class="sliderWrapper">
         <?php foreach ($featuredGames as $game): ?>
-          <?php
-          $steamId = $game['steam_id'];
-          $apiId = $game['api_id'];
-          $gameTitle = $game['game_title'];
-          $imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/{$steamId}/library_600x900.jpg";
-          ?>
           <div class="slide">
-            <a href="?action=product&id=<?= $apiId ?>">
-              <img src="<?= $imageUrl ?>" alt="<?= $gameTitle ?>" loading="lazy">
+            <a href="?action=product&id=<?= $apiId = $game['api_id']; ?>">
+              <img src="<?= $game['img_path'] ?>" alt="<?= $game['game_title'] ?>" loading="lazy">
             </a>
             <p class="gameTitle"><?= $game['game_title'] ?></p>
           </div>

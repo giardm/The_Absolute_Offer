@@ -8,13 +8,13 @@
     top: 50%;
     left: 50%;
     width: 170%;
-    height: 60%; // ➤ plus ovale (horizontal large)
+    height: 60%;
     transform: translate(-50%, -50%);
     background: $color;
-    filter: blur(20px); // ➤ moins diffus, plus net
-    opacity: 0.9; // ➤ moins transparent
-    border-radius: 40% / 60%; // ➤ forme ovale
+    filter: blur(20px);
+    opacity: 0.9;
+    border-radius: 40% / 60%;
     z-index: -1;
-    transition: all 0.4s ease; // ➤ transition douce
+    transition: all 0.4s ease;
   }
 }

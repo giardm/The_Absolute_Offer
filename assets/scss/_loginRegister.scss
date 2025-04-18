@@ -1,0 +1,68 @@
+.loginContainer,
+.registerContainer {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin: 48px 0;
+
+  h2 {
+    font-size: 1.75rem;
+    margin: 48px 0;
+  }
+
+  #loginForm,
+  #registerForm {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+
+    input {
+      all: unset;
+      width: 70%;
+      height: 2rem;
+      border-radius: 24px;
+      background-color: #fff;
+      color: #000;
+      border: 2px solid $brand-medium;
+    }
+
+    button {
+      all: unset;
+      width: 50%;
+      height: 2rem;
+      background-color: $brand-medium;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 24px;
+    }
+
+    a {
+      font-size: 0.9rem;
+      text-decoration: underline;
+    }
+  }
+
+  @media (min-width: 768px) {
+
+    #loginForm,
+    #registerForm {
+      input {
+        width: 40%;
+        padding: 8px 16px;
+        border: 2px solid $brand-medium;
+      }
+
+      button {
+        padding: 8px 16px;
+        width: 30%;
+
+        &:hover {
+          background-color: darken($brand-medium, 10%);
+        }
+      }
+    }
+  }
+}

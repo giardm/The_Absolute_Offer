@@ -6,6 +6,6 @@
   </video>
 </div>
 
-<div id="searchResults" data-query="<?php echo htmlspecialchars($query); ?>"></div>
+<div class="container" id="searchResults" data-query="<?php echo htmlspecialchars($query); ?>"></div>
 
 <?php require VIEWS_PATH . "/partials/footerView.php"; ?>
