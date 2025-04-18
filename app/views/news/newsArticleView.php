@@ -14,6 +14,9 @@
       <!-- Title -->
       <h1 class="newsTitle"><?= htmlspecialchars($article['title']) ?></h1>
 
+      <!-- category -->
+      <h4 class="category"><?= htmlspecialchars($article['category_name']) ?></h4>
+
       <!-- Content -->
       <div class="newsContent">
         <?= $article['content'] ?>

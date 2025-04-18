@@ -1,9 +1,10 @@
 .loginContainer,
 .registerContainer {
-  width: 100%;
+  max-width: 1400px;
   align-items: center;
   text-align: center;
   margin: 48px 0;
+  margin: auto;
 
   h2 {
     font-size: 1.75rem;
@@ -50,14 +51,14 @@
     #loginForm,
     #registerForm {
       input {
-        width: 40%;
+        max-width: 340px;
         padding: 8px 16px;
         border: 2px solid $brand-medium;
       }
 
       button {
         padding: 8px 16px;
-        width: 30%;
+        max-width: 240px;
 
         &:hover {
           background-color: darken($brand-medium, 10%);

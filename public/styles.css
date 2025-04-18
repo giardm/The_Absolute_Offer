@@ -353,7 +353,6 @@ h3 {
 #newsContainer {
   padding-top: 2rem;
   box-sizing: border-box;
-  max-width: 100%;
 }
 #newsContainer h2:hover {
   cursor: pointer;
@@ -837,7 +836,7 @@ ul li {
 
 .openOffersOverlay {
   display: block;
-  margin: 2rem auto;
+  margin: 1rem;
   padding: 16px 32px;
   font-size: 18px;
   font-weight: 600;
@@ -1065,6 +1064,13 @@ ul li {
   padding: 48px 24px;
 }
 
+h4 {
+  text-align: center;
+  padding-bottom: 48px;
+  font-weight: 100;
+  color: #F5F7FA;
+}
+
 .newsContent {
   text-align: left;
   padding: 0 32px 48px 32px;
@@ -1182,7 +1188,6 @@ ul li {
 .favoritesSection .favoritesWrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
   justify-content: center;
 }
 
@@ -1309,10 +1314,11 @@ ul li {
 
 .loginContainer,
 .registerContainer {
-  width: 100%;
+  max-width: 1400px;
   align-items: center;
   text-align: center;
   margin: 48px 0;
+  margin: auto;
 }
 .loginContainer h2,
 .registerContainer h2 {
@@ -1366,7 +1372,7 @@ ul li {
   .loginContainer #registerForm input,
   .registerContainer #loginForm input,
   .registerContainer #registerForm input {
-    width: 40%;
+    max-width: 340px;
     padding: 8px 16px;
     border: 2px solid #357DF2;
   }
@@ -1375,7 +1381,7 @@ ul li {
   .registerContainer #loginForm button,
   .registerContainer #registerForm button {
     padding: 8px 16px;
-    width: 30%;
+    max-width: 240px;
   }
   .loginContainer #loginForm button:hover,
   .loginContainer #registerForm button:hover,

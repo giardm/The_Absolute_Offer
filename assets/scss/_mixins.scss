@@ -18,3 +18,11 @@
     transition: all 0.4s ease;
   }
 }
+
+@mixin container {
+  max-width: 1400px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

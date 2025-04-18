@@ -1,6 +1,6 @@
 <?php require VIEWS_PATH . "/partials/headerView.php"; ?>
 
-<div class="loginContainer container">
+<div class="loginContainer ">
   <h2>Se connecter</h2>
   <form id="loginForm">
     <input type="text" name="identifier" placeholder="Email ou pseudo" required>
