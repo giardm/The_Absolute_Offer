@@ -17,6 +17,18 @@ $routes = [
   'steamInfo'        => 'proxy/steamController.php',
 ];
 
+$pageTitles = [
+  'home'       => 'Accueil',
+  'search'     => 'Recherche',
+  'news'       => 'News',
+  'addArticle' => 'Ajouter un article',
+  'profil'     => 'Profil',
+  'product'    => '',
+  'login'      => 'Connexion',
+  'register'   => 'Inscription',
+];
+
+
 // Action demandée
 $action = $_GET['action'] ?? 'home';
 

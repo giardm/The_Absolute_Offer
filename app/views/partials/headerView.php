@@ -4,16 +4,23 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Avec The Absolute Offer, trouve les meilleurs prix pour tes jeux vidéo, suis les news gaming, et garde tes titres favoris à portée de clic.">
+  <meta description="" name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./public/styles.css">
   <link rel="icon" type="image/x-icon" href="./public/images/logo/logo-03.webp">
   <?php if ($action == "addArticle"): ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/ui/trumbowyg.min.css">
   <?php endif; ?>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-  <script type="module" src="./public/scripts/<?= $action ?>.js" defer></script>
-  <script type="module" src="./public/scripts/searchbar.js" defer></script>
-  <title><?= $action ?></title>
+  <script type="module" src="./public/scripts/<?= $action ?>.js"></script>
+  <script type="module" src="./public/scripts/searchbar.js"></script>
+  <title id="pageTitle">
+    <?php
+    echo isset($pageTitles[$action]) && $pageTitles[$action] !== ''
+      ? "TAO - {$pageTitles[$action]}"
+      : "TAO";
+    ?>
+  </title>
+
 
 </head>
 
@@ -25,23 +32,22 @@
     </div>
     <div class="searchContainer">
       <div class="searchInput">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix...">
+        <img src="./public/images/logo/magnifying-glass.svg" alt="">
+        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix..." aria-label="Champ de recherche de jeux vidéo">
       </div>
 
       <button class="searchButton">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <img src="./public/images/logo/magnifying-glass.svg" alt="">
       </button>
     </div>
     <div class="login">
-      <i class="fa-solid fa-bars"></i>
       <a href=<?php if (isLoggedOn()):
-                echo "?action=profil" ?>
+                echo "'?action=profil'" ?>
         <?php else :
-                echo "?action=login" ?>
+                echo "'?action=login'" ?>
         <?php endif; ?>>
 
-        <i class="fa-regular fa-user"></i>
+        <img src="./public/images/logo/login.svg" alt="">
       </a>
     </div>
   </header>
