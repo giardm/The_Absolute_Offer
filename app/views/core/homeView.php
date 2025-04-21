@@ -77,20 +77,8 @@
           </div>
         </div>
       <?php endforeach; ?>
-      <div class="deleteModeWrapper">
-        <button id="toggleDeleteMode" class="deleteModeButton">Supprimer un jeu</button>
-      </div>
     <?php endif; ?>
   </section>
 <?php endif; ?>
-
-<!-- OFFERS MODAL -->
-<!-- <div id="offersModal" class="offersModal hidden">
-  <div class="offersModalContent">
-    <button class="closeModal">&times;</button>
-    <h2 class="modalTitle">Offres disponibles</h2>
-    <ul class="offerList"></ul>
-  </div>
-</div> -->
 
 <?php require VIEWS_PATH . "/partials/footerView.php"; ?>
