@@ -1,10 +1,9 @@
 import { showMessage } from "./messageDisplay.js"; // Affichage des messages d’état (toast)
 import { createModal } from "./modalOffers.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.favoriteCard');
-  const deleteToggleButton = document.getElementById('toggleDeleteMode');
-
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".favoriteCard");
+  const deleteToggleButton = document.getElementById("toggleDeleteMode");
 
   initializeCards(cards);
   initializeDeleteMode(cards, deleteToggleButton);
@@ -17,14 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
  * Initialise les cartes : skeleton + données
  * @param {NodeListOf<HTMLElement>} cards
  */
-function initializeCards(cards) {
+export function initializeCards(cards) {
   cards.forEach(async (card) => {
     const gameId = card.dataset.gameId;
-    const title = card.querySelector('.gameTitle');
-    const image = card.querySelector('.gameImage');
+    const title = card.querySelector(".gameTitle");
+    const image = card.querySelector(".gameImage");
 
-    title.classList.add('skeleton');
-    image.classList.add('skeleton');
+    title.classList.add("skeleton");
+    image.classList.add("skeleton");
 
     const data = await fetchGameData(gameId);
 
@@ -34,8 +33,8 @@ function initializeCards(cards) {
       renderError(card);
     }
 
-    title.classList.remove('skeleton');
-    image.classList.remove('skeleton');
+    title.classList.remove("skeleton");
+    image.classList.remove("skeleton");
   });
 }
 
@@ -46,7 +45,9 @@ function initializeCards(cards) {
  */
 async function fetchGameData(gameId) {
   try {
-    const res = await fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameId}`);
+    const res = await fetch(
+      `https://www.cheapshark.com/api/1.0/games?id=${gameId}`
+    );
     if (!res.ok) throw new Error("Erreur API");
     return await res.json();
   } catch (error) {
@@ -61,8 +62,8 @@ async function fetchGameData(gameId) {
  * @param {Object} game
  */
 function renderGameCard(card, game) {
-  const image = card.querySelector('.gameImage');
-  const title = card.querySelector('.gameTitle');
+  const image = card.querySelector(".gameImage");
+  const title = card.querySelector(".gameTitle");
 
   const steamAppId = game.info?.steamAppID;
 
@@ -79,7 +80,7 @@ function renderGameCard(card, game) {
  * @param {HTMLElement} card
  */
 function renderError(card) {
-  const title = card.querySelector('.gameTitle');
+  const title = card.querySelector(".gameTitle");
   title.textContent = "Erreur de chargement";
 }
 
@@ -93,23 +94,23 @@ function initializeDeleteMode(cards, toggleBtn) {
 
   if (!toggleBtn) return;
 
-  cards.forEach(card => {
-    card.addEventListener('click', (e) => {
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
       if (deleteMode) {
         e.stopImmediatePropagation(); // empêche la modale
       }
     });
   });
 
-  toggleBtn.addEventListener('click', () => {
+  toggleBtn.addEventListener("click", () => {
     deleteMode = !deleteMode;
 
-    cards.forEach(card => {
-      card.classList.toggle('deletionActive', deleteMode);
+    cards.forEach((card) => {
+      card.classList.toggle("deletionActive", deleteMode);
     });
 
-    toggleBtn.textContent = deleteMode ? 'Valider' : 'Supprimer un jeu';
-    toggleBtn.classList.toggle('validate', deleteMode);
+    toggleBtn.textContent = deleteMode ? "Valider" : "Supprimer un jeu";
+    toggleBtn.classList.toggle("validate", deleteMode);
   });
 }
 
@@ -117,12 +118,12 @@ function initializeDeleteMode(cards, toggleBtn) {
  * Gère les clics sur les boutons de suppression individuelle
  */
 function bindDeleteActions() {
-  document.querySelectorAll('.deleteButton').forEach(button => {
-    button.addEventListener('click', (e) => {
+  document.querySelectorAll(".deleteButton").forEach((button) => {
+    button.addEventListener("click", (e) => {
       e.preventDefault();
       const favoriteId = button.dataset.favoriteId;
 
-      deleteFavorite(favoriteId, button.closest('.favoriteCard'));
+      deleteFavorite(favoriteId, button.closest(".favoriteCard"));
     });
   });
 }
@@ -137,9 +138,9 @@ async function deleteFavorite(favoriteId, cardElement) {
     const res = await fetch("?action=favorite", {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ favoriteId })
+      body: JSON.stringify({ favoriteId }),
     });
 
     const data = await res.json();
@@ -160,24 +161,26 @@ async function deleteFavorite(favoriteId, cardElement) {
   }
 }
 
-
 /**
  * Change l'affichage de la section favoris si il n'y a aucun jeux
  */
 function checkIfFavoritesAreEmpty() {
-  const wrapper = document.querySelector('.favoritesWrapper');
-  const cards = wrapper.querySelectorAll('.favoriteCard');
+  const wrapper = document.querySelector(".favoritesWrapper");
+  const cards = wrapper.querySelectorAll(".favoriteCard");
 
   if (cards.length === 0) {
     // 🔹 Afficher le message s’il n’est pas déjà présent
-    if (!document.querySelector('.noFavorites')) {
-      wrapper.insertAdjacentHTML('beforebegin', `
+    if (!document.querySelector(".noFavorites")) {
+      wrapper.insertAdjacentHTML(
+        "beforebegin",
+        `
         <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
-      `);
+      `
+      );
     }
 
     // 🔹 Supprimer le bouton de suppression s’il est présent
-    const deleteToggleButton = document.getElementById('toggleDeleteMode');
+    const deleteToggleButton = document.getElementById("toggleDeleteMode");
     if (deleteToggleButton) {
       deleteToggleButton.remove();
     }
