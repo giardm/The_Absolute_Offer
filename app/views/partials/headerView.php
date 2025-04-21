@@ -33,7 +33,8 @@
     <div class="searchContainer">
       <div class="searchInput">
         <img src="./public/images/logo/magnifying-glass.svg" alt="">
-        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix..." aria-label="Champ de recherche de jeux vidéo">
+        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix..." aria-label="Champ de recherche de jeux vidéo"
+          value="<?php echo ($action === 'search') ? htmlspecialchars($query) : ''; ?>">
       </div>
 
       <button class="searchButton">

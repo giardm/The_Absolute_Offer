@@ -48,43 +48,49 @@
 
 <?php if (isLoggedOn()) : ?>
   <section class="favoritesSection">
-    <!-- css grid -->
-    <div class="favorites">
-      <h2 class="sectionTitle">favoris</h2>
-      <?php if (empty($favorites)): ?>
-        <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
-      <?php else: ?>
-        <div class="favoritesWrapper">
-          <?php foreach ($favorites as $favorite): ?>
-            <div class="favoriteCard" data-game-id="<?= $favorite['game_id'] ?>">
-              <a href="?action=product&id=<?= $favorite['game_id'] ?>" class="favoriteLink">
-                <div class="imageWrapper">
-                  <img src="" alt="Chargement..." class="gameImage" />
-                </div>
-                <div class="hoverOverlay">
-                  <span class="viewOffersButton">Voir les offres</span>
-                  <button class="deleteButton" data-favorite-id="<?= $favorite['favorite_id'] ?>">Supprimer</button>
-                </div>
-              </a>
-              <p class="gameTitle">Chargement...</p>
+    <h2 class="sectionTitle">Mes favoris</h2>
+    <?php if (empty($favorites)): ?>
+      <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
+    <?php else: ?>
+      <div class="favoritesWrapper">
+        <?php foreach ($favorites as $favorite): ?>
+          <div class="favoriteCard openOffersOverlay" data-game-id="<?= $favorite['game_id'] ?>">
+            <div class="imageWrapper">
+              <img src="" alt="Chargement..." class="gameImage" />
             </div>
-          <?php endforeach; ?>
+            <div class="hoverOverlay">
+              <button class="deleteButton" data-favorite-id="<?= $favorite['favorite_id'] ?>">Supprimer</button>
+            </div>
+            <p class="gameTitle">Chargement...</p>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <?php foreach ($favorites as $favorite): ?>
+        <div class="offers">
+          <!-- Modale avec toutes les offres -->
+          <div class="offersOverlay" data-game-id="<?= $favorite['game_id'] ?>" style="display: none;">
+            <div class="overlayContent">
+              <h3>Toutes les offres</h3>
+              <button class="closeOffersOverlay" aria-label="Fermer">&times;</button>
+              <ul class="offerList"></ul>
+            </div>
+          </div>
         </div>
-      <?php endif; ?>
-    </div>
-    <div class="topics">
-      <h3>Topics</h3>
-    </div>
+      <?php endforeach; ?>
+      <div class="deleteModeWrapper">
+        <button id="toggleDeleteMode" class="deleteModeButton">Supprimer un jeu</button>
+      </div>
+    <?php endif; ?>
   </section>
 <?php endif; ?>
 
 <!-- OFFERS MODAL -->
-<div id="offersModal" class="offersModal hidden">
+<!-- <div id="offersModal" class="offersModal hidden">
   <div class="offersModalContent">
     <button class="closeModal">&times;</button>
     <h2 class="modalTitle">Offres disponibles</h2>
     <ul class="offerList"></ul>
   </div>
-</div>
+</div> -->
 
 <?php require VIEWS_PATH . "/partials/footerView.php"; ?>

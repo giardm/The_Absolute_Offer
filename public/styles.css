@@ -242,6 +242,7 @@ header {
     background-color: #357DF2;
     border: none;
     width: 75%;
+    color: #fff;
   }
   .searchContainer .searchInput input::placeholder {
     font-weight: bold;
