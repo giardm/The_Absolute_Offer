@@ -6,6 +6,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require(__DIR__ . '/config/config.php');
 
+require_once MODELS_PATH . '/featuredOffers.php';
+
+$featuredGames = getFeaturedOffers();
+
 if (isset($_GET["action"])) {
   $action = $_GET["action"];
 } else {

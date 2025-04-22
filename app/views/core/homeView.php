@@ -27,6 +27,7 @@
 </div>
 
 <div class="container" id="newsContainer">
+  <div class="horizontalLine"></div>
   <a href="?action=news">
     <h2 class="sectionTitle">News</h2>
   </a>
@@ -47,7 +48,8 @@
 </div>
 
 <?php if (isLoggedOn()) : ?>
-  <section class="favoritesSection">
+  <section class="container" id="favoritesSection">
+    <div class="horizontalLine"></div>
     <h2 class="sectionTitle">Mes favoris</h2>
     <?php if (empty($favorites)): ?>
       <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>

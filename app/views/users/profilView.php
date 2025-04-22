@@ -13,7 +13,7 @@
     </div>
   </section>
 
-  <section class="favoritesSection">
+  <section id="favoritesSection">
     <h2 class="sectionTitle">Mes favoris</h2>
     <?php if (empty($favorites)): ?>
       <p class="noFavorites">Vous n'avez aucun jeu en favoris.</p>
