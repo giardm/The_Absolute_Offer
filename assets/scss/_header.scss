@@ -5,14 +5,24 @@ header {
   padding: 8px 16px;
   align-items: center;
   justify-content: space-between;
-}
 
-#mobileLogo {
-  display: block;
-}
+  #mobileLogo {
+    display: block;
+  }
 
-#desktopLogo {
-  display: none;
+  #desktopLogo {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    #mobileLogo {
+      display: none;
+    }
+
+    #desktopLogo {
+      display: block;
+    }
+  }
 }
 
 .searchContainer {
@@ -36,35 +46,42 @@ header {
     border: none;
   }
 
-  @media (min-width: 768px) {
-
+  &.show {
     .searchInput {
-      display: block;
       display: flex;
+      gap: 16px;
       color: white;
+      background-color: $brand_medium;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .searchInput {
+      display: flex;
       gap: 16px;
       width: 480px;
+      color: white;
       background-color: $brand_medium;
-      font-family: 'Lexend', sans-serif;
-      font-size: 14px;
-    }
 
-    .searchInput input {
-      background-color: $brand_medium;
-      border: none;
-      width: 75%;
-      color: #fff;
-
-      &::placeholder {
-        font-weight: bold;
-        color: $neutral_low;
-      }
-
-      &:focus {
-        font-weight: bold;
-        color: #fff;
+      input {
+        background-color: $brand_medium;
         border: none;
-        outline: none;
+        width: 75%;
+        color: #fff;
+        font-family: 'Lexend', sans-serif;
+        font-size: 14px;
+
+        &::placeholder {
+          font-weight: bold;
+          color: $neutral_low;
+        }
+
+        &:focus {
+          font-weight: bold;
+          color: #fff;
+          border: none;
+          outline: none;
+        }
       }
     }
 
@@ -78,15 +95,4 @@ header {
   padding: 8px;
   font-size: 36px;
   color: #fff;
-}
-
-
-@media (min-width: 768px) {
-  #mobileLogo {
-    display: none;
-  }
-
-  #desktopLogo {
-    display: block;
-  }
 }

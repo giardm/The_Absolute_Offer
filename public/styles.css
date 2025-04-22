@@ -199,13 +199,19 @@ header {
   align-items: center;
   justify-content: space-between;
 }
-
-#mobileLogo {
+header #mobileLogo {
   display: block;
 }
-
-#desktopLogo {
+header #desktopLogo {
   display: none;
+}
+@media (min-width: 768px) {
+  header #mobileLogo {
+    display: none;
+  }
+  header #desktopLogo {
+    display: block;
+  }
 }
 
 .searchContainer {
@@ -227,22 +233,27 @@ header {
   background: none;
   border: none;
 }
+.searchContainer.show .searchInput {
+  display: flex;
+  gap: 16px;
+  color: white;
+  background-color: #357DF2;
+}
 @media (min-width: 768px) {
   .searchContainer .searchInput {
-    display: block;
     display: flex;
-    color: white;
     gap: 16px;
     width: 480px;
+    color: white;
     background-color: #357DF2;
-    font-family: "Lexend", sans-serif;
-    font-size: 14px;
   }
   .searchContainer .searchInput input {
     background-color: #357DF2;
     border: none;
     width: 75%;
     color: #fff;
+    font-family: "Lexend", sans-serif;
+    font-size: 14px;
   }
   .searchContainer .searchInput input::placeholder {
     font-weight: bold;
@@ -265,14 +276,6 @@ header {
   color: #fff;
 }
 
-@media (min-width: 768px) {
-  #mobileLogo {
-    display: none;
-  }
-  #desktopLogo {
-    display: block;
-  }
-}
 .container {
   max-width: 1400px;
   align-items: center;
@@ -669,6 +672,18 @@ h3 {
   gap: 0.5rem;
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+.productHeader .overlayContent .buttons {
+  right: 0px;
+}
+.productHeader .overlayContent .buttons #featuredOfferBtn,
+.productHeader .overlayContent .buttons #favoriteBtn {
+  all: unset;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 24px;
+  background-color: #357DF2;
+  color: #fff;
 }
 .productHeader .overlayContent .gameCover {
   height: 120px;

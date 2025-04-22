@@ -34,6 +34,21 @@
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 
+    .buttons {
+
+      right: 0px;
+
+      #featuredOfferBtn,
+      #favoriteBtn {
+        all: unset;
+        padding: 4px 8px;
+        margin: 2px;
+        border-radius: 24px;
+        background-color: $brand-medium;
+        color: #fff;
+      }
+    }
+
     .gameCover {
       height: 120px;
       border-radius: 8px;
