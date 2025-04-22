@@ -1,6 +1,9 @@
 // === Favorites Section ===
-.favoritesSection {
+#favoritesSection {
+  max-width: 1400px;
   flex: 2;
+  margin: auto;
+  padding: 44px 0;
 
   .favoritesWrapper {
     display: flex;
