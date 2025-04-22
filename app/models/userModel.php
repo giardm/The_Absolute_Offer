@@ -89,7 +89,7 @@ function isLoggedOn()
 
 function isAdmin()
 {
-  return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+  return isset($_SESSION['tao_role']) && $_SESSION['tao_role'] === 'admin';
 }
 
 
