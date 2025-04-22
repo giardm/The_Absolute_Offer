@@ -26,7 +26,7 @@ if (isAdmin()) {
     $userId = $_SESSION['user_id'] ?? null;
 
     // Vérification de la présence des champs obligatoires
-    if (empty($title) || empty($content) || empty($categoryId) || !$userId) {
+    if (empty($title) || empty($content) || empty($categoryId) || empty($thumbAlt) || !$userId) {
       header('Content-Type: application/json');
       echo json_encode([
         'success' => false,
@@ -57,36 +57,55 @@ if (isAdmin()) {
       exit;
     }
 
-
     $thumbPath = null;
 
-    if (
-      isset($_FILES['image']) &&
-      $_FILES['image']['error'] === UPLOAD_ERR_OK
-    ) {
+    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
       $tmpFile = $_FILES['image']['tmp_name'];
       $originalName = basename($_FILES['image']['name']);
+      $fileExtension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+      // Vérification de l'extension
+      if ($fileExtension !== 'webp') {
+        header('Content-Type: application/json');
+        echo json_encode([
+          'success' => false,
+          'message' => 'Seuls les fichiers WebP sont autorisés.'
+        ]);
+        exit;
+      }
+
+      // Vérification du type MIME
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $mimeType = finfo_file($finfo, $tmpFile);
+      finfo_close($finfo);
+
+      if ($mimeType !== 'image/webp') {
+        header('Content-Type: application/json');
+        echo json_encode([
+          'success' => false,
+          'message' => 'Le fichier n’est pas une image WebP valide.'
+        ]);
+        exit;
+      }
+
       $uniqueName = uniqid() . '_' . $originalName;
       $uploadDir = 'public/images/uploads/';
 
-      // Création du dossier de destination s’il n’existe pas
       if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true);
       }
 
       $destination = $uploadDir . $uniqueName;
 
-      // Déplacement du fichier uploadé
       if (move_uploaded_file($tmpFile, $destination)) {
         $thumbPath = $destination;
       } else {
-        // Échec du déplacement du fichier image
         header('Content-Type: application/json');
         echo json_encode([
           'success' => false,
           'message' => 'Erreur lors de l’enregistrement de l’image.'
         ]);
-        exit; // On stoppe ici si le fichier ne peut pas être déplacé
+        exit;
       }
     }
 
