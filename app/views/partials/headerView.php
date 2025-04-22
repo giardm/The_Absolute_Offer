@@ -31,16 +31,21 @@
       <a href="?action=home"><img id="desktopLogo" src="./public/images/logo/logo-04-b.webp" alt=""></a>
     </div>
     <div class="searchContainer">
-      <div class="searchInput">
+      <div class="searchInput" id="searchInputContainer">
         <img src="./public/images/logo/magnifying-glass.svg" alt="">
-        <input id="gameSearchInput" type="text" placeholder="Recherchez un jeu au meilleur prix..." aria-label="Champ de recherche de jeux vidéo"
+        <input
+          id="gameSearchInput"
+          type="text"
+          placeholder="Recherchez un jeu au meilleur prix..."
+          aria-label="Champ de recherche de jeux vidéo"
           value="<?php echo ($action === 'search') ? htmlspecialchars($query) : ''; ?>">
       </div>
 
-      <button class="searchButton">
+      <button class="searchButton" id="mobileSearchToggle">
         <img src="./public/images/logo/magnifying-glass.svg" alt="">
       </button>
     </div>
+
     <div class="login">
       <a href=<?php if (isLoggedOn()):
                 echo "'?action=profil'" ?>
@@ -48,7 +53,7 @@
                 echo "'?action=login'" ?>
         <?php endif; ?>>
 
-        <img src="./public/images/logo/login.svg" alt="">
+        <img id="loginIcon" src="./public/images/logo/login.svg" alt="">
       </a>
     </div>
   </header>

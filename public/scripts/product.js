@@ -332,7 +332,7 @@ function addLightbox() {
  * @param {string} title
  */
 function addFeaturedOfferButton(steamId, apiId, title) {
-  const button = document.getElementById("featureOfferBtn");
+  const button = document.getElementById("featuredOfferBtn");
 
   if (!button) return;
 

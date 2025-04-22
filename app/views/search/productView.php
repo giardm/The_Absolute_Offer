@@ -12,16 +12,15 @@
     </div>
     <div class="overlayContent">
       <img class="gameCover" src="<?= $afficheUrl ?>" alt="Affiche du jeu">
-      <div class="lowerOverlayContent"></div>
       <h2 class="gameTitle"></h2>
-      <?php if (isAdmin()): ?>
-        <button id="featureOfferBtn">Mettre en vedette</button>
-        <div id="notification" class="hidden">Jeu ajouté à la page d'accueil !</div>
-      <?php endif; ?>
-      <?php if (isLoggedOn()): ?>
-        <button id="favoriteBtn">Ajouter aux favoris</button>
-        <div id="notification" class="hidden">Jeu ajouté a vos favoris !</div>
-      <?php endif; ?>
+      <div class="buttons">
+        <?php if (isAdmin()): ?>
+          <button id="featuredOfferBtn">Mettre en vedette</button>
+        <?php endif; ?>
+        <?php if (isLoggedOn()): ?>
+          <button id="favoriteBtn">Ajouter aux favoris</button>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
   <div class="productMain">
