@@ -1,3 +1,6 @@
+import { initializeCards } from "./profil.js";
+import { createModal } from "./modalOffers.js";
+
 /**
  * ============================================
  * Slider Carousel – Défilement horizontal animé
@@ -29,6 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   startAutoSlide(); // Démarre l'animation automatique
   setupKeyboardControls(); // Active la navigation clavier ← →
   setupHoverPause(); // Active la pause du slider au survol
+
+  const cards = document.querySelectorAll(".favoriteCard");
+
+  initializeCards(cards);
+  createModal();
 });
 
 /**
