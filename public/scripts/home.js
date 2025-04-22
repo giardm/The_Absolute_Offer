@@ -27,10 +27,11 @@ let sliderWrapper; // Élément DOM contenant les slides (rempli au chargement)
  */
 document.addEventListener("DOMContentLoaded", () => {
   sliderWrapper = document.querySelector(".sliderWrapper");
+  const sliderContainer = document.querySelector(".sliderContainer");
 
   updateSlideClasses(); // Attribue les classes initiales aux slides
   startAutoSlide(); // Démarre l'animation automatique
-  setupKeyboardControls(); // Active la navigation clavier ← →
+  setupMobileCarouselControls(sliderContainer); // Active la navigation du carrousel
   setupHoverPause(); // Active la pause du slider au survol
 
   const cards = document.querySelectorAll(".favoriteCard");
@@ -174,12 +175,79 @@ function setupHoverPause() {
 }
 
 /**
- * Active les contrôles clavier pour naviguer manuellement :
- * - Flèche droite : slide suivant
- * - Flèche gauche : slide précédent
- * Une interaction manuelle met en pause temporairement l’auto-slide.
+ * Active les contrôles d’interaction manuelle pour un carrousel :
+ * - Tactile (mobile) : glisser horizontal pour naviguer
+ * - Souris (desktop) : click & drag horizontal
+ * - Clavier : flèche droite = slide suivant, flèche gauche = slide précédent
+ * Toute interaction manuelle met en pause temporairement l’auto-slide.
  */
-function setupKeyboardControls() {
+
+function setupMobileCarouselControls(sliderContainer) {
+  if (!sliderContainer) return;
+
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+
+  sliderContainer.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+  });
+
+  sliderContainer.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+  });
+
+  sliderContainer.addEventListener("touchend", () => {
+    if (!isDragging) return;
+    const deltaX = currentX - startX;
+
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) {
+        slidePrev();
+      } else {
+        slideNext();
+      }
+      pauseAutoSlideTemporarily();
+    }
+
+    isDragging = false;
+  });
+
+  sliderContainer.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    sliderContainer.style.cursor = "grabbing";
+  });
+
+  sliderContainer.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    currentX = e.clientX;
+  });
+
+  sliderContainer.addEventListener("mouseup", () => {
+    if (!isDragging) return;
+    const deltaX = currentX - startX;
+
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) {
+        slidePrev();
+      } else {
+        slideNext();
+      }
+      pauseAutoSlideTemporarily();
+    }
+
+    isDragging = false;
+    sliderContainer.style.cursor = "grab";
+  });
+
+  sliderContainer.addEventListener("mouseleave", () => {
+    isDragging = false;
+    sliderContainer.style.cursor = "grab";
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       slideNext();
@@ -190,7 +258,12 @@ function setupKeyboardControls() {
       pauseAutoSlideTemporarily();
     }
   });
+
+  sliderContainer.style.cursor = "grab";
 }
+
+
+
 
 /**
  * Interrompt temporairement le défilement automatique
