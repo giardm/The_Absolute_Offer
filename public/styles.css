@@ -5,7 +5,7 @@
   font-family: "Lexend";
   font-style: normal;
   font-weight: 100;
-  src: url("../fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
+  src: url("../assets/fonts/lexend/lexend-v24-latin-100.woff2") format("woff2");
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* lexend-200 - latin */
@@ -355,6 +355,17 @@ h3 {
   padding-top: 2rem;
   box-sizing: border-box;
 }
+#newsContainer #addArticle {
+  padding-top: 12px;
+  text-decoration: none;
+  width: 50%;
+  height: 2rem;
+  background-color: #357DF2;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 24px;
+}
 #newsContainer h2:hover {
   cursor: pointer;
   position: relative;
@@ -455,6 +466,11 @@ h3 {
 }
 #newsContainer .news-grid .news-item .overlay h3 {
   margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+  #newsContainer #addArticle {
+    width: 20%;
+  }
 }
 
 .sectionTitle {

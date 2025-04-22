@@ -26,6 +26,18 @@
   padding-top: 2rem;
   box-sizing: border-box;
 
+  #addArticle {
+    padding-top: 12px;
+    text-decoration: none;
+    width: 50%;
+    height: 2rem;
+    background-color: $brand-medium;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 24px;
+  }
+
   h2 {
     &:hover {
       cursor: pointer;
@@ -114,6 +126,12 @@
           margin-bottom: 0.5rem;
         }
       }
+    }
+  }
+
+  @media (min-width: 768px) {
+    #addArticle {
+      width: 20%;
     }
   }
 }
