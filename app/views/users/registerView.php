@@ -39,4 +39,22 @@
       aria-label="Mot de passe"
       required>
 
-    <!-- Champ : Confirmation du
+    <!-- Champ : Confirmation du mot de passe -->
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      placeholder="Mot de passe"
+      aria-label="Confirmer le mot de passe"
+      required>
+
+    <!-- Bouton de soumission -->
+    <button id="submitBtn" type="submit" aria-label="Valider la création du compte">S'inscrire</button>
+
+    <!-- Lien vers le formulaire de connexion -->
+    <a href="?action=login">J'ai déjà un compte.</a>
+
+  </form>
+</div>
+
+<?php require VIEWS_PATH . "/partials/footerView.php"; ?>
