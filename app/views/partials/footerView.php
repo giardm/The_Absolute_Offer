@@ -63,7 +63,6 @@
       <ul>
         <li>CGU</li>
         <li>Mentions <br> légales</li>
-        <li>Contact</li>
       </ul>
     </div>
 
