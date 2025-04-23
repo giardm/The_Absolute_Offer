@@ -331,9 +331,10 @@ footer .footerContainer {
   gap: 32px;
   color: #fff;
 }
-footer .footerContainer .footerLogo img {
-  max-width: 240px;
-  height: auto;
+footer .footerContainer .footerLogo svg {
+  width: 200px;
+  color: currentColor;
+  fill: currentColor;
 }
 footer .footerContainer .footerColumn {
   text-align: center;
@@ -593,11 +594,12 @@ h3 {
 }
 
 #featuredGamesContainer {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   background: url("./images/logo/ellipse3.webp") no-repeat center;
 }
 

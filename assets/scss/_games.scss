@@ -1,9 +1,10 @@
 #featuredGamesContainer {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   background: url("./images/logo/ellipse3.webp") no-repeat center;
 
 }

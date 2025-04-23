@@ -12,9 +12,10 @@ footer {
     gap: 32px;
     color: #fff;
 
-    .footerLogo img {
-      max-width: 240px;
-      height: auto;
+    .footerLogo svg {
+      width: 200px;
+color: currentColor;
+fill: currentColor;
     }
 
     .footerColumn {
