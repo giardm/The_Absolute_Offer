@@ -119,3 +119,30 @@ body {
 main {
   flex: 1;
 }
+
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  font-size: 96px;
+  text-align: center;
+  align-items: center;
+  padding: 96px;
+
+  p {
+    padding: 48px 0
+  }
+
+  a {
+    font-size: 48px;
+    width: 50%;
+    background-color: $brand-medium;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 24px;
+
+    &:hover {
+      background-color: $brand-high;
+    }
+  }
+}
