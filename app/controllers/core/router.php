@@ -1,7 +1,17 @@
 <?php
+
+/**
+ * ======================================================
+ * Routeur principal de l'application :
+ * sélectionne le contrôleur à charger en fonction de l'action passée en URL.
+ * ======================================================
+ */
+
 require_once MODELS_PATH . '/userModel.php';
 
-// Table de routage
+// ======================================================
+// Définition des routes : chaque action correspond à un contrôleur
+// ======================================================
 $routes = [
   'home'             => 'home/homeController.php',
   'search'           => 'products/searchController.php',
@@ -18,6 +28,10 @@ $routes = [
   'steamInfo'        => 'proxy/steamController.php',
 ];
 
+// ======================================================
+// Titre de page correspondant à chaque action
+// Utilisé pour l'affichage dynamique dans les vues
+// ======================================================
 $pageTitles = [
   'home'       => 'Accueil',
   'search'     => 'Recherche',
@@ -29,10 +43,16 @@ $pageTitles = [
   'register'   => 'Inscription',
 ];
 
-
-// Action demandée
+// ======================================================
+// Détermination de l'action demandée par l'utilisateur
+// (par défaut, on charge la page d'accueil)
+// ======================================================
 $action = $_GET['action'] ?? 'home';
 
+// ======================================================
+// Si l'action existe dans les routes, on charge le contrôleur associé
+// Sinon, on affiche une page d'erreur
+// ======================================================
 if (isset($routes[$action])) {
   $route = CONTROLLERS_PATH . '/' . $routes[$action];
   require_once $route;
