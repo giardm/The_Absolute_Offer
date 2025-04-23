@@ -36,7 +36,6 @@
     <header>
       <!--
         Logo du site, version mobile et desktop.
-        aria-label non requis ici car l’image est suivie d’un lien clair vers l’accueil.
       -->
       <div class="logo">
         <a href="?action=home">
@@ -62,7 +61,6 @@
 
       <!--
         Barre de recherche avec champ textuel et bouton d’accès mobile.
-        Le champ utilise aria-label pour être accessible aux lecteurs d’écran.
       -->
       <div class="searchContainer">
         <div class="searchInput" id="searchInputContainer">
@@ -83,7 +81,6 @@
 
       <!--
         Zone de connexion ou accès au profil selon l’état de session.
-        Le lien contient une icône avec un alt clair.
       -->
       <div class="login">
         <a href=<?php if (isLoggedOn()): ?> '?action=profil'
