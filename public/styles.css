@@ -241,10 +241,16 @@ header {
   justify-content: space-between;
 }
 header #mobileLogo {
+  width: 40px;
   display: block;
+  color: currentColor;
+  fill: currentColor;
 }
 header #desktopLogo {
+  width: 80px;
   display: none;
+  color: currentColor;
+  fill: currentColor;
 }
 @media (min-width: 768px) {
   header #mobileLogo {
@@ -319,7 +325,7 @@ header #desktopLogo {
 
 footer {
   padding-top: 24px;
-  padding: 48px 16px;
+  padding: 48px 16px 0 16px;
 }
 footer .footerContainer {
   padding-top: 48px;
@@ -331,12 +337,16 @@ footer .footerContainer {
   gap: 32px;
   color: #fff;
 }
-footer .footerContainer .footerLogo img {
-  max-width: 240px;
-  height: auto;
+footer .footerContainer .footerLogo svg {
+  width: 200px;
+  color: currentColor;
+  fill: currentColor;
 }
 footer .footerContainer .footerColumn {
   text-align: center;
+}
+footer .footerContainer .footerColumn h4 {
+  text-align: left;
 }
 footer .footerContainer .footerColumn .footerTitle {
   font-weight: bold;
@@ -368,6 +378,13 @@ footer .footerContainer .footerColumn ul li a#deleteProfil:hover {
   footer .footerContainer .footerColumn {
     text-align: left;
   }
+}
+footer .copyright {
+  margin: 0 auto;
+  text-align: center;
+  padding: 36px 0 0 0;
+  opacity: 0.5;
+  font-size: 14px;
 }
 
 .container {
@@ -442,17 +459,33 @@ h3 {
   background-position: center bottom;
   text-align: center;
 }
-
 #homeHero h1 {
   padding: 32px;
   font-weight: 600;
   font-size: 40px;
 }
-
 #homeHero p {
   padding: 24px;
   font-weight: 400;
   font-size: 32px;
+}
+#homeHero #heroLogo {
+  width: 90%;
+  color: currentColor;
+  fill: currentColor;
+}
+@media (min-width: 768px) {
+  #homeHero #heroLogo {
+    display: none;
+  }
+}
+#homeHero #heroVideo {
+  display: none;
+}
+@media (min-width: 768px) {
+  #homeHero #heroVideo {
+    display: block;
+  }
 }
 
 #newsContainer {
@@ -590,11 +623,12 @@ h3 {
 }
 
 #featuredGamesContainer {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   background: url("./images/logo/ellipse3.webp") no-repeat center;
 }
 
@@ -1557,6 +1591,54 @@ h4 {
   .registerContainer #loginForm button:hover,
   .registerContainer #registerForm button:hover {
     background-color: rgb(14.7534883721, 96.4651162791, 229.2465116279);
+  }
+}
+
+.legalsContainer {
+  padding: 1.5rem 1rem;
+  line-height: 1.7;
+}
+.legalsContainer h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5rem;
+}
+.legalsContainer h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.legalsContainer p {
+  margin-bottom: 1rem;
+}
+.legalsContainer ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.legalsContainer ul li {
+  margin-bottom: 0.5rem;
+  list-style-type: disc;
+}
+.legalsContainer strong {
+  font-weight: 600;
+}
+.legalsContainer hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2.5rem 0;
+}
+@media (min-width: 768px) {
+  .legalsContainer {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .legalsContainer h1 {
+    font-size: 2rem;
+  }
+  .legalsContainer h2 {
+    font-size: 1.5rem;
   }
 }
 

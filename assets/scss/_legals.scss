@@ -1,0 +1,56 @@
+.legalsContainer {
+    padding: 1.5rem 1rem;
+    line-height: 1.7;
+  
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 0.5rem;
+    }
+  
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+  
+    p {
+      margin-bottom: 1rem;
+    }
+  
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+  
+      li {
+        margin-bottom: 0.5rem;
+        list-style-type: disc;
+      }
+    }
+  
+    strong {
+      font-weight: 600;
+    }
+  
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 2.5rem 0;
+    }
+  
+    @media (min-width: 768px) {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+  
+      h1 {
+        font-size: 2rem;
+      }
+  
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
