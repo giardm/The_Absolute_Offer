@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
   <header>
     <div class="logo">
       <a href="?action=home"><img id="mobileLogo" src="./public/images/logo/logo-03-b.webp" alt=""></a>
@@ -57,3 +58,5 @@
       </a>
     </div>
   </header>
+  <div class="wrapper">
+    <main>

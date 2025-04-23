@@ -1,7 +1,8 @@
 <div id="messageDisplay" class="toast hidden"></div>
 
-<hr>
+</main>
 <footer>
+  <hr>
   <div class="footerContainer">
     <div class="footerLogo">
       <img src="./public/images/logo/tao-footer-logo.svg" alt="TAO logo">
@@ -12,7 +13,7 @@
       <ul>
         <?php if (isLoggedOn()): ?>
           <li><a href="?action=profil">Profil</a></li>
-          <li><a id="deleteProfil" href="?action=deleteProfil">Supprimer mon compte</a></li>
+          <li><a id="deleteProfil" href="?action=deleteProfil">Supprimer<br>mon<br>compte</a></li>
         <?php else : ?>
           <li><a href="?action=login">Connexion</a></li>
           <li><a href="?action=register">Inscription</a></li>
@@ -43,7 +44,7 @@
     </div>
   </div>
 </footer>
-
+</div>
 
 </body>
 
