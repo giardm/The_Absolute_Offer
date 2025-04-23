@@ -1,6 +1,6 @@
 footer {
   padding-top: 24px;
-  padding: 48px 16px;
+  padding: 48px 16px 0 16px;
 
   .footerContainer {
     padding-top: 48px;
@@ -14,8 +14,8 @@ footer {
 
     .footerLogo svg {
       width: 200px;
-color: currentColor;
-fill: currentColor;
+      color: currentColor;
+      fill: currentColor;
     }
 
     .footerColumn {
@@ -62,5 +62,13 @@ fill: currentColor;
         text-align: left;
       }
     }
+  }
+
+  .copyright{
+    margin:0 auto;
+    text-align: center;
+    padding: 36px 0 0 0;
+    opacity: 0.5;
+    font-size: 14px;
   }
 }
