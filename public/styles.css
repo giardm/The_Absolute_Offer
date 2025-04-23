@@ -241,10 +241,16 @@ header {
   justify-content: space-between;
 }
 header #mobileLogo {
+  width: 40px;
   display: block;
+  color: currentColor;
+  fill: currentColor;
 }
 header #desktopLogo {
+  width: 80px;
   display: none;
+  color: currentColor;
+  fill: currentColor;
 }
 @media (min-width: 768px) {
   header #mobileLogo {

@@ -7,11 +7,17 @@ header {
   justify-content: space-between;
 
   #mobileLogo {
+    width: 40px;
     display: block;
+    color: currentColor;
+    fill: currentColor;
   }
 
   #desktopLogo {
+    width: 80px;
     display: none;
+    color: currentColor;
+    fill: currentColor;
   }
 
   @media (min-width: 768px) {
