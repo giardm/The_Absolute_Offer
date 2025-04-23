@@ -1,5 +1,4 @@
 import { initializeCards } from "./profil.js";
-import { createModal } from "./modalOffers.js";
 
 /**
  * ============================================
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".favoriteCard");
 
   initializeCards(cards);
-  createModal();
 });
 
 /**
