@@ -3,6 +3,7 @@ footer {
   padding: 48px 16px;
 
   .footerContainer {
+    padding-top: 48px;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -35,10 +36,15 @@ footer {
           color: #ccc;
           margin-bottom: 6px;
 
-          :hover {
+          a:hover {
             color: $supporting_medium;
           }
+
+          a#deleteProfil:hover {
+            color: $error_medium;
+          }
         }
+
       }
     }
 

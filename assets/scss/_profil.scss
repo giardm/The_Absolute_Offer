@@ -55,3 +55,43 @@
     }
   }
 }
+
+// suppression de compte 
+
+#confirmDelete {
+  padding: 88px 24px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  button {
+    all: unset;
+    height: 2rem;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 24px;
+    padding: 12px 24px;
+    margin-bottom: 48px;
+  }
+
+  #confirm {
+    background-color: $success_medium;
+
+    &:hover {
+      background-color: $success_high;
+    }
+  }
+
+  #cancel {
+    background-color: $error_medium;
+
+    &:hover {
+      background-color: $error_high;
+    }
+  }
+}

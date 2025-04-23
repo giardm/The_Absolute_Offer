@@ -191,6 +191,22 @@ a {
     width: 100%;
   }
 }
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 header {
   background-color: #357DF2;
   height: 8vh;
@@ -281,6 +297,7 @@ footer {
   padding: 48px 16px;
 }
 footer .footerContainer {
+  padding-top: 48px;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -311,8 +328,11 @@ footer .footerContainer .footerColumn ul li {
   color: #ccc;
   margin-bottom: 6px;
 }
-footer .footerContainer .footerColumn ul li :hover {
+footer .footerContainer .footerColumn ul li a:hover {
   color: #AA5BF5;
+}
+footer .footerContainer .footerColumn ul li a#deleteProfil:hover {
+  color: #ED4545;
 }
 @media (min-width: 768px) {
   footer .footerContainer {
@@ -693,6 +713,39 @@ h3 {
 }
 .profileSection .logoutWrapper .logoutButton:hover {
   background-color: #c0392b;
+}
+
+#confirmDelete {
+  padding: 88px 24px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.buttons button {
+  all: unset;
+  height: 2rem;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 24px;
+  padding: 12px 24px;
+  margin-bottom: 48px;
+}
+.buttons #confirm {
+  background-color: #85C71A;
+}
+.buttons #confirm:hover {
+  background-color: #4F7812;
+}
+.buttons #cancel {
+  background-color: #ED4545;
+}
+.buttons #cancel:hover {
+  background-color: #B81D1D;
 }
 
 .productMain {
