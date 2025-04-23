@@ -35,8 +35,6 @@ function getFavorites($userId, $limit)
   return $favorites;
 }
 
-
-
 /**
  * Ajoute un jeu aux favoris d’un utilisateur.
  *
@@ -62,13 +60,22 @@ function addFavorite($gameId, $userId)
       'message' => "Jeu ajouté aux favoris."
     ];
   } catch (PDOException $e) {
-    error_log("Erreur dans addFavorite : " . $e->getMessage());
+    $errorMsg = $e->getMessage();
+    if (strpos($errorMsg, 'unique_user_game') !== false) {
+      return [
+        'success' => false,
+        'message' => "Ce jeu est déjà dans vos favoris."
+      ];
+    }
+    error_log("Erreur dans addFavorite : " . $errorMsg);
     return [
       'success' => false,
       'message' => "Erreur lors de l'ajout aux favoris."
     ];
   }
 }
+
+
 
 
 
