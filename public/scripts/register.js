@@ -16,10 +16,20 @@ import { showMessage } from "./messageDisplay.js"; // Affichage des messages d�
  * Attache un gestionnaire d’événement à la soumission du formulaire.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("registerForm")
-    .addEventListener("submit", registerStatus);
+  const registerForm = document.getElementById("registerForm");
+
+  if (registerForm) {
+    // Focus sur le premier champ du formulaire
+    const firstInput = registerForm.querySelector("input, select, textarea, button");
+    if (firstInput) {
+      firstInput.focus();
+    }
+
+    // Ajout de l'écouteur de soumission
+    registerForm.addEventListener("submit", registerStatus);
+  }
 });
+
 
 /**
  * Gère la soumission du formulaire d'inscription.

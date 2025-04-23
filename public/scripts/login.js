@@ -19,9 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
+    // Met le focus sur le premier champ du formulaire
+    const firstInput = loginForm.querySelector("input, select, textarea, button");
+    if (firstInput) {
+      firstInput.focus();
+    }
+
     loginForm.addEventListener("submit", displayLoginStatus);
   }
 });
+
 
 /**
  * Gère la soumission du formulaire de connexion.
