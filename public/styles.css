@@ -338,6 +338,9 @@ footer .footerContainer .footerLogo img {
 footer .footerContainer .footerColumn {
   text-align: center;
 }
+footer .footerContainer .footerColumn h4 {
+  text-align: left;
+}
 footer .footerContainer .footerColumn .footerTitle {
   font-weight: bold;
   font-size: 16px;
