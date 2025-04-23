@@ -19,18 +19,19 @@ function getFavorites($userId, $limit)
 {
   $favorites = array();
   $limit = (int)$limit;
+  $userId = (int)$userId;
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT * FROM favorites WHERE user_id=:userId ORDER BY added_at LIMIT $limit;";
+    $sql = "SELECT * FROM favorites WHERE user_id = :userId ORDER BY added_at LIMIT :limit";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-      'userId' => $userId
+      'userId' => $userId,
+      'limit' => $limit
     ]);
-
     $favorites = $stmt->fetchAll();
   } catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage();
+    error_log("Erreur dans getFavorites : " . $e->getMessage());
   }
   return $favorites;
 }
@@ -44,6 +45,9 @@ function getFavorites($userId, $limit)
  */
 function addFavorite($gameId, $userId)
 {
+  $gameId = (int)$gameId;
+  $userId = (int)$userId;
+
   try {
     $pdo = connexionPDO();
     $sql = "INSERT INTO favorites(game_id, added_at, user_id) VALUES (:game_id, NOW(), :user_id);";
@@ -56,14 +60,16 @@ function addFavorite($gameId, $userId)
       'success' => true,
       'message' => "Jeu ajouté aux favoris."
     ];
-  } catch (PDOException) {
+  } catch (PDOException $e) {
+    error_log("Erreur dans addFavorite : " . $e->getMessage());
     return [
       'success' => false,
       'message' => "Erreur lors de l'ajout aux favoris."
     ];
   }
-  exit;
 }
+
+
 
 /**
  * Supprime un jeu favori d’un utilisateur.
@@ -73,9 +79,11 @@ function addFavorite($gameId, $userId)
  */
 function deleteFavorite($favoriteId)
 {
+  $favoriteId = (int)$favoriteId;
+
   try {
     $pdo = connexionPDO();
-    $sql = "DELETE FROM favorites WHERE favorite_id=:favorite_id ;";
+    $sql = "DELETE FROM favorites WHERE favorite_id = :favorite_id;";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
       'favorite_id' => $favoriteId
@@ -84,11 +92,11 @@ function deleteFavorite($favoriteId)
       'success' => true,
       'message' => "Jeu supprimé des favoris."
     ];
-  } catch (PDOException) {
+  } catch (PDOException $e) {
+    error_log("Erreur dans deleteFavorite : " . $e->getMessage());
     return [
       'success' => false,
-      'message' => "Erreur lors de la suppresion du favori."
+      'message' => "Erreur lors de la suppression du favori."
     ];
   }
-  exit;
 }

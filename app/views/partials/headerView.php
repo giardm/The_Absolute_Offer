@@ -25,38 +25,37 @@
 </head>
 
 <body>
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <a href="?action=home"><img id="mobileLogo" src="./public/images/logo/logo-03-b.webp" alt=""></a>
+        <a href="?action=home"><img id="desktopLogo" src="./public/images/logo/logo-04-b.webp" alt=""></a>
+      </div>
+      <div class="searchContainer">
+        <div class="searchInput" id="searchInputContainer">
+          <img src="./public/images/logo/magnifying-glass.svg" alt="">
+          <input
+            id="gameSearchInput"
+            type="text"
+            placeholder="Recherchez un jeu au meilleur prix..."
+            aria-label="Champ de recherche de jeux vidéo"
+            value="<?php echo ($action === 'search') ? htmlspecialchars($query) : ''; ?>">
+        </div>
 
-  <header>
-    <div class="logo">
-      <a href="?action=home"><img id="mobileLogo" src="./public/images/logo/logo-03-b.webp" alt=""></a>
-      <a href="?action=home"><img id="desktopLogo" src="./public/images/logo/logo-04-b.webp" alt=""></a>
-    </div>
-    <div class="searchContainer">
-      <div class="searchInput" id="searchInputContainer">
-        <img src="./public/images/logo/magnifying-glass.svg" alt="">
-        <input
-          id="gameSearchInput"
-          type="text"
-          placeholder="Recherchez un jeu au meilleur prix..."
-          aria-label="Champ de recherche de jeux vidéo"
-          value="<?php echo ($action === 'search') ? htmlspecialchars($query) : ''; ?>">
+        <button class="searchButton" id="mobileSearchToggle">
+          <img src="./public/images/logo/magnifying-glass.svg" alt="">
+        </button>
       </div>
 
-      <button class="searchButton" id="mobileSearchToggle">
-        <img src="./public/images/logo/magnifying-glass.svg" alt="">
-      </button>
-    </div>
+      <div class="login">
+        <a href=<?php if (isLoggedOn()):
+                  echo "'?action=profil'" ?>
+          <?php else :
+                  echo "'?action=login'" ?>
+          <?php endif; ?>>
 
-    <div class="login">
-      <a href=<?php if (isLoggedOn()):
-                echo "'?action=profil'" ?>
-        <?php else :
-                echo "'?action=login'" ?>
-        <?php endif; ?>>
-
-        <img id="loginIcon" src="./public/images/logo/login.svg" alt="">
-      </a>
-    </div>
-  </header>
-  <div class="wrapper">
+          <img id="loginIcon" src="./public/images/logo/login.svg" alt="">
+        </a>
+      </div>
+    </header>
     <main>

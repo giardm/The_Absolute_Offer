@@ -44,16 +44,14 @@ function createUser($email, $username, $hashedPassword)
         ];
       }
     } else {
+      error_log("Erreur SQL dans createUser : " . $e->getMessage());
       return [
         'success' => false,
-        'message' => "Erreur SQL : " . $e->getMessage()
+        'message' => "Une erreur est survenue lors de l'inscription."
       ];
     }
   }
 }
-
-
-
 
 function getUserByEmailOrUsername($identifier)
 {
@@ -76,10 +74,11 @@ function getUserByEmailOrUsername($identifier)
 
     return $user;
   } catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage();
+    error_log("Erreur dans getUserByEmailOrUsername : " . $e->getMessage());
     return false;
   }
 }
+
 
 
 function isLoggedOn()
@@ -95,12 +94,28 @@ function isAdmin()
 
 function logout()
 {
-  if (isset($_SESSION)) {
-    $_SESSION = [];
-  };
+  // Vide toutes les variables de session
+  $_SESSION = [];
+  session_unset();
 
+  // Supprime le cookie de session si existant
+  if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(
+      session_name(),
+      '',
+      time() - 42000,
+      $params["path"],
+      $params["domain"],
+      $params["secure"],
+      $params["httponly"]
+    );
+  }
+
+  // Détruit la session
   session_destroy();
 }
+
 
 
 // Fonction pour formater la durée
@@ -129,22 +144,24 @@ function formatDurationFromSeconds(int $seconds): string
 //fonction de suppression de compte
 function deleteAccount($userId)
 {
+  $userId = (int)$userId;
+
   try {
     $pdo = connexionPDO();
-    $sql = "DELETE FROM users WHERE user_id=:user_id ;";
+    $sql = "DELETE FROM users WHERE user_id = :user_id;";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
       'user_id' => $userId
     ]);
     return [
       'success' => true,
-      'message' => "Jeu supprimé des favoris."
+      'message' => "Compte utilisateur supprimé avec succès."
     ];
-  } catch (PDOException) {
+  } catch (PDOException $e) {
+    error_log("Erreur dans deleteAccount : " . $e->getMessage());
     return [
       'success' => false,
-      'message' => "Erreur lors de la suppresion du favori."
+      'message' => "Erreur lors de la suppression du compte."
     ];
   }
-  exit;
 }
