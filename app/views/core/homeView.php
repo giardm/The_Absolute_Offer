@@ -4,9 +4,16 @@
      Section d’introduction avec vidéo et slogan principal
      ====================================================== -->
 <div class="container" id="homeHero">
-  <video autoplay loop muted playsinline aria-hidden="true">
-    <!-- Source vidéo MP4 commentée -->
-    <!-- <source src="./public/videos/logo.mp4" type="video/mp4"> -->
+  <svg id="heroLogo" alt="Logo TAO version bureau" id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525.47 256.65">
+    <path class="cls-1" d="M135.06,59.63h-35.27c0,18.43-14.99,33.43-33.43,33.43v35.27c37.94,0,68.7-30.76,68.7-68.7Z" />
+    <path class="cls-1" d="M168.48,197.03v-35.27c-18.43,0-33.43-14.99-33.43-33.43h-35.27c0,37.94,30.76,68.7,68.7,68.7Z" />
+    <rect class="cls-1" x="135.06" y="93.05" width="35.27" height="35.27" />
+    <path class="cls-1" d="M393.13,59.63c-37.94,0-68.7,30.76-68.7,68.7s30.76,68.7,68.7,68.7,68.7-30.76,68.7-68.7-30.76-68.7-68.7-68.7ZM393.13,161.75c-18.43,0-33.43-14.99-33.43-33.43s14.99-33.43,33.43-33.43,33.43,14.99,33.43,33.43-14.99,33.43-33.43,33.43Z" />
+    <path class="cls-1" d="M397.15,0H128.33C57.57,0,0,57.57,0,128.33s57.57,128.33,128.33,128.33h268.82c70.76,0,128.33-57.57,128.33-128.33S467.91,0,397.15,0ZM397.15,221.38H128.33c-51.31,0-93.05-41.74-93.05-93.05s41.74-93.05,93.05-93.05h268.82c51.31,0,93.05,41.74,93.05,93.05s-41.74,93.05-93.05,93.05Z" />
+    <path class="cls-1" d="M233.07,161.75h0c-9.74,0-17.64,7.9-17.64,17.64s7.9,17.64,17.64,17.64h0c9.74,0,17.64-7.9,17.64-17.64s-7.9-17.64-17.64-17.64Z" />
+    <path class="cls-1" d="M283.11,128.33v-35.27h-60.81c0,18.43-14.99,33.43-33.43,33.43v35.27c25.05,0,46.96-13.41,58.96-33.44v.02c0,37.94,30.76,68.7,68.7,68.7v-35.27c-18.43,0-33.43-14.99-33.43-33.43Z" />
+  </svg>
+  <video id="heroVideo" autoplay loop muted playsinline aria-hidden="true">
     <source src="./public/videos/logo.webm" type="video/webm">
   </video>
   <h1>The Absolute Offer</h1>

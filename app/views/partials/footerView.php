@@ -68,12 +68,13 @@
     <div class="footerColumn">
       <h4 class="footerTitle">Support</h4>
       <ul>
-        <li>CGU</li>
-        <li>Mentions <br> légales</li>
+        <li><a href="?action=cgu">CGU</a></li>
+        <li><a href="?action=legalNotices">Mentions <br> légales</a></li>
       </ul>
     </div>
 
   </div>
+  <p class="copyright">©The Absolute Offer. Tous droits réservés. 2025</p>
 </footer>
 
 </div>

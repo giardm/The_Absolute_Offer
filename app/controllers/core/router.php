@@ -26,6 +26,8 @@ $routes = [
   'logout'           => 'users/logoutController.php',
   'register'         => 'users/registerController.php',
   'steamInfo'        => 'proxy/steamController.php',
+  'cgu'              => 'legals/cguController.php',
+  'legalNotices'     => 'legals/legalNoticesController.php',
 ];
 
 // ======================================================
