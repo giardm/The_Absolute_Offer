@@ -1,8 +1,22 @@
 <?php
 
+/**
+ * ======================================================
+ * Gère les opérations liées aux utilisateurs :
+ * création, authentification, session, suppression, et affichage de l’ancienneté.
+ * ======================================================
+ */
+
 require_once MODELS_PATH . '/connexionDb.php';
 
-
+/**
+ * Crée un nouvel utilisateur dans la base de données.
+ *
+ * @param string $email - Adresse email de l'utilisateur
+ * @param string $username - Nom d'utilisateur
+ * @param string $hashedPassword - Mot de passe déjà haché
+ * @return array - Résultat de l'opération avec message
+ */
 function createUser($email, $username, $hashedPassword)
 {
   $role = 'user';
@@ -10,9 +24,12 @@ function createUser($email, $username, $hashedPassword)
 
   try {
     $pdo = connexionPDO();
+
     $insert = "INSERT INTO users (email, username, hash_password, role, added_at)
                VALUES (:email, :username, :password, :role, :created_at)";
     $stmt = $pdo->prepare($insert);
+
+    // Insertion de l'utilisateur avec ses informations
     $stmt->execute([
       'email' => $email,
       'username' => $username,
@@ -20,11 +37,13 @@ function createUser($email, $username, $hashedPassword)
       'role' => $role,
       'created_at' => $now
     ]);
+
     return [
       'success' => true,
       'message' => "Inscription réussie."
     ];
   } catch (PDOException $e) {
+    // Gestion des erreurs liées aux champs uniques
     if ($e->getCode() == 23000) {
       $message = $e->getMessage();
       if (strpos($message, 'email') !== false) {
@@ -53,6 +72,12 @@ function createUser($email, $username, $hashedPassword)
   }
 }
 
+/**
+ * Récupère un utilisateur à partir de son email ou nom d'utilisateur.
+ *
+ * @param string $identifier - Email ou nom d'utilisateur
+ * @return array|false - Utilisateur trouvé ou false
+ */
 function getUserByEmailOrUsername($identifier)
 {
   try {
@@ -63,8 +88,10 @@ function getUserByEmailOrUsername($identifier)
       'email' => $identifier,
       'username' => $identifier
     ]);
+
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Ajout d'une durée lisible depuis l'inscription
     if ($user && isset($user['added_at'])) {
       $registrationDate = new DateTime($user['added_at']);
       $now = new DateTime();
@@ -79,19 +106,31 @@ function getUserByEmailOrUsername($identifier)
   }
 }
 
-
-
+/**
+ * Vérifie si un utilisateur est actuellement connecté.
+ *
+ * @return bool - true si connecté, false sinon
+ */
 function isLoggedOn()
 {
   return isset($_SESSION['username']);
 }
 
+/**
+ * Vérifie si l'utilisateur connecté a le rôle administrateur.
+ *
+ * @return bool - true si admin, false sinon
+ */
 function isAdmin()
 {
   return isset($_SESSION['tao_role']) && $_SESSION['tao_role'] === 'admin';
 }
 
-
+/**
+ * Déconnecte proprement l'utilisateur.
+ *
+ * @return void
+ */
 function logout()
 {
   // Vide toutes les variables de session
@@ -116,9 +155,12 @@ function logout()
   session_destroy();
 }
 
-
-
-// Fonction pour formater la durée
+/**
+ * Formate une durée exprimée en secondes en texte lisible.
+ *
+ * @param int $seconds - Durée en secondes
+ * @return string - Texte représentant la durée
+ */
 function formatDurationFromSeconds(int $seconds): string
 {
   if ($seconds < 60) {
@@ -141,7 +183,12 @@ function formatDurationFromSeconds(int $seconds): string
   }
 }
 
-//fonction de suppression de compte
+/**
+ * Supprime définitivement un compte utilisateur.
+ *
+ * @param int $userId - Identifiant de l'utilisateur à supprimer
+ * @return array - Résultat de l'opération avec message
+ */
 function deleteAccount($userId)
 {
   $userId = (int)$userId;

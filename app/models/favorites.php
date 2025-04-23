@@ -23,11 +23,10 @@ function getFavorites($userId, $limit)
 
   try {
     $pdo = connexionPDO();
-    $sql = "SELECT * FROM favorites WHERE user_id = :userId ORDER BY added_at LIMIT :limit";
+    $sql = "SELECT * FROM favorites WHERE user_id=:userId ORDER BY added_at LIMIT $limit;";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
       'userId' => $userId,
-      'limit' => $limit
     ]);
     $favorites = $stmt->fetchAll();
   } catch (PDOException $e) {
@@ -35,6 +34,8 @@ function getFavorites($userId, $limit)
   }
   return $favorites;
 }
+
+
 
 /**
  * Ajoute un jeu aux favoris d’un utilisateur.
