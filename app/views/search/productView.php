@@ -1,11 +1,23 @@
 <?php require VIEWS_PATH . "/partials/headerView.php"; ?>
 
+<!--
+  ======================================================
+  Vue : Fiche produit (détail d’un jeu).
+  Affiche les informations générales, offres, bande-annonce, captures, etc.
+  ======================================================
+-->
+
+<!-- Animation de chargement avec logo vidéo -->
 <div id="loaderContainer">
   <video id="loaderVideo" autoplay muted loop playsinline>
     <source src="./public/videos/logo.webm" type="video/webm">
   </video>
 </div>
-<div class=" container" data-id="<?= $gameId ?>">
+
+<!-- Conteneur principal du jeu, lié à son ID -->
+<div class="container" data-id="<?= $gameId ?>">
+
+  <!-- En-tête avec image de fond, jaquette, titre, boutons d’action -->
   <div class="productHeader">
     <div class="headerImageWrapper">
       <img class="headerImage" src="" alt="Bannière">
@@ -15,14 +27,16 @@
       <h2 class="gameTitle"></h2>
       <div class="buttons">
         <?php if (isAdmin()): ?>
-          <button id="featuredOfferBtn">Mettre en vedette</button>
+          <button id="featuredOfferBtn" aria-label="Mettre le jeu en vedette">Mettre en vedette</button>
         <?php endif; ?>
         <?php if (isLoggedOn()): ?>
-          <button id="favoriteBtn">Ajouter aux favoris</button>
+          <button id="favoriteBtn" aria-label="Ajouter le jeu aux favoris">Ajouter aux favoris</button>
         <?php endif; ?>
       </div>
     </div>
   </div>
+
+  <!-- Bloc d'information sur le jeu (date, éditeur, etc.) -->
   <div class="productMain">
     <div class="productInformations">
       <div class="informations">
@@ -36,30 +50,37 @@
         </ul>
       </div>
     </div>
-    <!-- OFFRES -->
+
+    <!-- Bloc des offres du jeu -->
     <div class="offers">
       <h3>Offres disponibles</h3>
-      <!-- Offres visibles -->
+
+      <!-- Liste principale des offres -->
       <ul class="offerList"></ul>
-      <!-- Bouton pour ouvrir la modale -->
-      <button class="openOffersOverlay" class="hidden" data-game-id="<?= $gameId  ?>">Afficher toutes les offres</button>
-      <!-- Modale avec toutes les offres -->
-      <div class="offersOverlay" data-game-id="<?= $gameId  ?>" style="display: none;">
+
+      <!-- Bouton d'ouverture de la modale (correction : suppression d’un class="hidden" en doublon) -->
+      <button class="openOffersOverlay" data-game-id="<?= $gameId ?>" aria-label="Afficher toutes les offres pour ce jeu">Afficher toutes les offres</button>
+
+      <!-- Modale contenant toutes les offres disponibles -->
+      <div class="offersOverlay" data-game-id="<?= $gameId ?>" style="display: none;">
         <div class="overlayContent">
           <h3>Toutes les offres</h3>
-          <button class="closeOffersOverlay" data-game-id="<?= $gameId  ?>" aria-label="Fermer">&times;</button>
+          <button class="closeOffersOverlay" data-game-id="<?= $gameId ?>" aria-label="Fermer la fenêtre des offres">&times;</button>
           <ul class="offerList"></ul>
         </div>
       </div>
     </div>
-    <!-- FIN OFFRES -->
   </div>
+
+  <!-- Description détaillée du jeu -->
   <h3 id="descriptionTitle">Description</h3>
   <div class="description"></div>
+
+  <!-- Médias : bande-annonce et captures d'écran -->
   <div class="medias">
     <div class="videos">
       <h2>Bande-annonce</h2>
-      <video controls>
+      <video controls aria-label="Bande-annonce du jeu">
         <source id="trailerSource" src="" type="video/webm">
       </video>
     </div>
@@ -68,14 +89,23 @@
       <div class="screenshotsGallery"></div>
     </div>
   </div>
-  <p class="disclaimer">Les informations du jeu affichées sur cette page proviennent de <a target="_blank" href="https://store.steampowered.com/">Steam (© Valve Corporation)</a>. Tous les noms, marques et images associés sont la propriété de leurs détenteurs respectifs. Ce site n'est ni affilié, ni approuvé par Valve Corporation.</p>
+
+  <!-- Note de droits et origine des données -->
+  <p class="disclaimer">
+    Les informations du jeu affichées sur cette page proviennent de
+    <a target="_blank" href="https://store.steampowered.com/" aria-label="Ouvrir le site Steam dans un nouvel onglet">
+      Steam (© Valve Corporation)
+    </a>. Tous les noms, marques et images associés sont la propriété de leurs détenteurs respectifs.
+    Ce site n'est ni affilié, ni approuvé par Valve Corporation.
+  </p>
 </div>
-<!-- lightbox -->
+
+<!-- Modale Lightbox pour les captures d’écran -->
 <div id="lightbox" class="lightbox hidden">
-  <img id="lightboxImage" src="" alt="Full Screenshot">
+  <img id="lightboxImage" src="" alt="Capture d'écran en plein écran">
   <div class="lightbox-nav">
-    <button id="prev">&larr;</button>
-    <button id="next">&rarr;</button>
+    <button id="prev" aria-label="Image précédente">&larr;</button>
+    <button id="next" aria-label="Image suivante">&rarr;</button>
   </div>
 </div>
 

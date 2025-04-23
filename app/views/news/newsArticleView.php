@@ -1,38 +1,47 @@
 <?php require VIEWS_PATH . "/partials/headerView.php"; ?>
 
+<!--
+  ======================================================
+  Vue : Affichage d'un article de news.
+  Affiche le titre, la catégorie, le contenu, et les infos de publication.
+  Si aucun article n’est trouvé, affiche un message d’erreur.
+  ======================================================
+-->
+
 <div class="container">
   <?php if (!empty($article)) : ?>
     <article class="newsArticle" id="newsArticle<?= $article['news_id'] ?>">
 
-      <!-- Thumbnail -->
+      <!-- Miniature de l'article -->
       <div class="newsThumbnailWrapper">
         <img
-          src="<?= $article['thumb_path'] ?>" alt="<?= $article['thumb_alt'] ?>"
+          src="<?= $article['thumb_path'] ?>"
+          alt="<?= $article['thumb_alt'] ?>"
           class="newsThumbnail">
       </div>
 
-      <!-- Title -->
+      <!-- Titre principal de l’article -->
       <h1 class="newsTitle"><?= htmlspecialchars($article['title']) ?></h1>
 
-      <!-- category -->
+      <!-- Catégorie associée -->
       <h4 class="category"><?= htmlspecialchars($article['category_name']) ?></h4>
 
-      <!-- Content -->
+      <!-- Contenu HTML de l’article (rendu tel quel) -->
       <div class="newsContent">
         <?= $article['content'] ?>
       </div>
 
-      <!-- Signature -->
+      <!-- Signature de l’auteur et date de publication -->
       <footer class="newsFooter">
-        <span class="newsAuthor">Ecrit par <strong><?= htmlspecialchars($article['username']) ?></strong></span>
+        <span class="newsAuthor">Écrit par <strong><?= htmlspecialchars($article['username']) ?></strong></span>
         <span class="newsDate">le <?= date('F j, Y', strtotime($article['added_at'])) ?></span>
       </footer>
 
     </article>
   <?php else : ?>
+    <!-- Message affiché si l’article n’existe pas -->
     <p class="newsNotFound">Désolé, cette page n'existe pas.</p>
-  <?php endif;  ?>
+  <?php endif; ?>
 </div>
-
 
 <?php require VIEWS_PATH . "/partials/footerView.php"; ?>
