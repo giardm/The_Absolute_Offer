@@ -8,6 +8,7 @@ $routes = [
   'news'             => 'news/newsController.php',
   'addArticle'       => 'news/addArticleController.php',
   'profil'           => 'users/profilController.php',
+  'deleteProfil'     => 'users/deleteProfilController.php',
   'product'          => 'products/productController.php',
   'addFeaturedOffer' => 'home/featuredOffersController.php',
   'favorite'         => 'users/favoriteController.php',

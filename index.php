@@ -1,6 +1,7 @@
 <?php
 
 if (session_status() === PHP_SESSION_NONE) {
+  session_name("<the_absolute_offer>");
   session_start();
 }
 

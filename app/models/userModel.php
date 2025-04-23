@@ -125,3 +125,26 @@ function formatDurationFromSeconds(int $seconds): string
     return $years . ' an' . ($years > 1 ? 's' : '');
   }
 }
+
+//fonction de suppression de compte
+function deleteAccount($userId)
+{
+  try {
+    $pdo = connexionPDO();
+    $sql = "DELETE FROM users WHERE user_id=:user_id ;";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+      'user_id' => $userId
+    ]);
+    return [
+      'success' => true,
+      'message' => "Jeu supprimé des favoris."
+    ];
+  } catch (PDOException) {
+    return [
+      'success' => false,
+      'message' => "Erreur lors de la suppresion du favori."
+    ];
+  }
+  exit;
+}

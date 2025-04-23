@@ -12,6 +12,7 @@
       <ul>
         <?php if (isLoggedOn()): ?>
           <li><a href="?action=profil">Profil</a></li>
+          <li><a id="deleteProfil" href="?action=deleteProfil">Supprimer mon compte</a></li>
         <?php else : ?>
           <li><a href="?action=login">Connexion</a></li>
           <li><a href="?action=register">Inscription</a></li>
