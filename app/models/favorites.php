@@ -75,10 +75,6 @@ function addFavorite($gameId, $userId)
   }
 }
 
-
-
-
-
 /**
  * Supprime un jeu favori d’un utilisateur.
  *
